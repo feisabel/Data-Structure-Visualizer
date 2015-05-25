@@ -3,67 +3,24 @@ import java.awt.*;
 import java.util.*;
 
 public class MyCanvas extends Canvas {
+
+    private Graphics2D graphic;
+    private Image canvasImage;
+    private ArrayList<NodeDesigner> objects;
 	
-	
-	public MyCanvas(StructureDesigner myStructureDesigner, String title, 
-					int width, int height, Color bgColor){
-		objects = new ArrayList<Object>();
-		setBackground (Color.GRAY); //just to know where is the limits
-        setSize(300, 300);
-        Canvas(title,width, height, bgColor);
+	public MyCanvas(int width, int height){
+    	setBackground (Color.BLUE); //just to know where is the limits
+        setSize(width, height);
+        objects = new ArrayList<NodeDesigner>();  
 	}
 	
 	public void paint (Graphics g) {
-         Graphics2D g2;
-         g2 = (Graphics2D) g;
-         g2.fillOval (0, 0, 30, 30);
-         NodeDesigner node = new NodeDesigner();
- 
+         
     }
 
-	 private static MyCanvas canvasSingleton;
-
-	    /**
-	     * Factory method to get the canvas singleton object.
-	     */
-    public static MyCanvas getCanvas()
+    public MyCanvas getCanvas()
     {
-        if(canvasSingleton == null) {
-            canvasSingleton = new MyCanvas(new StructureDesigner(),
-            				  "Não sei o que colocar aqui", 300, 300, Color.white);
-        }
-        canvasSingleton.setVisible(true);
-        return canvasSingleton;
-    }
-
-    //  ----- instance part -----
-
-    private JFrame frame;
-    private CanvasPane canvas;
-    private Graphics2D graphic;
-    private Color backgroundColor;
-    private Image canvasImage;
-    private List<Object> objects;
-    private HashMap<Object, ShapeDescription> shapes;
-    
-    /**
-     * Create a Canvas.
-     * @param title    title to appear in Canvas Frame
-     * @param width    the desired width for the canvas
-     * @param height   the desired height for the canvas
-     * @param bgColor the desired background color of the canvas
-     */
-    private void Canvas(String title, int width, int height, Color bgColor)
-    {
-        frame = new JFrame();
-        canvas = new CanvasPane();
-        frame.setContentPane(canvas);
-        frame.setTitle(title);
-        canvas.setPreferredSize(new Dimension(width, height));
-        backgroundColor = bgColor;
-        frame.pack();
-        objects = new ArrayList<Object>();
-        shapes = new HashMap<Object, ShapeDescription>();
+        return this;
     }
 
     /**
@@ -76,32 +33,18 @@ public class MyCanvas extends Canvas {
     public void setVisible(boolean visible)
     {
         if(graphic == null) {
-            // first time: instantiate the offscreen image and fill it with
-            // the background color
-            Dimension size = canvas.getSize();
-            canvasImage = canvas.createImage(size.width, size.height);
+            Dimension size = this.getSize();
+            canvasImage = this.createImage(size.width, size.height);
             graphic = (Graphics2D)canvasImage.getGraphics();
-            graphic.setColor(backgroundColor);
             graphic.fillRect(0, 0, size.width, size.height);
             graphic.setColor(Color.black);
         }
-        frame.setVisible(visible);
     }
 
-    /**
-     * Draw a given shape onto the canvas.
-     * @param  referenceObject  an object to define identity for this shape
-     * @param  color            the color of the shape
-     * @param  shape            the shape object to be drawn on the canvas
-     */
-     // Note: this is a slightly backwards way of maintaining the shape
-     // objects. It is carefully designed to keep the visible shape interfaces
-     // in this project clean and simple for educational purposes.
-    public void draw(Object referenceObject, String color, Shape shape)
+    public void draw(NodeDesigner referenceObject)
     {
-        objects.remove(referenceObject);   // just in case it was already there
-        objects.add(referenceObject);      // add at the end
-        shapes.put(referenceObject, new ShapeDescription(shape, color));
+    	objects.remove(referenceObject);   // just in case it was already there
+    	objects.add(referenceObject);      // add at the end
         redraw();
     }
  
@@ -111,8 +54,7 @@ public class MyCanvas extends Canvas {
      */
     public void erase(Object referenceObject)
     {
-        objects.remove(referenceObject);   // just in case it was already there
-        shapes.remove(referenceObject);
+    	objects.remove(referenceObject);   // just in case it was already there
         redraw();
     }
 
@@ -172,10 +114,10 @@ public class MyCanvas extends Canvas {
     private void redraw()
     {
         erase();
-        for(Object shape : objects) {
-            shapes.get(shape).draw(graphic);
+        for(NodeDesigner shape : objects) {
+            shape.draw();
         }
-        canvas.repaint();
+        this.repaint();
     }
        
     /**
@@ -184,47 +126,9 @@ public class MyCanvas extends Canvas {
     public void erase()
     {
         Color original = graphic.getColor();
-        graphic.setColor(backgroundColor);
-        Dimension size = canvas.getSize();
+        Dimension size = this.getSize();
         graphic.fill(new Rectangle(0, 0, size.width, size.height));
         graphic.setColor(original);
-    }
-
-
-    /************************************************************************
-     * Inner class CanvasPane - the actual canvas component contained in the
-     * Canvas frame. This is essentially a JPanel with added capability to
-     * refresh the image drawn on it.
-     */
-    private class CanvasPane extends JPanel
-    {
-        public void paint(Graphics g)
-        {
-            g.drawImage(canvasImage, 0, 0, null);
-        }
-    }
-    
-    /************************************************************************
-     * Inner class CanvasPane - the actual canvas component contained in the
-     * Canvas frame. This is essentially a JPanel with added capability to
-     * refresh the image drawn on it.
-     */
-    private class ShapeDescription
-    {
-        private Shape shape;
-        private String colorString;
-
-        public ShapeDescription(Shape shape, String color)
-        {
-            this.shape = shape;
-            colorString = color;
-        }
-
-        public void draw(Graphics2D graphic)
-        {
-            setForegroundColor(colorString);
-            graphic.fill(shape);
-        }
     }
 
 }

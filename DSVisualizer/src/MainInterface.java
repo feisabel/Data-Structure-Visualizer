@@ -4,10 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-/**
- * 
- */
+import java.util.LinkedList;
 
 /**
  * @author Ana Caroline
@@ -16,13 +13,13 @@ import java.awt.event.WindowEvent;
 public class MainInterface {
 	private Frame mainFrame;
 	private Panel controlPanelStructure;
-	private static MyCanvas myStructure;
+	private MyCanvas myStructure;
 	public MainInterface(){
 		prepareGUI();
 	}
 	
 	private void prepareGUI(){
-		myStructure = new MyCanvas(new StructureDesigner());
+		myStructure = new MyCanvas(500, 500);
 		mainFrame = new Frame("DSVisualizer");
 		mainFrame.setSize(700,700);
 		mainFrame.setLayout(new GridLayout(1, 1)); //PARA QUE SERVE ESSA BAGAÇA?
@@ -46,10 +43,17 @@ public class MainInterface {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		MainInterface test = new MainInterface();
 		test.showDemo();
 	}
-
+	
+	public void createListInt(){
+		LinkedList myList = new LinkedList<Integer>();
+		NodeDesigner node1 = new NodeDesigner(myStructure);
+		NodeDesigner node2 = new NodeDesigner(myStructure);
+		NodeDesigner node3 = new NodeDesigner(myStructure);
+		myList.add(1, 1); myStructure.draw(node1);
+		myList.add(2, 2); myStructure.draw(node2);
+		myList.add(3, 3); myStructure.draw(node3);
+	}
 }

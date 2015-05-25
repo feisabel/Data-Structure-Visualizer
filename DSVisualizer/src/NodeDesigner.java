@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.geom.*;
-public class NodeDesigner {
 
+public class NodeDesigner {
+	private MyCanvas canvas;
     private int diameter;
     private int xPosition;
     private int yPosition;
@@ -11,12 +12,13 @@ public class NodeDesigner {
     /**
      * Create a new circle at default position with default color.
      */
-    public NodeDesigner()
+    public NodeDesigner(MyCanvas canvas)
     {
-        diameter = 30;
-        xPosition = 20;
-        yPosition = 60;
-        color = "blue";
+        this.canvas = canvas;
+    	diameter = 30;
+        xPosition = 0;
+        yPosition = 0;
+        color = "white";
         isVisible = false;
     }
 
@@ -34,7 +36,7 @@ public class NodeDesigner {
      */
     public void makeInvisible()
     {
-        erase();
+        canvas.erase();
         isVisible = false;
     }
         /**
@@ -42,9 +44,9 @@ public class NodeDesigner {
      */
     public void moveHorizontal(int distance)
     {
-        erase();
+        canvas.erase();
         xPosition += distance;
-        draw();
+
     }
 
     /**
@@ -52,9 +54,9 @@ public class NodeDesigner {
      */
     public void moveVertical(int distance)
     {
-        erase();
+        canvas.erase();
         yPosition += distance;
-        draw();
+
     }
 
     /**
@@ -66,9 +68,8 @@ public class NodeDesigner {
     public void setSize(int newDiameter)
     {
         if(newDiameter > 0 ){
-	    	erase();
+	    	canvas.erase();
 	        diameter = newDiameter;
-	        draw();
         }
     }
 
@@ -88,27 +89,13 @@ public class NodeDesigner {
     public void draw()
     {
         if(isVisible) {
-            MyCanvas canvas = MyCanvas.getCanvas();
-            canvas.draw(this, color, new Ellipse2D.Double(xPosition, yPosition, 
-                                                          diameter, diameter));
+            canvas.draw(this);
             canvas.wait(10);
             try {
 				canvas.wait(10);
-			} catch (Exception e) { //ECLIPSE QUEM FEZ ISSO, SÓ ACEITEI NA VIDA
-				// TODO Auto-generated catch block
+			} catch (Exception e) { //ECLIPSE QUE FEZ ISSO, SÓ ACEITEI NA VIDA
 				e.printStackTrace();
 			}
-        }
-    }
-
-    /**
-     * Erase the circle on screen.
-     */
-    private void erase()
-    {
-        if(isVisible) {
-            MyCanvas canvas = MyCanvas.getCanvas();
-            canvas.erase();
         }
     }
 }
