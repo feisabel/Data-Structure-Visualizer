@@ -7,7 +7,7 @@
 public class BinarySearchTree
 {
     private Node head;
-    private int numberOfNodes;
+
     /**
      * Constructor for class Tree
      */
@@ -16,12 +16,10 @@ public class BinarySearchTree
     public BinarySearchTree()
     {
         head = new Node();
-        numberOfNodes = 0;
+
     }
     
-    public int getNumberOfNodes(){
-    	return numberOfNodes;
-    }
+
     /**
      * Gets the root of the tree.
      * @return  the root of the tree
@@ -54,7 +52,7 @@ public class BinarySearchTree
      */
     public void insert(int key)
     {
-        numberOfNodes++;
+  
     	privateSearch(root(), key, true);
     }
     
@@ -85,7 +83,7 @@ public class BinarySearchTree
                 remove(m);  // delete m
             }
         }
-        numberOfNodes--;
+       
         return q;
     }
     

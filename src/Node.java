@@ -107,4 +107,13 @@ public class Node
     		return false;
     	}
     }
+
+    public int nodeLevel(){
+    	int i = 0;
+    	Node a = this;
+    	if(a != null){
+    		for(i = 1; a != null; a = a.getParent(), i++);	
+    	}
+    	return i;
+    }
 }
