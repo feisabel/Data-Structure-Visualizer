@@ -10,25 +10,37 @@ import javax.swing.JScrollPane;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.ConnectionSet;
+import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultEdge;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultGraphModel;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
+import org.jgraph.graph.GraphLayoutCache;
 import org.jgraph.graph.GraphModel;
 import org.jgraph.graph.Port;
 
 
 public abstract class Drawer extends JApplet {
-	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#92E9FF" );
+	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
     protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 320 );
 	protected static final int deltaY = 30;
 	private JFrame frame;
 	protected GraphModel model;
+	protected JGraph jgraph;
+	protected GraphLayoutCache view;
+	
+	public abstract void draw();
 	
 	public Drawer(){
 		frame = new JFrame();
 		model = new DefaultGraphModel();
+		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
+		jgraph = new JGraph( model, view );
+
+		adjustDisplaySettings( jgraph );
+		getContentPane().add( jgraph );
+		resize( DEFAULT_SIZE );
 	}
 	
 	public void drawStructure(JGraph myGraph){

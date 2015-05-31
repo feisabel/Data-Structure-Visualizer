@@ -11,6 +11,7 @@ public class Node
     private Node leftKid;
     private Node rightKid;
     private int key;
+    private int x;
     /**
      * Constructor of the class Node with no parameters.
      */
@@ -35,6 +36,21 @@ public class Node
         this.key = key;
     }
     
+    public Node(int a){
+        parent = null;
+        leftKid = null;
+        rightKid = null;
+        key = a;
+    	
+    }
+    
+    public void setX(int a){
+    	x = a;
+    }
+    
+    public int getX(){
+    	return x;
+    }
     /**
      * Access method to parent.
      * @return The Node parent.

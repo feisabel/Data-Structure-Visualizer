@@ -1,0 +1,16 @@
+import java.util.LinkedList;
+
+
+public class HeapFake extends Drawer{
+	LinkedList<Integer> list;
+	public HeapFake(){
+		list = new LinkedList<Integer>();
+	}
+	public void add(int a){
+		list.add(a);
+	}
+	public void draw(){
+		
+		
+	}
+}

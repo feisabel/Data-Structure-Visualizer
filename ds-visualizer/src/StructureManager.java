@@ -10,6 +10,8 @@ public class StructureManager extends JApplet {
 	public static void main(String[] args) {
 		Factory f = new Factory();
 		BinarySearchTree t = f.binarySearchTree(10);
+		HeapFake h = f.heapfake(10);
+		h.draw();
 		t.draw();
 	}
 

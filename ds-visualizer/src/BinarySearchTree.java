@@ -24,7 +24,6 @@ public class BinarySearchTree extends Drawer
         head = new Node();
 
     }
-    
 
     /**
      * Gets the root of the tree.
@@ -221,15 +220,6 @@ public class BinarySearchTree extends Drawer
     }
     
 	public void draw(){
-		
-		GraphLayoutCache view = new GraphLayoutCache(model,
-								new DefaultCellViewFactory());
-		JGraph jgraph = new JGraph( model, view );
-	    
-	    adjustDisplaySettings( jgraph );
-	    getContentPane().add( jgraph );
-	    resize( DEFAULT_SIZE );
-	    
 		int x = DEFAULT_SIZE.width/2;
 		int y = 10;
 		HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();

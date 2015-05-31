@@ -1,0 +1,59 @@
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import org.jgraph.graph.DefaultGraphCell;
+
+
+public class HeapFake extends Drawer{
+	LinkedList<Node> list;
+	public HeapFake(){
+		list = new LinkedList<Node>();
+	}
+	
+	public boolean add(int a){
+		if(!contains(a)){
+			list.add(list.size(), new Node(a));
+			System.out.println(a);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean contains(int a){
+		for(Node b : list){
+			if(b.getKey() == a)
+				return true;
+		}
+		return false;
+	}
+	public void draw(){
+		int x = 0;
+		int y = 30;
+		int lvl = 1;
+		HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
+		for(int i = 0; i < list.size(); i++){
+			if(Math.scalb(1., lvl)-1 == i){
+				y+=deltaY;
+				lvl++;
+			}
+			
+			if(i % 2 == 1){ //vulgo é da direita
+				System.out.println(x + " eh direita");
+				x = (int) (list.get((i+1)/2).getX() - (int) DEFAULT_SIZE.width/Math.scalb(1., lvl));
+			}else{
+				if(i != 0){
+					System.out.println(x + " eh esquerda");
+					x = (int) (list.get((i+1)/2).getX() + (int) DEFAULT_SIZE.width/Math.scalb(1., lvl));
+				}
+				else
+					x = (int) (list.get((i+1)/2).getX() + (int) DEFAULT_SIZE.width/Math.scalb(1., lvl));
+			}
+			createMyVertex(cells, list.get(i), x, y, Color.red);
+			list.get(i).setX(x);
+		}
+		
+		jgraph.getGraphLayoutCache().insert(cells.values().toArray());
+		drawStructure(jgraph);
+	}
+}
