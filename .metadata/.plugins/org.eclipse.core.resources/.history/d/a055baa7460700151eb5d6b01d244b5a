@@ -20,6 +20,7 @@ import org.jgraph.graph.Port;
 
 
 public abstract class Drawer extends JApplet {
+	private static final long serialVersionUID = 6046505950682742359L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#92E9FF" );
     protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 320 );
 	protected static final int deltaY = 30;
@@ -37,7 +38,13 @@ public abstract class Drawer extends JApplet {
 		frame.pack();
 		frame.setVisible(true);
 	}
-		
+	
+	public static void main(String[] args) {
+		Factory f = new Factory();
+		BinarySearchTree t = f.binarySearchTree(10);
+		t.draw();
+	}
+	
 	protected void adjustDisplaySettings( JGraph jg ) {
         jg.setPreferredSize( DEFAULT_SIZE );
         Color  c        = DEFAULT_BG_COLOR;

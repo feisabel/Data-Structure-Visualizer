@@ -167,6 +167,46 @@ public class BinarySearchTree extends Drawer
             return privateSearch(node.getRightKid(), key, insert);
         }
     }
+     
+    /**
+     * Helper method for depthSearch. Searches for a node, if not found insert one.
+     * @param  r  root of the tree to search on
+     * @param  key  ley to search
+     * @return  node with the key 'key'
+     */
+    private Node depthSearchNew(Node r, int key)
+    {
+        if(isEmpty()){
+            root(new Node(head, null, null, 0));
+            return root();
+        }
+        else {
+            if(r.getKey() == key){
+                return r;
+            }
+            else{
+                if(r.getKey() > key){
+                    if(r.getLeftKid() == null){
+                        r.setLeftKid(new Node(r, null, null, 0));
+                        return r.getLeftKid();
+                    }
+                    else{
+                        r = r.getLeftKid();
+                    }
+                }
+                else{
+                    if(r.getRightKid() == null) {
+                        r.setRightKid(new Node(r, null, null, 0));
+                        return r.getRightKid();
+                    }
+                    else{
+                        r = r.getRightKid();
+                    }
+                }
+            }
+            return depthSearchNew(r, key);
+        }
+    }
     
     /**
      * @return  the node with the min key in the tree
