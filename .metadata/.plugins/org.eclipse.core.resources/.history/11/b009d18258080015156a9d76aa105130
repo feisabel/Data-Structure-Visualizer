@@ -125,9 +125,12 @@ public class Node
     }
 
     public int nodeLevel(){
-    	int i;
+    	int i = 0;
     	Node a = this;
-    	for(i = 0; a != null; a = a.getParent(), i++);	
+    	if(a != null){
+    		for(i = 1; a != null; a = a.getParent(), i++);	
+    	}
+    	System.out.printf(a.getKey() + " " + i);
     	return i;
     }
 }

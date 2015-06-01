@@ -24,7 +24,7 @@ import org.jgraph.graph.Port;
 public abstract class Drawer extends JApplet {
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
     protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 320 );
-	protected static final int deltaY = 40;
+	protected static final int deltaY = 30;
 	private JFrame frame;
 	protected GraphModel model;
 	protected JGraph jgraph;

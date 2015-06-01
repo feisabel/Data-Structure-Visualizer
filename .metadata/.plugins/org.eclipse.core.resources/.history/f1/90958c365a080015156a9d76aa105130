@@ -234,14 +234,12 @@ public class BinarySearchTree extends Drawer
 		if(root != null){
 			createMyVertex(c, root, x, y, col);
 			if(root.getLeftKid() != null){
-				preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-						y + deltaY, Color.blue);
+				preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), y + deltaY, Color.blue);
 				insertEdge(getDefaultPort((c.get(root.getKey())), model),
 						getDefaultPort(c.get(root.getLeftKid().getKey()), model));	
 			}
 			if(root.getRightKid() != null){
-				preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-						y + deltaY, Color.blue);
+				preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), y + deltaY, Color.blue);
 				insertEdge(getDefaultPort((c.get(root.getKey())), model),
 						getDefaultPort(c.get(root.getRightKid().getKey()), model));
 			}

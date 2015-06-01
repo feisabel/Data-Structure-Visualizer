@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="16" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
 <window height="725" maximized="true" width="1026" x="235" y="43">
 <fastViewData fastViewLocation="1024"/>
@@ -33,25 +33,35 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Drawer.java" partName="Drawer.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/Drawer.java" title="Drawer.java" tooltip="ds-visualizer/src/Drawer.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/Drawer.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="912" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="864" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BinarySearchTree.java" partName="BinarySearchTree.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/BinarySearchTree.java" title="BinarySearchTree.java" tooltip="ds-visualizer/src/BinarySearchTree.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/BinarySearchTree.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5045" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="46" selectionLength="0" selectionOffset="6420" selectionTopPixel="2850"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Factory.java" partName="Factory.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/Factory.java" title="Factory.java" tooltip="ds-visualizer/src/Factory.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/Factory.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="179" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="1" selectionOffset="491" selectionTopPixel="82"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HeapFake.java" partName="HeapFake.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/HeapFake.java" title="HeapFake.java" tooltip="ds-visualizer/src/HeapFake.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/HeapFake.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="365" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" partName="Node.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/Node.java" title="Node.java" tooltip="ds-visualizer/src/Node.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/Node.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2799" selectionTopPixel="1867"/>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StructureManager.java" partName="StructureManager.java" path="/home/ana/Desktop/ds-visualizer/ds-visualizer/src/StructureManager.java" title="StructureManager.java" tooltip="ds-visualizer/src/StructureManager.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ds-visualizer/src/StructureManager.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="329" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="372" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -162,165 +172,166 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/StructureManager.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/HeapFake.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/BinarySearchTree.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/Node.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/Drawer.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/Factory.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/StructureManager.java"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;sun.reflect(InstantiationExceptionConstructorAccessorImpl.class"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang(Class.class"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang(Thread.class"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;sun.applet(AppletPanel.class"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang.reflect(Constructor.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/BinarySearchTree.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/Node.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/Drawer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ds-visualizer/src/HeapFake.java"/>
 </editors>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="1703" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="27" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="1675" y="18"/>
+<item historyLabel="Drawer.java" index="4">
+<position info="not_deleted" x="742" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="27" y="0"/>
 </item>
-<item historyLabel="Factory.java" index="2">
-<position info="not_deleted" x="179" y="0"/>
+<item historyLabel="Node.java" index="3">
+<position info="not_deleted" x="776" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="1344" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="1342" y="0"/>
+<item historyLabel="Factory.java" index="5">
+<position info="not_deleted" x="338" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="257" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="2">
+<position info="not_deleted" x="6382" y="18"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="799" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="357" y="0"/>
 </item>
-<item historyLabel="Factory.java" index="2">
-<position info="not_deleted" x="179" y="0"/>
+<item historyLabel="Drawer.java" index="4">
+<position info="not_deleted" x="2968" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="2">
+<position info="not_deleted" x="6901" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="257" y="0"/>
+<item historyLabel="Factory.java" index="5">
+<position info="not_deleted" x="491" y="1"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="1463" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="1103" y="0"/>
+<item historyLabel="Node.java" index="3">
+<position info="not_deleted" x="2893" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="257" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="373" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="88" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="802" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="260" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="373" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="365" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="872" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="169" y="26"/>
+<item historyLabel="Node.java" index="3">
+<position info="not_deleted" x="2893" y="0"/>
 </item>
-<item historyLabel="InstantiationExceptionConstructorAccessorImpl.class" index="4">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="365" y="0"/>
 </item>
-<item historyLabel="Class.class" index="5">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Factory.java" index="5">
+<position info="not_deleted" x="491" y="1"/>
 </item>
-<item historyLabel="Thread.class" index="6">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="2">
+<position info="not_deleted" x="6901" y="0"/>
 </item>
-<item historyLabel="AppletPanel.class" index="7">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Factory.java" index="5">
+<position info="not_deleted" x="491" y="1"/>
 </item>
-<item historyLabel="Class.class" index="5">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="HeapFake.java" index="1">
+<position info="not_deleted" x="365" y="0"/>
 </item>
-<item historyLabel="Constructor.class" index="8">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Node.java" index="3">
+<position info="not_deleted" x="2893" y="0"/>
 </item>
-<item historyLabel="Class.class" index="5">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="AppletPanel.class" index="7">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="5894" y="0"/>
 </item>
-<item historyLabel="Class.class" index="5">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="InstantiationExceptionConstructorAccessorImpl.class" index="4">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="5892" y="2"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="257" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="872" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="6021" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="327" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="6021" y="0"/>
+</item>
+<item historyLabel="Node.java" index="7">
+<position info="not_deleted" x="2861" y="0"/>
+</item>
+<item historyLabel="Node.java" index="7">
 <position/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="75" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position/>
+<item historyLabel="Node.java" index="7">
+<position info="not_deleted" x="2869" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="75" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="6381" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="326" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="6635" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="326" y="0"/>
+<item historyLabel="Drawer.java" index="8">
+<position info="not_deleted" x="820" y="0"/>
 </item>
-<item historyLabel="Factory.java" index="2">
-<position info="not_deleted" x="179" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="133" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="Node.java" index="7">
+<position info="not_deleted" x="2837" y="0"/>
 </item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="848" y="0"/>
+<item historyLabel="HeapFake.java" index="9">
+<position info="not_deleted" x="365" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="BinarySearchTree.java" index="6">
+<position info="not_deleted" x="6420" y="0"/>
 </item>
-<item historyLabel="Factory.java" index="2">
-<position info="not_deleted" x="179" y="0"/>
+<item historyLabel="Node.java" index="7">
+<position info="not_deleted" x="2799" y="0"/>
 </item>
-<item historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="330" y="0"/>
+<item historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="372" y="0"/>
 </item>
-<item historyLabel="BinarySearchTree.java" index="0">
-<position info="not_deleted" x="5045" y="0"/>
+<item historyLabel="Drawer.java" index="8">
+<position info="not_deleted" x="864" y="0"/>
 </item>
-<item historyLabel="Factory.java" index="2">
-<position info="not_deleted" x="179" y="0"/>
-</item>
-<item historyLabel="Drawer.java" index="1">
-<position info="not_deleted" x="912" y="0"/>
-</item>
-<item active="true" historyLabel="StructureManager.java" index="3">
-<position info="not_deleted" x="330" y="0"/>
+<item active="true" historyLabel="StructureManager.java" index="0">
+<position info="not_deleted" x="372" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -328,6 +339,10 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="topLeft"/>
+<trimItem IMemento.internal.id="bottomLeft"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -335,12 +350,19 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="bottomRight"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StructureManager.java" tooltip="ds-visualizer/src/StructureManager.java">
 <persistable path="/ds-visualizer/src/StructureManager.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" tooltip="ds-visualizer/src/Node.java">
+<persistable path="/ds-visualizer/src/Node.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HeapFake.java" tooltip="ds-visualizer/src/HeapFake.java">
+<persistable path="/ds-visualizer/src/HeapFake.java"/>
 </file>
 <file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Constructor.class" tooltip="java.lang.reflect.Constructor">
 <persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ds-visualizer/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang.reflect(Constructor.class"/>
