@@ -11,4 +11,5 @@ target/
 # ignore eclipse settings
 .settings/
 .classpath
-.project 
+.project
+.metadata/
