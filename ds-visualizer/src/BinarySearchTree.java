@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.util.HashMap;
 
+import javax.swing.JPanel;
+
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultGraphCell;
@@ -12,7 +14,7 @@ import org.jgraph.graph.GraphLayoutCache;
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
-public class BinarySearchTree extends Drawer
+public class BinarySearchTree extends Drawer implements Tree
 {
     private Node head;
 
@@ -219,15 +221,14 @@ public class BinarySearchTree extends Drawer
         return null;
     }
     
-	public void draw(){
+	public JPanel draw(){
 		int x = DEFAULT_SIZE.width/2;
 		int y = 10;
 		HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
 		preOrderCell(cells, root(), x, y, Color.blue);
 		
 		jgraph.getGraphLayoutCache().insert(cells.values().toArray());
-		
-		drawStructure(jgraph);
+		return drawStructure(jgraph);
 	}
 
 	void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){

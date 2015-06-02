@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.swing.JApplet;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.jgraph.JGraph;
@@ -23,17 +24,15 @@ import org.jgraph.graph.Port;
 
 public abstract class Drawer extends JApplet {
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 320 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 500 );
 	protected static final int deltaY = 40;
-	private JFrame frame;
 	protected GraphModel model;
 	protected JGraph jgraph;
 	protected GraphLayoutCache view;
 	
-	public abstract void draw();
+	public abstract JPanel draw();
 	
 	public Drawer(){
-		frame = new JFrame();
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
 		jgraph = new JGraph( model, view );
@@ -42,12 +41,13 @@ public abstract class Drawer extends JApplet {
 		getContentPane().add( jgraph );
 		resize( DEFAULT_SIZE );
 	}
-	
-	public void drawStructure(JGraph myGraph){
+	protected JPanel jpanel;
+
+	public JPanel drawStructure(JGraph myGraph){
 		myGraph.setPreferredSize( DEFAULT_SIZE );
-		frame.getContentPane().add(new JScrollPane(myGraph));
-		frame.pack();
-		frame.setVisible(true);
+		jpanel = new JPanel();
+		jpanel.add(myGraph);		
+		return jpanel;
 	}
 		
 	protected void adjustDisplaySettings( JGraph jg ) {

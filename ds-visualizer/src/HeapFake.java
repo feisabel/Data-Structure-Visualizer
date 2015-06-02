@@ -2,11 +2,13 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.swing.JPanel;
+
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphModel;
 
 
-public class HeapFake extends Drawer{
+public class HeapFake extends Drawer implements Tree{
 	LinkedList<Node> list;
 	public HeapFake(){
 		list = new LinkedList<Node>();
@@ -27,7 +29,7 @@ public class HeapFake extends Drawer{
 		}
 		return false;
 	}
-	public void draw(){
+	public JPanel draw(){
 		int x = 0;
 		int y = 30;
 		int lvl = 0;
@@ -58,8 +60,7 @@ public class HeapFake extends Drawer{
 			}
 		}
 
-		
 		jgraph.getGraphLayoutCache().insert(cells.values().toArray());
-		drawStructure(jgraph);
+		return drawStructure(jgraph);
 	}
 }
