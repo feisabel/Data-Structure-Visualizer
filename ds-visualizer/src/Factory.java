@@ -11,6 +11,8 @@ public final class Factory {
 	public static final int NARIA = 3;
 	public static final int UNIONFIND = 4;
 	
+	private Factory() {}
+	
 	public static Tree create(int a, int n){
 		switch (a){
 		case 0:
