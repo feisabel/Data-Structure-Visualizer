@@ -29,23 +29,24 @@ public class HeapFake extends Drawer implements Tree{
 		}
 		return false;
 	}
+	
 	public JPanel draw(){
 		int x = 0;
 		int y = 30;
-		int lvl = 0;
+		int lvl = 1;
 		HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
 		Node help = null;
 		for(int i = 0; i < list.size(); i++){
 			if(i%2 == 0){
 				if(i != 0){
 					help = list.get(i/2 - 1);
-					x = (int) (help.getX() + DEFAULT_SIZE.width/Math.scalb(1.0, lvl+2));
+					x = (int) (help.getX() + DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
 				}else
-					x = (int) (DEFAULT_SIZE.width/Math.scalb(1.0, lvl+1));
+					x = (int) (DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
 			}
 			else{
 				help = list.get(i/2);
-				x = (int) (help.getX() - DEFAULT_SIZE.width/Math.scalb(1.0, lvl+2));
+				x = (int) (help.getX() - DEFAULT_SIZE.width/Math.scalb(1.0, lvl+1));
 				
 			}
 			if(Math.scalb(1.0, lvl) == i+1){
@@ -59,7 +60,6 @@ public class HeapFake extends Drawer implements Tree{
 						getDefaultPort(cells.get(list.get(i).getKey()), model));
 			}
 		}
-
 		jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		return drawStructure(jgraph);
 	}

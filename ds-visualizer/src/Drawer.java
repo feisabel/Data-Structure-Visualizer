@@ -1,13 +1,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
-
 import java.util.HashMap;
-
 import javax.swing.JApplet;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.ConnectionSet;
@@ -23,8 +19,12 @@ import org.jgraph.graph.Port;
 
 
 public abstract class Drawer extends JApplet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 700, 500 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 600, 500 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
