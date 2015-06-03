@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 import java.util.LinkedList;
 import java.util.Random;
 

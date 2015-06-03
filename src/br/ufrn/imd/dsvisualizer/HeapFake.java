@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;

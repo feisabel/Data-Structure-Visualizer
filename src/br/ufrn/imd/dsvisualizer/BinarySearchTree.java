@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 import java.awt.Color;
 import java.util.HashMap;
 
@@ -16,7 +17,8 @@ import org.jgraph.graph.GraphLayoutCache;
  */
 public class BinarySearchTree extends Drawer implements Tree
 {
-    private Node head;
+	private static final long serialVersionUID = 1L;
+	private Node head;
 
     /**
      * Constructor for class Tree

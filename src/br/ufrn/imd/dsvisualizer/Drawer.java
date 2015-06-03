@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;

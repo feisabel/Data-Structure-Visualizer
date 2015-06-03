@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 import java.awt.Rectangle;
 
 import javax.swing.JApplet;

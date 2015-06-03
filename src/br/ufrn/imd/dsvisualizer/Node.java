@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 
 /**
  * Node implements a simple node type.
