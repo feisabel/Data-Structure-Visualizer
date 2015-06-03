@@ -11,7 +11,7 @@ import org.jgraph.graph.GraphLayoutCache;
 
 /**
  * Implements a binary search tree using Node.
- * CAROL ESTEVE AQUI
+ * CAROL E JP ESTIVERAM AQUI
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
