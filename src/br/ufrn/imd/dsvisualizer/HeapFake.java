@@ -69,7 +69,6 @@ public class HeapFake extends DataStructure {
 							getDefaultPort(cells.get(list.get(i).getKey()), model));
 				}
 			}
-			jgraph.getGraphLayoutCache().insert(asda, asda);
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	}
