@@ -20,6 +20,7 @@ public class UnionFind extends DataStructure {
 	
 	
 	public UnionFind (int n){
+		drawer = new UnionFindDrawer();
 		len = n;
 		unionfind = new int[n];
 		ordem = new int[n];
