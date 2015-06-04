@@ -58,9 +58,9 @@ public abstract class Drawer extends JApplet {
 		return "" + a;
 	}
 	
-	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, Node n, int x, int y, Color c){
-		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n.getKey())));
-		g.put(n.getKey(), v);
+	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, int n, int x, int y, Color c){
+		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n)));
+		g.put(n, v);
 		DefaultPort port = new DefaultPort();
 		v.add(port);
 		port.setParent(v);

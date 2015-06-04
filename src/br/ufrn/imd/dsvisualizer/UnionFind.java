@@ -8,10 +8,16 @@ import javax.swing.JPanel;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 
-public class UnionFind extends Drawer {
+public class UnionFind extends DataStructure {
 	private int[] unionfind;
 	private int[] ordem;
 	private int len;
+	
+	/*Só para funcionar!*/
+	public boolean search(int num){ return true; }
+	public boolean insert(int num){ return true; }
+	public boolean remove(int num){ return true; }
+	
 	
 	public UnionFind (int n){
 		len = n;
@@ -36,10 +42,10 @@ public class UnionFind extends Drawer {
 			ordem[y]++;
 		}
 	}
-	public int search(int x){
+	public int searchUni(int x){
 		try{
 			if(x != unionfind[x]){
-				unionfind[x] = search(unionfind[x]);	
+				unionfind[x] = searchUni(unionfind[x]);	
 			}
 			return unionfind[x];
 		}
@@ -47,52 +53,6 @@ public class UnionFind extends Drawer {
 			System.out.println("Invalid argument");
 			return -1;
 		}
-	}
-	
-	public JPanel draw(){
-		HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
-		HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
-		
-		int x = 50, y = 50;
-		
-		for(int i = 0; i < len; i++){
-			if(unionfind[i] == i){
-					createMyVertex(c, i, x, y, Color.red);
-					insertEdge(getDefaultPort((c.get(i)), model),
-							getDefaultPort((c.get(i)), model));
-					x+=100;
-					pos.put(i, new Pos(x, y));
-				}
-		}
-		
-		for(int j = maxOrdem() - 1 ; j >= 0; j--){
-			for(int i = 0; i < len; i++){
-				System.out.println("pai "+i);
-				Kid myKids = kids(i);
-				if(myKids != null){
-					System.out.println(myKids.number);
-					Pos parentPos = pos.get(i);
-					int deltaX = 100/myKids.number;
-					for(int k = 0, posX = parentPos.a; 
-							k < myKids.number; k++, posX+=deltaX){
-						
-						System.out.println("filho " + myKids.arrayKids[k]);
-						
-						createMyVertex(c, myKids.arrayKids[k], posX, parentPos.b + 50, Color.red );
-						
-						insertEdge(getDefaultPort((c.get(myKids.arrayKids[k])), model),
-								   getDefaultPort((c.get(i)), model));
-					
-					}
-				}
-				//pegar todos os irmãos de um i que estão na ordem j
-				//tem que saber quando "irmãos há nessa ordem"
-			}
-			y+=30;
-		}
-		jgraph.getGraphLayoutCache().insert(c.values().toArray());
-		return drawStructure(jgraph);
-		
 	}
 	
 	private Kid kids(int i){
@@ -148,5 +108,53 @@ public class UnionFind extends Drawer {
 			a = x;
 			b = y;
 		}
+	}
+
+	class UnionFindDrawer extends Drawer{
+		public void draw(){
+			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
+			HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
+			
+			int x = 50, y = 50;
+			
+			for(int i = 0; i < len; i++){
+				if(unionfind[i] == i){
+						createMyVertex(c, i, x, y, Color.red);
+						insertEdge(getDefaultPort((c.get(i)), model),
+								getDefaultPort((c.get(i)), model));
+						x+=100;
+						pos.put(i, new Pos(x, y));
+					}
+			}
+			
+			for(int j = maxOrdem() - 1 ; j >= 0; j--){
+				for(int i = 0; i < len; i++){
+					System.out.println("pai "+i);
+					Kid myKids = kids(i);
+					if(myKids != null){
+						System.out.println(myKids.number);
+						Pos parentPos = pos.get(i);
+						int deltaX = 100/myKids.number;
+						for(int k = 0, posX = parentPos.a; 
+								k < myKids.number; k++, posX+=deltaX){
+							
+							System.out.println("filho " + myKids.arrayKids[k]);
+							
+							createMyVertex(c, myKids.arrayKids[k], posX, parentPos.b + 50, Color.red );
+							
+							insertEdge(getDefaultPort((c.get(myKids.arrayKids[k])), model),
+									   getDefaultPort((c.get(i)), model));
+						
+						}
+					}
+					//pegar todos os irmãos de um i que estão na ordem j
+					//tem que saber quando "irmãos há nessa ordem"
+				}
+				y+=30;
+			}
+			jgraph.getGraphLayoutCache().insert(c.values().toArray());
+			
+		}
+		
 	}
 }

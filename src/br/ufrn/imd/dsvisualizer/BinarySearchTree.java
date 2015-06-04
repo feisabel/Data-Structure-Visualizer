@@ -17,7 +17,6 @@ import org.jgraph.graph.GraphLayoutCache;
  */
 public class BinarySearchTree extends DataStructure
 {
-	private static final long serialVersionUID = 1L;
 	private Node head;
 
 	// TODO Ajeitar métodos de inserção, remoção e busca para combinar com interface de DataStructure
@@ -244,7 +243,7 @@ public class BinarySearchTree extends DataStructure
 	
 		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
 			if(root != null){
-				createMyVertex(c, root, x, y, col);
+				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeftKid() != null){
 					preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
 							y + deltaY, Color.blue);
