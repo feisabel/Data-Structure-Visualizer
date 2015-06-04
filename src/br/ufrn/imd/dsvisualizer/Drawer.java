@@ -25,30 +25,27 @@ public abstract class Drawer extends JApplet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 600, 500 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 500, 300 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
 	protected GraphLayoutCache view;
 	
-	public abstract JPanel draw();
+	public abstract void draw();
 	
 	public Drawer(){
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
 		jgraph = new JGraph( model, view );
-
+		jgraph.setPreferredSize( DEFAULT_SIZE );
+		
 		adjustDisplaySettings( jgraph );
 		getContentPane().add( jgraph );
 		resize( DEFAULT_SIZE );
 	}
-	protected JPanel jpanel;
-
-	public JPanel drawStructure(JGraph myGraph){
-		myGraph.setPreferredSize( DEFAULT_SIZE );
-		jpanel = new JPanel();
-		jpanel.add(myGraph);		
-		return jpanel;
+	
+	public JGraph getJGraph(){
+		return jgraph;
 	}
 		
 	protected void adjustDisplaySettings( JGraph jg ) {

@@ -15,18 +15,20 @@ import org.jgraph.graph.GraphLayoutCache;
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
-public class BinarySearchTree extends Drawer implements Tree
+public class BinarySearchTree extends DataStructure
 {
 	private static final long serialVersionUID = 1L;
 	private Node head;
 
+	// TODO Ajeitar métodos de inserção, remoção e busca para combinar com interface de DataStructure
+	
     /**
      * Constructor for class Tree
      */
     public BinarySearchTree()
     {
         head = new Node();
-
+        drawer = new BSTDrawer();
     }
 
     /**
@@ -59,10 +61,17 @@ public class BinarySearchTree extends Drawer implements Tree
     /**
      * Inserts a node to the tree.
      */
-    public void insert(int key)
-    {
-  
+    public boolean insert(int key) {
     	privateSearch(root(), key, true);
+    	return true;
+    }
+    
+    public boolean remove(int key) {
+    	return removeHelper(key) != null;
+    }
+    
+    public boolean search(int key) {
+    	return searchHelper(key) != null;
     }
     
     /**
@@ -70,26 +79,26 @@ public class BinarySearchTree extends Drawer implements Tree
      * @param  key  key of the node to be removed
      * @return  removed node
      */
-    public Node delete(int key)
+    public Node removeHelper(int key)
     {
-        Node q = search(key);
+        Node q = searchHelper(key);
         
         if (q != null) {  // if is in the tree
             if (q.getLeftKid() == null && q.getRightKid() == null) {  // if q is leaf
-                remove(q);  // delete it
+            	delete(q);  // delete it
             }
             else if (q.getLeftKid() != null && q.getRightKid() == null) {  // if q has one child, at the left
                 swap(q, q.getLeftKid());  // value swap with child
-                remove(q.getLeftKid());  // delete child 
+                delete(q.getLeftKid());  // delete child 
             }
             else if (q.getLeftKid() == null && q.getRightKid() != null) {  // if q has one child, at the right
                 swap(q, q.getRightKid());  // value swap with child
-                remove(q.getRightKid());  // delete child
+                delete(q.getRightKid());  // delete child
             }
             else {  // if q has two children
                 Node m = max(q.getLeftKid());  // gets the immediate predecessor
                 swap(q, m);  // value swaps q with it
-                remove(m);  // delete m
+                delete(m);  // delete m
             }
         }
        
@@ -114,7 +123,7 @@ public class BinarySearchTree extends Drawer implements Tree
      * Deletes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void remove(Node node)
+    private void delete(Node node)
     {
         if (node != null) {
             Node parent = node.getParent();
@@ -134,7 +143,7 @@ public class BinarySearchTree extends Drawer implements Tree
      * @param  key  key to be searched
      * @return  node with key 'key', or null if not found
      */
-    public Node search(int key)
+    public Node searchHelper(int key)
     {
         return privateSearch(root(), key, false);
     }
@@ -222,35 +231,35 @@ public class BinarySearchTree extends Drawer implements Tree
         }
         return null;
     }
-    
-	public JPanel draw(){
-		int x = DEFAULT_SIZE.width/2;
-		int y = 10;
-		HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-		preOrderCell(cells, root(), x, y, Color.blue);
-		
-		jgraph.getGraphLayoutCache().insert(cells.values().toArray());
-		return drawStructure(jgraph);
-	}
 
-	void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
-		if(root != null){
-			createMyVertex(c, root, x, y, col);
-			if(root.getLeftKid() != null){
-				preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-						y + deltaY, Color.blue);
-				insertEdge(getDefaultPort((c.get(root.getKey())), model),
-						getDefaultPort(c.get(root.getLeftKid().getKey()), model));	
-			}
-			if(root.getRightKid() != null){
-				preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-						y + deltaY, Color.blue);
-				insertEdge(getDefaultPort((c.get(root.getKey())), model),
-						getDefaultPort(c.get(root.getRightKid().getKey()), model));
+    class BSTDrawer extends Drawer {
+		public void draw(){
+			int x = DEFAULT_SIZE.width/2;
+			int y = 10;
+			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
+			preOrderCell(cells, root(), x, y, Color.blue);
+			
+			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
+		}
+	
+		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
+			if(root != null){
+				createMyVertex(c, root, x, y, col);
+				if(root.getLeftKid() != null){
+					preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+							y + deltaY, Color.blue);
+					insertEdge(getDefaultPort((c.get(root.getKey())), model),
+							getDefaultPort(c.get(root.getLeftKid().getKey()), model));	
+				}
+				if(root.getRightKid() != null){
+					preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+							y + deltaY, Color.blue);
+					insertEdge(getDefaultPort((c.get(root.getKey())), model),
+							getDefaultPort(c.get(root.getRightKid().getKey()), model));
+				}
 			}
 		}
-	}
-
+    }
 }
 
 
