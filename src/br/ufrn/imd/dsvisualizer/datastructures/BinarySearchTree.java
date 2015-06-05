@@ -191,20 +191,25 @@ public class BinarySearchTree extends Tree
     
     public void rightRotation(BSTNode node, BSTNode left) {
 		left.setParent(node.getParent());
-		left.getParent().setLeft(left);
+		if (left.getParent() != null)
+			left.getParent().setLeft(left);
 		node.setLeft(left.getRight());
-		node.getLeft().setParent(node);
+		if (node.getLeft() != null)
+			node.getLeft().setParent(node);
 		left.setRight(node);
 		node.setParent(left);
 	}
 	
 	public void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
 		right.setParent(node.getParent());
-		right.getParent().setLeft(right);
+		if (right.getParent() != null)
+			right.getParent().setLeft(right);
 		left.setRight(right.getLeft());
-		left.getRight().setParent(left);
+		if (left.getRight() != null)
+			left.getRight().setParent(left);
 		node.setLeft(right.getRight());
-		node.getLeft().setParent(node);
+		if (node.getLeft() != null)
+			node.getLeft().setParent(node);
 		right.setLeft(left);
 		left.setParent(right);
 		right.setRight(node);
@@ -213,20 +218,25 @@ public class BinarySearchTree extends Tree
 	
 	public void leftRotation(BSTNode node, BSTNode right) {
 		right.setParent(node.getParent());
-		right.getParent().setRight(right);
+		if (right.getParent() != null)
+			right.getParent().setRight(right);
 		node.setRight(right.getLeft());
-		node.getRight().setParent(node);
+		if (node.getRight() != null)
+			node.getRight().setParent(node);
 		right.setLeft(node);
 		node.setParent(right);
 	}
 	
 	public void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
 		left.setParent(node.getParent());
-		left.getParent().setRight(left);
+		if (left.getParent() != null)
+			left.getParent().setRight(left);
 		right.setLeft(left.getRight());
-		right.getLeft().setParent(right);
+		if (right.getLeft() != null)
+			right.getLeft().setParent(right);
 		node.setRight(left.getLeft());
-		node.getRight().setParent(node);
+		if (node.getRight() != null)
+			node.getRight().setParent(node);
 		left.setRight(right);
 		right.setParent(left);
 		right.setLeft(node);

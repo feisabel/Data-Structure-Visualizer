@@ -30,50 +30,50 @@ public class AVLTree extends BinarySearchTree {
     
 >>>>>>> a5cf7d1ccd00fd5c33fdcbb73ae44fa6d0d9b94b
 	public void insert(int key) {
-		privateInsert(key, root, null, true);
+		privateInsert(key, root, null, new Ref<Boolean>(true));
 	}
 	
-	private void privateInsert(int key, AVLNode node, AVLNode dad, boolean b) {
+	private void privateInsert(int key, AVLNode node, AVLNode dad, Ref<Boolean> b) {
 		if (node == null) {
 			AVLNode newNode = new AVLNode(dad, null, null, key, 0);
-			if (dad == null)
+			if (root == null)
 				root = newNode;
 			else if (key < dad.getKey())
 				dad.setLeft(newNode);
 			else
 				dad.setRight(newNode);
-			b = true;
+			b.set(true);
 		}
 		else {
 			if (key == node.getKey())
 				return;
 			else if (key < node.getKey()) {
 				privateInsert(key, node.getLeft(), node, b);
-				if (b) {
+				if (b.get()) {
 					if (node.getBalance() == 1) {
 						node.setBalance(0);
-						b = false;
+						b.set(false);
 					}
 					else if (node.getBalance() == 0)
 						node.setBalance(-1);
 					else {
 						rightRotations(node);
-						b = false;
+						b.set(false);
 					}
 				}
 			}
 			else {
 				privateInsert(key, node.getRight(), node, b);
-				if (b) {
+				if (b.get()) {
 					if (node.getBalance() == -1) {
 						node.setBalance(0);
-						b = false;
+						b.set(false);
 					}
 					else if (node.getBalance() == 0)
 						node.setBalance(1);
 					else {
 						leftRotations(node);
-						b = false;
+						b.set(false);
 					}
 				}
 			}
@@ -81,7 +81,7 @@ public class AVLTree extends BinarySearchTree {
 	}
 	
 	public void rightRotations(AVLNode node) {
-		if (node.getLeft().balance == -1 ) {
+		if (node.getLeft().getBalance() == -1 ) {
 			rightRotation(node);
 		}
 		else 
@@ -90,7 +90,7 @@ public class AVLTree extends BinarySearchTree {
 	}
 	
 	public void leftRotations(AVLNode node) {
-		if (node.getRight().balance == 1)
+		if (node.getRight().getBalance() == 1)
 			leftRotation(node);
 		else
 			doubleLeftRotation(node);
