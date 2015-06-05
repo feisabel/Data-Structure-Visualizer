@@ -76,6 +76,9 @@ public abstract class Drawer extends JApplet {
 		DefaultEdge edge = new DefaultEdge();
 		// Create ConnectionSet for Insertion
 		ConnectionSet cs = new ConnectionSet(edge, source, target);
+		int arrow = GraphConstants.ARROW_CLASSIC;
+		GraphConstants.setLineEnd(edge.getAttributes(), arrow);
+		GraphConstants.setEndFill(edge.getAttributes(), true);
 		// Add Edge and Connections to the Model
 		Object[] insert = new Object[]{edge};
 		model.insert(insert,null, cs, null, null);
