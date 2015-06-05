@@ -122,4 +122,5 @@ public class BSTNode extends Node
     	for(i = 0; a != null; a = a.getParent(), i++);	
     	return i;
     }
+
 }
