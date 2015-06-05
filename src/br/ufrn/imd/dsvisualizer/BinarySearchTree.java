@@ -15,11 +15,9 @@ import org.jgraph.graph.GraphLayoutCache;
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
-public class BinarySearchTree extends DataStructure
+public class BinarySearchTree extends Tree
 {
 	private BSTNode head;
-
-	// TODO Ajeitar métodos de inserção, remoção e busca para combinar com interface de DataStructure
 	
     /**
      * Constructor for class Tree
@@ -67,7 +65,7 @@ public class BinarySearchTree extends DataStructure
     }
     
     /**
-     * Removes node with the given key.
+     * Deletes node with the given key.
      * @param  key  key of the node to be removed
      * @return  removed node
      */
@@ -111,7 +109,7 @@ public class BinarySearchTree extends DataStructure
     }
     
     /**
-     * Deletes the given node. Must have a parent.
+     * Removes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
     private void remove(BSTNode node)
@@ -199,7 +197,7 @@ public class BinarySearchTree extends DataStructure
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	
-		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
+		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, BSTNode root, int x, int y, Color col){
 			if(root != null){
 				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeft() != null){

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public final class DSManager {
-	static private HashMap<DataStructure, ActionListener> actionListeners = new HashMap<DataStructure, ActionListener>();
+	static private HashMap<DataStructure, DSActionListener> actionListeners = new HashMap<DataStructure, DSActionListener>();
 	static private Random rand = new Random();
 	
 	private DSManager() {}
@@ -21,7 +21,7 @@ public final class DSManager {
 		return ds;
 	}
 	
-	public static ActionListener getActionListener(DataStructure ds) {
+	public static DSActionListener getActionListener(DataStructure ds) {
 		return actionListeners.get(ds);
 	}
 	
@@ -37,18 +37,22 @@ public final class DSManager {
 			this.frame = frame;
 		}
 		
-		public void actionPerformed(ActionEvent e) {
-			String command = e.getActionCommand();
-			String arg = (String)JOptionPane.showInputDialog(frame, "Number to " + command + ":",
-													"", JOptionPane.PLAIN_MESSAGE, null, null, null);
-			int num = Integer.parseInt(arg);
-			if (command.startsWith("search")) {
-				ds.search(num);
-			} else if (command.startsWith("insert")) {
-				ds.insert(num);
-			} else {
-				ds.remove(num);
+		public void actionPerformed(ActionEvent ev) {
+			String command = ev.getActionCommand();
+			String[] input = ((String)JOptionPane.showInputDialog(frame, "Numbers to " + command + ":",
+													"", JOptionPane.PLAIN_MESSAGE)).split(" *");
+			int[] args = new int[input.length];
+			for (int i = 0; i < args.length; i++) {
+				args[i] = Integer.parseInt(input[i]);
 			}
+			
+			try {
+				ds.call(command, args);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+			
 			ds.draw();
 		}
 	}

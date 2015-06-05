@@ -12,7 +12,7 @@ import br.ufrn.imd.dsvisualizer.UnionFind;
 
 public class Main {
 	public static void main(String[] args){
-		DataStructure u = Factory.create(Factory.STACK, 15);
+		MyStack u = (MyStack)Factory.create(Factory.STACK, 15);
 		u.remove(1);
 		u.draw();
 		JFrame j = new JFrame();

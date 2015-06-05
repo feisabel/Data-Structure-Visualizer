@@ -9,7 +9,6 @@ package br.ufrn.imd.dsvisualizer;
  */
 public class BSTNode extends Node
 {
-    private BSTNode parent;
     private BSTNode left;
     private BSTNode right;
     private int key;
@@ -18,7 +17,6 @@ public class BSTNode extends Node
      * Constructor of the class BSTNode with no parameters.
      */
     public BSTNode() {
-        parent = null;
         left = null;
         right = null;
         key = 0;
@@ -118,7 +116,7 @@ public class BSTNode extends Node
     	}
     }
 
-    public int BSTNodeLevel(){
+    public int nodeLevel(){
     	int i;
     	BSTNode a = this;
     	for(i = 0; a != null; a = a.getParent(), i++);	

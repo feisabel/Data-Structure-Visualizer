@@ -34,11 +34,6 @@ public class HeapFake extends DataStructure {
 		return false;
 	}
 	
-	public boolean remove(int num) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 	class HeapDrawer extends Drawer {
 		public void draw() {
 			int x = 0;

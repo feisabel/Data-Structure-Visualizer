@@ -1,11 +1,11 @@
 package br.ufrn.imd.dsvisualizer;
 
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
+
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 
@@ -14,13 +14,7 @@ public class UnionFind extends DataStructure {
 	private int[] ordem;
 	private int len;
 	
-	/*Só para funcionar!*/
-	public boolean search(int num){ return true; }
-	public boolean insert(int num){ return true; }
-	public boolean remove(int num){ return true; }
-	
-	
-	public UnionFind (int n){
+	public UnionFind(int n){
 		drawer = new UnionFindDrawer();
 		len = n;
 		unionfind = new int[n];
@@ -29,6 +23,9 @@ public class UnionFind extends DataStructure {
 			unionfind[i] = i; 
 			ordem[i] = 0;
 		}
+		
+		support("unite", 2);
+		support("find", 1);
 	}
 	
 	public void unite(int x, int y){
@@ -44,10 +41,11 @@ public class UnionFind extends DataStructure {
 			ordem[y]++;
 		}
 	}
-	public int searchUni(int x){
+	
+	public int find(int x){
 		try{
 			if(x != unionfind[x]){
-				unionfind[x] = searchUni(unionfind[x]);	
+				unionfind[x] = find(unionfind[x]);	
 			}
 			return unionfind[x];
 		}
@@ -83,17 +81,17 @@ public class UnionFind extends DataStructure {
 		
 		return res;
 	}
-	
-	class Pos{
-		int a;
-		int b;
-		Pos(int x, int y){
-			a = x;
-			b = y;
-		}
-	}
 
-	class UnionFindDrawer extends Drawer{
+	private class UnionFindDrawer extends Drawer{
+		private class Pos {
+			int a;
+			int b;
+			Pos(int x, int y){
+				a = x;
+				b = y;
+			}
+		}
+		
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
@@ -128,7 +126,7 @@ public class UnionFind extends DataStructure {
 				//tem que saber quando "irmãos há nessa ordem"
 			}			
 			jgraph.getGraphLayoutCache().insert(c.values().toArray());
-			
+	
 		}
 		
 	}
