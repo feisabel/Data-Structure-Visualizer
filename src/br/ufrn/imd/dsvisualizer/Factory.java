@@ -12,10 +12,10 @@ public final class Factory {
 	public static final int RN = 4;
 	public static final int NARIA = 5;
 	public static final int UNIONFIND = 6;
-	public static final int LIST = 7;
-	public static final int STACK = 8;
-	public static final int QUEUE = 9;
-	public static final int DEQUE = 10;
+	public static final int LIST = 7; //okay
+	public static final int STACK = 8; //okay
+	public static final int QUEUE = 9; //
+	public static final int DEQUE = 10; //
 	
 	private Factory() {}
 	
