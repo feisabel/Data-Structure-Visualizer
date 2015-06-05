@@ -1,4 +1,5 @@
 package br.ufrn.imd.dsvisualizer;
+
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,13 +63,14 @@ public class HeapFake extends DataStructure {
 					lvl++;
 					y+=deltaY;
 				}
-				createMyVertex(cells, list.get(i), x, y, Color.red);
+				createMyVertex(cells, list.get(i).getKey(), x, y, Color.red);
 				list.get(i).setX(x);
 				if(i != 0){
 					insertEdge(getDefaultPort(cells.get(help.getKey()), model), 
 							getDefaultPort(cells.get(list.get(i).getKey()), model));
 				}
 			}
+
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	}

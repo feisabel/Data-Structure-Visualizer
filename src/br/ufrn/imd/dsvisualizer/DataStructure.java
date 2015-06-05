@@ -1,4 +1,5 @@
 package br.ufrn.imd.dsvisualizer;
+
 import org.jgraph.JGraph;
 
 abstract public class DataStructure {

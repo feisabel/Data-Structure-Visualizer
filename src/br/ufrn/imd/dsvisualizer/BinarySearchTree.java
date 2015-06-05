@@ -1,4 +1,5 @@
 package br.ufrn.imd.dsvisualizer;
+
 import java.awt.Color;
 import java.util.HashMap;
 
@@ -11,14 +12,12 @@ import org.jgraph.graph.GraphLayoutCache;
 
 /**
  * Implements a binary search tree using Node.
- * CAROL E JP ESTIVERAM AQUI
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
 public class BinarySearchTree extends DataStructure
 {
-	private static final long serialVersionUID = 1L;
-	private Node head;
+	private BSTNode head;
 
 	// TODO Ajeitar métodos de inserção, remoção e busca para combinar com interface de DataStructure
 	
@@ -27,7 +26,7 @@ public class BinarySearchTree extends DataStructure
      */
     public BinarySearchTree()
     {
-        head = new Node();
+        head = new BSTNode();
         drawer = new BSTDrawer();
     }
 
@@ -35,43 +34,36 @@ public class BinarySearchTree extends DataStructure
      * Gets the root of the tree.
      * @return  the root of the tree
      */
-    private Node root()
+    private BSTNode root()
     {
-        return head.getLeftKid();
+        return head.getLeft();
     }
     
     /**
      * Sets the root of the tree to the given node.
      * @param  node  the node to which the root will be set
      */
-    private void root(Node node)
+    private void root(BSTNode node)
     {
-        head.setLeftKid(node);
+        head.setLeft(node);
     }
     
     /**
      * Check if the tree is empty.
      * @return  true if the tree is empty, false otherwise
      */
-    public boolean isEmpty()
+    private boolean isEmpty()
     {
         return root() == null;
     }
     
     /**
      * Inserts a node to the tree.
+     * @param key key of the note to be inserted
      */
-    public boolean insert(int key) {
-    	privateSearch(root(), key, true);
-    	return true;
-    }
-    
-    public boolean remove(int key) {
-    	return removeHelper(key) != null;
-    }
-    
-    public boolean search(int key) {
-    	return searchHelper(key) != null;
+    public void insert(int key)
+    {
+        privateSearch(root(), key, true);
     }
     
     /**
@@ -79,29 +71,28 @@ public class BinarySearchTree extends DataStructure
      * @param  key  key of the node to be removed
      * @return  removed node
      */
-    public Node removeHelper(int key)
+    public BSTNode delete(int key)
     {
-        Node q = searchHelper(key);
+        BSTNode q = search(key);
         
         if (q != null) {  // if is in the tree
-            if (q.getLeftKid() == null && q.getRightKid() == null) {  // if q is leaf
-            	delete(q);  // delete it
+            if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
+                remove(q);  // delete it
             }
-            else if (q.getLeftKid() != null && q.getRightKid() == null) {  // if q has one child, at the left
-                swap(q, q.getLeftKid());  // value swap with child
-                delete(q.getLeftKid());  // delete child 
+            else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
+                swap(q, q.getLeft());  // value swap with child
+                remove(q.getLeft());  // delete child
             }
-            else if (q.getLeftKid() == null && q.getRightKid() != null) {  // if q has one child, at the right
-                swap(q, q.getRightKid());  // value swap with child
-                delete(q.getRightKid());  // delete child
+            else if (q.getLeft() == null && q.getRight() != null) {  // if q has one child, at the right
+                swap(q, q.getRight());  // value swap with child
+                remove(q.getRight());  // delete child
             }
             else {  // if q has two children
-                Node m = max(q.getLeftKid());  // gets the immediate predecessor
+                BSTNode m = max(q.getLeft());  // gets the immediate predecessor
                 swap(q, m);  // value swaps q with it
-                delete(m);  // delete m
+                remove(m);  // delete m
             }
         }
-       
         return q;
     }
     
@@ -110,7 +101,7 @@ public class BinarySearchTree extends DataStructure
      * @param  node1  node to be swapped
      * @param  node2  node to be swapped
      */
-    private void swap(Node node1, Node node2)
+    private void swap(BSTNode node1, BSTNode node2)
     {
         if (node1 != null && node2 != null) {
             int p = node1.getKey();
@@ -123,16 +114,16 @@ public class BinarySearchTree extends DataStructure
      * Deletes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void delete(Node node)
+    private void remove(BSTNode node)
     {
         if (node != null) {
-            Node parent = node.getParent();
+        	BSTNode parent = (BSTNode) node.getParent();
             if (parent != null) {
-                if (parent.getLeftKid() == node) {
-                    parent.setLeftKid(null);
+                if (parent.getLeft() == node) {
+                    parent.setLeft(null);
                 }
                 else {
-                    parent.setRightKid(null);
+                    parent.setRight(null);
                 }
             }
         }
@@ -143,7 +134,7 @@ public class BinarySearchTree extends DataStructure
      * @param  key  key to be searched
      * @return  node with key 'key', or null if not found
      */
-    public Node searchHelper(int key)
+    public BSTNode search(int key)
     {
         return privateSearch(root(), key, false);
     }
@@ -155,63 +146,29 @@ public class BinarySearchTree extends DataStructure
      * @param  insert  if creates a new node when not found
      * @return  node with key 'key'
      */
-    private Node privateSearch(Node node, int key, boolean insert)
+    private BSTNode privateSearch(BSTNode node, int key, boolean insert)
     {
         if(node == null) {
             if (isEmpty() && insert) {
-                root(new Node(head, null, null, key));
+                root(new BSTNode(head, null, null, key));
                 return root();
             }
             return null;
         } else if (node.getKey() == key) {
             return node;
         } else if(node.getKey() > key) {
-            if (node.getLeftKid() == null && insert) {
-                node.setLeftKid(new Node(node, null, null, key));
-                return node.getLeftKid();
+            if (node.getLeft() == null && insert) {
+                node.setLeft(new BSTNode(node, null, null, key));
+                return node.getLeft();
             }
-            return privateSearch(node.getLeftKid(), key, insert);
+            return privateSearch(node.getLeft(), key, insert);
         } else {
-            if (node.getRightKid() == null && insert) {
-                node.setRightKid(new Node(node, null, null, key));
-                return node.getRightKid();
+            if (node.getRight() == null && insert) {
+                node.setRight(new BSTNode(node, null, null, key));
+                return node.getRight();
             }
-            return privateSearch(node.getRightKid(), key, insert);
+            return privateSearch(node.getRight(), key, insert);
         }
-    }
-    
-    /**
-     * @return  the node with the min key in the tree
-     */
-    public Node min()
-    {
-        return min(root());
-    }
-    
-    /**
-     * Gets the node with the min key of the given subtree. 
-     * @param  r  the root of the subtree
-     * @return  the node with the min key in the tree r
-     */
-    public Node min(Node r)
-    {
-        if (r != null) {
-            if (r.getLeftKid() == null) {
-                return r;
-            }
-            else {
-                return min(r.getLeftKid());
-            }
-        }
-        return null;
-    }
-    
-    /**
-     * @return  the node with the max key in the tree
-     */
-    public Node max()
-    {
-        return max(root());
     }
     
     /**
@@ -219,14 +176,14 @@ public class BinarySearchTree extends DataStructure
      * @param  r  the root of the subtree
      * @return  the node with the max key in the subtree r
      */
-    public Node max(Node r)
+    private BSTNode max(BSTNode r)
     {
         if (r != null) {
-            if (r.getRightKid() == null) {
+            if (r.getRight() == null) {
                 return r;
             }
             else {
-                return max(r.getRightKid());
+                return max(r.getRight());
             }
         }
         return null;
@@ -244,18 +201,18 @@ public class BinarySearchTree extends DataStructure
 	
 		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
 			if(root != null){
-				createMyVertex(c, root, x, y, col);
-				if(root.getLeftKid() != null){
-					preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+				createMyVertex(c, root.getKey(), x, y, col);
+				if(root.getLeft() != null){
+					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
 							y + deltaY, Color.blue);
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getLeftKid().getKey()), model));	
+							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}
-				if(root.getRightKid() != null){
-					preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+				if(root.getRight() != null){
+					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
 							y + deltaY, Color.blue);
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getRightKid().getKey()), model));
+							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}
 			}
 		}
