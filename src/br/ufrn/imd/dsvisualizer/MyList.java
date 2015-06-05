@@ -45,7 +45,6 @@ public class MyList extends DataStructure {
 			boolean d = true;
 			for(int i = 0; i < list.size(); i++){
 				createMyVertex(c, list.get(i), x, y, Color.red);
-				
 				if(x + 60 > DEFAULT_SIZE.width && d){
 					d = false;
 					y+= 60;
@@ -59,10 +58,10 @@ public class MyList extends DataStructure {
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((c.get(i-1)), model),
-							getDefaultPort(c.get(i), model));
-					insertEdge(getDefaultPort((c.get(i)), model),
-							getDefaultPort(c.get(i-1), model));
+					insertEdge(getDefaultPort((c.get(list.get(i-1))), model),
+							getDefaultPort(c.get(list.get(i)), model));
+					insertEdge(getDefaultPort((c.get(list.get(i))), model),
+							getDefaultPort(c.get(list.get(i-1)), model));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(c.values().toArray());
