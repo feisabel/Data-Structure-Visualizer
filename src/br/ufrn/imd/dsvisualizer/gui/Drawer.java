@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;

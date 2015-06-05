@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.gui;
 
 import java.awt.EventQueue;
 
@@ -17,6 +17,9 @@ import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
+
+import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
+import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

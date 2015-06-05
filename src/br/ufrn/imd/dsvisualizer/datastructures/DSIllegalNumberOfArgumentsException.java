@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class DSIllegalNumberOfArgumentsException extends Exception {
 	public DSIllegalNumberOfArgumentsException(String operation, Class<?> c, int expected, int got) {
