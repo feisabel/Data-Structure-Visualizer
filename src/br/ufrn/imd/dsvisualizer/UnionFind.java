@@ -56,23 +56,6 @@ public class UnionFind extends DataStructure {
 		}
 	}
 	
-	private Kid kids(int i){
-		int numberKids = 0;
-		int[] a = new int[len-1];
-		for(int k = 0, b = 0; k < len-1; k++){
-			if(unionfind[k] == i){
-				a[b] = k;
-				b++;
-				numberKids++;
-			}
-		}
-		Kid res = new Kid(numberKids, a);
-		if(numberKids > 0)
-			return res;
-		else
-			return null;
-	}
-	
 	private int maxOrdem(){
 		int m = ordem[0];
 		for(int i = 1; i < len; i++){
@@ -80,26 +63,24 @@ public class UnionFind extends DataStructure {
 				m = ordem[i];
 			}
 		}
-		System.out.println("max ordem " + m);
+		
 		return m;
 	}
 	
-	private int brothers(int k){
-		int b = 0;
-		for(int i = 0; i < len; i++){
-			if(unionfind[i] == k)
-				b++;
+	private int level(int i){
+		int res = 0;
+		boolean t = false;
+		while(!t){
+			if(unionfind[i] == i)
+				t = true;
+			else{
+				int k = unionfind[i];
+				i = k;
+				res++;
+			}
 		}
-		return b;
-	}
-	
-	class Kid{
-		int number; 
-		int[] arrayKids;
-		Kid(int x, int[] y){
-			number = x;
-			arrayKids = y;
-		}
+		
+		return res;
 	}
 	
 	class Pos{
@@ -118,41 +99,33 @@ public class UnionFind extends DataStructure {
 			
 			int x = 50, y = 50;
 			
-			for(int i = 0; i < len; i++){
-				if(unionfind[i] == i){
-						createMyVertex(c, i, x, y, Color.red);
-						insertEdge(getDefaultPort((c.get(i)), model),
-								getDefaultPort((c.get(i)), model));
-						x+=100;
-						pos.put(i, new Pos(x, y));
-					}
-			}
-			
-			for(int j = maxOrdem() - 1 ; j >= 0; j--){
+			for(int j = 0; j <= maxOrdem(); j++){
 				for(int i = 0; i < len; i++){
-					System.out.println("pai "+i);
-					Kid myKids = kids(i);
-					if(myKids != null){
-						System.out.println(myKids.number);
-						Pos parentPos = pos.get(i);
-						int deltaX = 100/myKids.number;
-						for(int k = 0, posX = parentPos.a; 
-								k < myKids.number; k++, posX+=deltaX){
-							
-							System.out.println("filho " + myKids.arrayKids[k]);
-							
-							createMyVertex(c, myKids.arrayKids[k], posX, parentPos.b + 50, Color.red );
-							
-							insertEdge(getDefaultPort((c.get(myKids.arrayKids[k])), model),
-									   getDefaultPort((c.get(i)), model));
-						
+					if(level(i) == j){
+						int X, Y;
+						if(j == 0){
+							X = x;
+							Y = y;
+							x += 150;
+						}else{
+							Pos parentPos = pos.get(unionfind[i]); //pega a posição do pai
+							X = parentPos.a;
+							Y = parentPos.b;
+							parentPos.a += 50;
+						}
+						createMyVertex(c, i, X, Y + 50, Color.red );
+						pos.put(i, new Pos(X, Y + 50));
+						if(j == 0){
+							insertEdge(getDefaultPort((c.get(i)), model),
+									getDefaultPort((c.get(i)), model));
+						}else{
+							insertEdge(getDefaultPort((c.get(i)), model),
+							   getDefaultPort(c.get(unionfind[i]), model));
 						}
 					}
-					//pegar todos os irmãos de um i que estão na ordem j
-					//tem que saber quando "irmãos há nessa ordem"
-				}
-				y+=30;
-			}
+				}//pegar todos os irmãos de um i que estão na ordem j
+				//tem que saber quando "irmãos há nessa ordem"
+			}			
 			jgraph.getGraphLayoutCache().insert(c.values().toArray());
 			
 		}
