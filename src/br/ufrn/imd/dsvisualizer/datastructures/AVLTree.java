@@ -1,5 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+import java.awt.Color;
+import java.util.HashMap;
+
+import org.jgraph.graph.DefaultGraphCell;
+
 import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree.BSTDrawer;
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
@@ -155,8 +160,32 @@ public class AVLTree extends BinarySearchTree {
 
 	class AVLTreeDrawer extends Drawer{
 		public void draw(){
+			int x = DEFAULT_SIZE.width/2;
+			int y = 10;
+			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
+			preOrderCell(cells, root(), x, y, Color.blue);
 			
+			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
-		
-	}
+	
+		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, AVLNode root, int x, int y, Color col){
+			if(root != null){
+				createMyVertex(c, root.getKey(), x, y, col);
+				if(root.getLeft() != null){
+					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
+							y + deltaY, Color.blue);
+					insertEdge(getDefaultPort((c.get(root.getKey())), model),
+							getDefaultPort(c.get(root.getLeft().getKey()), model));	
+				}
+				if(root.getRight() != null){
+					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+							y + deltaY, Color.blue);
+					insertEdge(getDefaultPort((c.get(root.getKey())), model),
+							getDefaultPort(c.get(root.getRight().getKey()), model));
+				}
+			}
+		} 
+    }
+	
 }
+
