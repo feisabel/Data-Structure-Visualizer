@@ -7,7 +7,7 @@ package br.ufrn.imd.dsvisualizer;
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
-public class BSTNode
+public class BSTNode extends Node
 {
     private BSTNode parent;
     private BSTNode left;

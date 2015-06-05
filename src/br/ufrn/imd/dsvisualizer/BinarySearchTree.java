@@ -215,7 +215,7 @@ public class BinarySearchTree extends DataStructure
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}
 			}
-		}
+		} 
     }
 }
 

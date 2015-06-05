@@ -45,7 +45,6 @@ public class MyStack extends DataStructure{ /*Pilha*/
 			int x = 30, y = 30;
 			boolean d = true;
 			for(int i = 0; i < stack.size(); i++){
-				System.out.println(stack.get(i));
 				createMyVertex(c, stack.get(i), x, y, Color.red);
 				if(x + 60 > DEFAULT_SIZE.width && d){
 					d = false;
