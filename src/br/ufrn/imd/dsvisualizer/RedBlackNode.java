@@ -2,13 +2,13 @@ package br.ufrn.imd.dsvisualizer;
 
 public class RedBlackNode extends BSTNode {
 	
-	private char color;
+	private Color color;
 	
 	public RedBlackNode() {
-		color = 'r';
+		color = RED;
 	}
 	
-	public RedBlackNode(RedBlackNode parent, RedBlackNode left, RedBlackNode right, int key, char color) {
+	public RedBlackNode(RedBlackNode parent, RedBlackNode left, RedBlackNode right, int key, Color color) {
 		super(parent, left, right, key);
 		this.color = color;
 	}
@@ -17,7 +17,7 @@ public class RedBlackNode extends BSTNode {
 		return color;
 	}
 	
-	public void setColor(char color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 	
