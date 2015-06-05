@@ -27,9 +27,9 @@ public final class Factory {
 			return heapfake(initialSize);
 		case 2:
 			return heapfake(initialSize);
-/*		case 3: 
-			return
-		case 4: 
+		case 3: 
+			return avl(initialSize);
+/*		case 4: 
 			return
 		case 5: 
 			return
@@ -101,5 +101,13 @@ public final class Factory {
 				i++;
 		}
 		return h;
+	}
+	
+	private static AVLTree avl(int size){
+		AVLTree m = new AVLTree();
+		for(int i = 0; i < size; i++){
+			m.insert(number(30));
+		}
+		return m;
 	}
 }
