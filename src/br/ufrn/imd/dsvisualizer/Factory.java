@@ -9,12 +9,12 @@ public final class Factory {
 	public static final int HEAPMIN = 2;
 	public static final int AVL = 3;
 	public static final int RN = 4;
-	public static final int NARIA = 3;
-	public static final int UNIONFIND = 4;
-	public static final int LIST = 5;
-	public static final int STACK = 5;
-	public static final int QUEUE = 5;
-	public static final int DEQUE = 5;
+	public static final int NARIA = 5;
+	public static final int UNIONFIND = 6;
+	public static final int LIST = 7;
+	public static final int STACK = 8;
+	public static final int QUEUE = 9;
+	public static final int DEQUE = 10;
 	
 	private Factory() {}
 	
@@ -26,9 +26,31 @@ public final class Factory {
 			return heapfake(initialSize);
 		case 2:
 			return heapfake(initialSize);
+/*		case 3: 
+			return
+		case 4: 
+			return
+		case 5: 
+			return
+*/		case 6: 
+			return unionfind(initialSize);
+		case 7: 
+			return list(initialSize);
 		default:
 			return null;
 		}
+	}
+	
+	private static MyList list(int size){
+		MyList m = new MyList();
+		for(int i = 0; i < size; i++)
+			m.insert(number(30));
+		return m;
+	}
+	
+	private static UnionFind unionfind(int size){
+		UnionFind u = new UnionFind(size);
+		return u;
 	}
 	
 	private static BinarySearchTree binarySearchTree(int size){
