@@ -1,3 +1,5 @@
+package br.ufrn.imd.dsvisualizer;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 

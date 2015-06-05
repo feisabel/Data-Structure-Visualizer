@@ -1,5 +1,6 @@
 package br.ufrn.imd.dsvisualizer;
 
+
 /**
  * BSTNode implements a simple BSTNode type.
  * 

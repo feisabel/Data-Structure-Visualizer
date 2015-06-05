@@ -1,3 +1,4 @@
+package br.ufrn.imd.dsvisualizer;
 
 public class AVLTree extends BinarySearchTree{
 	

@@ -1,4 +1,5 @@
 package br.ufrn.imd.dsvisualizer;
+
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,22 +12,22 @@ import org.jgraph.graph.GraphModel;
 
 
 public class HeapFake extends DataStructure {
-	LinkedList<Node> list;
+	LinkedList<BSTNode> list;
 	public HeapFake(){
 		drawer = new HeapDrawer();
-		list = new LinkedList<Node>();
+		list = new LinkedList<BSTNode>();
 	}
 	
 	public boolean insert(int a){
 		if(!search(a)){
-			list.add(list.size(), new Node(a));
+			list.add(list.size(), new BSTNode(a));
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean search(int a){
-		for(Node b : list){
+		for(BSTNode b : list){
 			if(b.getKey() == a)
 				return true;
 		}
@@ -44,7 +45,7 @@ public class HeapFake extends DataStructure {
 			int y = 30;
 			int lvl = 1;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-			Node help = null;
+			BSTNode help = null;
 			for(int i = 0; i < list.size(); i++){
 				if(i%2 == 0){
 					if(i != 0){
@@ -69,7 +70,7 @@ public class HeapFake extends DataStructure {
 							getDefaultPort(cells.get(list.get(i).getKey()), model));
 				}
 			}
-	//		jgraph.getGraphLayoutCache().insert(asda, asda);
+
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	}
