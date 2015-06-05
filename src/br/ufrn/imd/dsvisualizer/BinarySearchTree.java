@@ -201,17 +201,17 @@ public class BinarySearchTree extends DataStructure
 		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, Node root, int x, int y, Color col){
 			if(root != null){
 				createMyVertex(c, root.getKey(), x, y, col);
-				if(root.getLeftKid() != null){
-					preOrderCell(c, root.getLeftKid(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+				if(root.getLeft() != null){
+					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
 							y + deltaY, Color.blue);
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getLeftKid().getKey()), model));	
+							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}
-				if(root.getRightKid() != null){
-					preOrderCell(c, root.getRightKid(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+				if(root.getRight() != null){
+					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
 							y + deltaY, Color.blue);
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getRightKid().getKey()), model));
+							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}
 			}
 		}
