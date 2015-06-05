@@ -4,47 +4,49 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import org.jgraph.graph.DefaultGraphCell;
 
-public class MyList extends DataStructure {
-	List<Integer> list;
-	public MyList(){
-		list = new LinkedList<Integer>();
-		drawer = new MyListDrawer();
+public class MyStack extends DataStructure{ /*Pilha*/
+	List<Integer> stack;
+	public MyStack(){
+		stack = new LinkedList<Integer>();
+		drawer = new MyStackDrawer();
 	}
 	
 	public boolean insert(int a){
-		if(!list.contains(a)){
-			list.add(new Integer(a));
+		if(!stack.contains(a)){
+			stack.add(stack.size(), new Integer(a));
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean remove(int a){
-		if(list.contains(a)){
-			list.remove(new Integer(a));
+		if(stack.size() > 0){
+			stack.remove(stack.size()-1);
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean search(int a){
-		if(list.contains(a)){
-			a = list.get(a);
+		if(stack.contains(a)){
+			a = stack.get(a);
 			return true;
 		}
 		return false;
 	}
 	
-	class MyListDrawer extends Drawer{
+	class MyStackDrawer extends Drawer{
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;
 			boolean d = true;
-			for(int i = 0; i < list.size(); i++){
-				createMyVertex(c, list.get(i), x, y, Color.red);
+			for(int i = 0; i < stack.size(); i++){
+				System.out.println(stack.get(i));
+				createMyVertex(c, stack.get(i), x, y, Color.red);
 				if(x + 60 > DEFAULT_SIZE.width && d){
 					d = false;
 					y+= 60;
@@ -58,10 +60,10 @@ public class MyList extends DataStructure {
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((c.get(list.get(i-1))), model),
-							getDefaultPort(c.get(list.get(i)), model));
-					insertEdge(getDefaultPort((c.get(list.get(i))), model),
-							getDefaultPort(c.get(list.get(i-1)), model));
+					insertEdge(getDefaultPort((c.get(stack.get(i-1))), model),
+							getDefaultPort(c.get(stack.get(i)), model));
+					insertEdge(getDefaultPort((c.get(stack.get(i))), model),
+							getDefaultPort(c.get(stack.get(i-1)), model));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(c.values().toArray());

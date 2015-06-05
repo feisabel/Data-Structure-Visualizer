@@ -37,9 +37,18 @@ public final class Factory {
 			return unionfind(initialSize);
 		case 7: 
 			return list(initialSize);
+		case 8:
+			return stack(initialSize);
 		default:
 			return null;
 		}
+	}
+	
+	private static MyStack stack(int size){
+		MyStack m = new MyStack();
+		for(int i = 0; i < size; i++)
+			m.insert(number(30));
+		return m;
 	}
 	
 	private static MyList list(int size){
