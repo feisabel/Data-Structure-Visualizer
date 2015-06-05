@@ -1,5 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree.BSTDrawer;
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
+
 public class AVLTree extends BinarySearchTree {
 	
 	private AVLNode root;
@@ -10,6 +13,7 @@ public class AVLTree extends BinarySearchTree {
     public AVLTree()
     {
         root = null;
+        drawer = new AVLTreeDrawer();
     }
 	
 	public void insert(int key) {
@@ -147,5 +151,12 @@ public class AVLTree extends BinarySearchTree {
 		else
 			right.setBalance(0);
 		left.setBalance(0);
+	}
+
+	class AVLTreeDrawer extends Drawer{
+		public void draw(){
+			
+		}
+		
 	}
 }

@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.jgraph.graph.DefaultGraphCell;
 
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
+
 
 public class MyDeque extends DataStructure{
 	List<Integer> deque;
@@ -14,7 +16,7 @@ public class MyDeque extends DataStructure{
 		deque = new LinkedList<Integer>();
 		drawer = new MyDequeDrawer();
 	}
-	public boolean insert(int a){ //insere sempre no primeiro
+	public boolean insertFirst(int a){ //insere sempre no primeiro
 		if(!deque.contains(a)){
 			deque.add(0, new Integer(a));
 			return true;
@@ -30,7 +32,7 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
-	public boolean removeFirst(int a){ //remove no primeiro
+	public boolean removeFirst(){ //remove no primeiro
 		if(deque.size() > 0){
 			deque.remove(0);
 			return true;
@@ -38,7 +40,7 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
-	public boolean remove(int a){ //remove no último
+	public boolean removeLast(){ //remove no último
 		if(deque.size() > 0){
 			deque.remove(deque.size()-1);
 			return true;
