@@ -12,14 +12,17 @@ public class MyList extends DataStructure {
 	public MyList(){
 		list = new LinkedList<Integer>();
 		drawer = new MyListDrawer();
+		
+		support("insert", 1);
+		support("delete", 1);
+		support("search", 1);
 	}
 	
-	public boolean insert(int a){
+	public void insert(int a){
 		list.add(new Integer(a));
-		return true;
 	}
 	
-	public boolean remove(int a){
+	public boolean delete(int a){
 		if(list.contains(a)){
 			list.remove(new Integer(a));
 			return true;

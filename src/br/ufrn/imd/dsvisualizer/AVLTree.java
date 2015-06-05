@@ -1,6 +1,6 @@
 package br.ufrn.imd.dsvisualizer;
 
-public class AVLTree extends BinarySearchTree{
+public class AVLTree extends BinarySearchTree {
 	
 	private AVLNode root;
     
