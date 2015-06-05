@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -12,10 +12,10 @@ public final class Factory {
 	public static final int RN = 4;
 	public static final int NARIA = 5;
 	public static final int UNIONFIND = 6;
-	public static final int LIST = 7;
-	public static final int STACK = 8;
-	public static final int QUEUE = 9;
-	public static final int DEQUE = 10;
+	public static final int LIST = 7; //okay
+	public static final int STACK = 8; //okay
+	public static final int QUEUE = 9; //
+	public static final int DEQUE = 10; //
 	
 	private Factory() {}
 	
@@ -39,15 +39,33 @@ public final class Factory {
 			return list(initialSize);
 		case 8:
 			return stack(initialSize);
+		case 9:
+			return queue(initialSize);
+		case 10:
+			return deque(initialSize);
 		default:
 			return null;
 		}
 	}
 	
+	private static MyQueue queue(int size){
+		MyQueue m = new MyQueue();
+		for(int i = 0; i < size; i++)
+			m.insertLast(number(30));
+		return m;
+	}
+	
+	private static MyDeque deque(int size){
+		MyDeque m = new MyDeque();
+		for(int i = 0; i < size; i++)
+			m.insertFirst(number(30));
+		return m;
+	}
+	
 	private static MyStack stack(int size){
 		MyStack m = new MyStack();
 		for(int i = 0; i < size; i++)
-			m.insert(number(30));
+			m.push(number(30));
 		return m;
 	}
 	

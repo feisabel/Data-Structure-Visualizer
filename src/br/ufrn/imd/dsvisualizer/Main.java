@@ -3,17 +3,14 @@ package br.ufrn.imd.dsvisualizer;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import br.ufrn.imd.dsvisualizer.BinarySearchTree;
-import br.ufrn.imd.dsvisualizer.DataStructure;
-import br.ufrn.imd.dsvisualizer.Factory;
-import br.ufrn.imd.dsvisualizer.MyList;
-import br.ufrn.imd.dsvisualizer.UnionFind;
+import br.ufrn.imd.dsvisualizer.datastructures.Factory;
+import br.ufrn.imd.dsvisualizer.datastructures.MyQueue;
 
 
 public class Main {
 	public static void main(String[] args){
-		MyStack u = (MyStack)Factory.create(Factory.STACK, 15);
-		u.remove(1);
+		MyQueue u = (MyQueue)Factory.create(Factory.QUEUE, 6);
+		u.removeFirst();
 		u.draw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));

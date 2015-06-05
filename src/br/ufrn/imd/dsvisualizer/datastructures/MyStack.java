@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import java.util.Stack;
 
 import org.jgraph.graph.DefaultGraphCell;
 
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
+
 public class MyStack extends DataStructure{ /*Pilha*/
 	List<Integer> stack;
 	public MyStack(){
@@ -15,7 +17,7 @@ public class MyStack extends DataStructure{ /*Pilha*/
 		drawer = new MyStackDrawer();
 	}
 	
-	public boolean insert(int a){
+	public boolean push(int a){
 		if(!stack.contains(a)){
 			stack.add(stack.size(), new Integer(a));
 			return true;
@@ -23,7 +25,7 @@ public class MyStack extends DataStructure{ /*Pilha*/
 		return false;
 	}
 	
-	public boolean remove(int a){
+	public boolean pop(){
 		if(stack.size() > 0){
 			stack.remove(stack.size()-1);
 			return true;
@@ -45,7 +47,6 @@ public class MyStack extends DataStructure{ /*Pilha*/
 			int x = 30, y = 30;
 			boolean d = true;
 			for(int i = 0; i < stack.size(); i++){
-				System.out.println(stack.get(i));
 				createMyVertex(c, stack.get(i), x, y, Color.red);
 				if(x + 60 > DEFAULT_SIZE.width && d){
 					d = false;

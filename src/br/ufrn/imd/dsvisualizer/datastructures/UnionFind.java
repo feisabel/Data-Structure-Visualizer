@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public class UnionFind extends DataStructure {
 	private int[] unionfind;

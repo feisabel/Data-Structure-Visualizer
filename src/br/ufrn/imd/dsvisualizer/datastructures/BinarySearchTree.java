@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -9,6 +9,8 @@ import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphLayoutCache;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 /**
  * Implements a binary search tree using Node.
@@ -257,7 +259,7 @@ public class BinarySearchTree extends Tree
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}
 			}
-		}
+		} 
     }
 }
 
