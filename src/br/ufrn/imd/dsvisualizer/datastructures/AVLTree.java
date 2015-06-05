@@ -24,11 +24,7 @@ public class AVLTree extends BinarySearchTree {
     private AVLNode root() {
     	return root;
     }
-<<<<<<< HEAD
-	
-=======
-    
->>>>>>> a5cf7d1ccd00fd5c33fdcbb73ae44fa6d0d9b94b
+
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Boolean>(true));
 	}
