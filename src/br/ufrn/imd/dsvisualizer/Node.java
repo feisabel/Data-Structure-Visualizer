@@ -1,3 +1,5 @@
+package br.ufrn.imd.dsvisualizer;
+
 
 public abstract class Node {
 

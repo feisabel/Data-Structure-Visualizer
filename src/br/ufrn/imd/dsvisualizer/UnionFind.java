@@ -1,5 +1,6 @@
 package br.ufrn.imd.dsvisualizer;
 
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
