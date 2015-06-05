@@ -18,11 +18,11 @@ import org.jgraph.graph.GraphLayoutCache;
 import org.jgraph.graph.GraphModel;
 import org.jgraph.graph.Port;
 
-
+/*Responsável pelos métodos que facilitam o desenho das estruturas 
+ * e também pelo método que a desenha, cada filho implementa a sua
+ * própria maneira de se desenhar, portanto trata-se de uma classe
+ * abstrata.*/
 public abstract class Drawer extends JApplet {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
     protected static final Dimension DEFAULT_SIZE = new Dimension( 500, 300 );
@@ -33,6 +33,8 @@ public abstract class Drawer extends JApplet {
 	
 	public abstract void draw();
 	
+	/*Construtur sem parâmetros.
+	 * */
 	public Drawer(){
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
@@ -44,20 +46,31 @@ public abstract class Drawer extends JApplet {
 		resize( DEFAULT_SIZE );
 	}
 	
+	/*Retorna o JGraph.
+	 * 
+	 * */
 	public JGraph getJGraph(){
 		return jgraph;
 	}
-		
+	
+	/*Responsável por alguns ajustes de tamanho e cor do background.
+	 * */	
 	protected void adjustDisplaySettings( JGraph jg ) {
         jg.setPreferredSize( DEFAULT_SIZE );
         Color  c        = DEFAULT_BG_COLOR;
         jg.setBackground( c );
     }
 	
+	/*Recebe um inteiro e retorna uma string.
+	 * */
 	public String toString(int a){
 		return "" + a;
 	}
 	
+	/*Método responsável por criar um vértice novo dado um inteiro que ser o valor do
+	 *node, os inteiros x e y das coordenadas e uma cor, o HashMap é utilizado para mapear
+	 *os nodes e vértices que já foram criados.
+	 * */
 	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, int n, int x, int y, Color c){
 		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n)));
 		g.put(n, v);
@@ -71,6 +84,9 @@ public abstract class Drawer extends JApplet {
 	
 	}
 	
+	/*Insere um vértice dado um node de onde ele sai (source) e um node para onde
+	 *ele vai.
+	 * */
 	protected void insertEdge( Port source, Port target) {
 		 // Create Edge
 		DefaultEdge edge = new DefaultEdge();
@@ -84,13 +100,11 @@ public abstract class Drawer extends JApplet {
 		model.insert(insert,null, cs, null, null);
 	}
 	
+	/*Dado um objeto, um vértice, retorna um port (tipo específico da biblioteca JGraph).
+	 * */
 	protected Port getDefaultPort(Object vertex, GraphModel model) {
-	 // Iterate over all Children
 		for(int i = 0; i < model.getChildCount(vertex); i++) {
-			// Fetch the Child of Vertex at Index i
 			Object child = model.getChild(vertex, i);
-		 	// Check if Child is a Portif (child instanceof Port)
-		 	// Return the Child as a Port
 		 	return (Port) child;
 		}
 	     // No Ports Found
