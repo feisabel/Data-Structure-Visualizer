@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Stack;
 
 import org.jgraph.graph.DefaultGraphCell;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public class MyStack extends DataStructure{ /*Pilha*/
 	List<Integer> stack;

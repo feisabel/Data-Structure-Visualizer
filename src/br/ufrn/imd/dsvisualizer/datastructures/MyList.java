@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.jgraph.graph.DefaultGraphCell;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public class MyList extends DataStructure {
 	List<Integer> list;

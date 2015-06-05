@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class DSUnsupportedOperationException extends RuntimeException {
 	public DSUnsupportedOperationException(String operation, Class<?> c) {

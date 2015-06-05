@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphModel;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 
 public class HeapFake extends DataStructure {

@@ -3,11 +3,12 @@ package br.ufrn.imd.dsvisualizer;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import br.ufrn.imd.dsvisualizer.BinarySearchTree;
-import br.ufrn.imd.dsvisualizer.DataStructure;
-import br.ufrn.imd.dsvisualizer.Factory;
-import br.ufrn.imd.dsvisualizer.MyList;
-import br.ufrn.imd.dsvisualizer.UnionFind;
+import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree;
+import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
+import br.ufrn.imd.dsvisualizer.datastructures.Factory;
+import br.ufrn.imd.dsvisualizer.datastructures.MyList;
+import br.ufrn.imd.dsvisualizer.datastructures.MyStack;
+import br.ufrn.imd.dsvisualizer.datastructures.UnionFind;
 
 
 public class Main {

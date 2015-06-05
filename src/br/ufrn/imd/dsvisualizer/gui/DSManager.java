@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.gui;
 
 
 import java.awt.event.ActionEvent;
@@ -8,6 +8,9 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
+import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 public final class DSManager {
 	static private HashMap<DataStructure, DSActionListener> actionListeners = new HashMap<DataStructure, DSActionListener>();

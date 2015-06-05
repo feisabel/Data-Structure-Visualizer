@@ -1,4 +1,4 @@
-package br.ufrn.imd.dsvisualizer;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 import org.jgraph.JGraph;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 abstract public class DataStructure {
 	// data structure drawer
