@@ -84,7 +84,9 @@ public final class Factory {
 	private static BinarySearchTree binarySearchTree(int size){
 		BinarySearchTree tree = new BinarySearchTree();
 		for(int i = 0; i < size; i++){
-			tree.insert(number(30));
+			int n = number(30);
+			System.out.println(n);
+			tree.insert(n);
 		}
 		return tree;
 	}

@@ -264,7 +264,7 @@ public class BinarySearchTree extends Tree
 				}
 				if(root.getRight() != null){
 					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-							y + deltaY, root.getLeft().getColor());
+							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}

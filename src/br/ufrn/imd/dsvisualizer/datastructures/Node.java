@@ -10,16 +10,17 @@ public abstract class Node {
 		c = java.awt.Color.red;
 	}
 	
+	public Node(Node parent){
+		this.parent = parent;
+		c = java.awt.Color.red;
+	}
+	
 	public java.awt.Color getColor(){
 		return c;
 	}
 	
 	public void setColor(java.awt.Color c){
 		this.c = c;
-	}
-	
-	public Node(Node parent){
-		this.parent = parent;
 	}
 	
     /**
