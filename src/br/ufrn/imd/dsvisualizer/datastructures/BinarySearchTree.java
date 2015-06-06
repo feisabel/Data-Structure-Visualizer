@@ -191,8 +191,12 @@ public class BinarySearchTree extends Tree
     
     public void rightRotation(BSTNode node, BSTNode left) {
 		left.setParent(node.getParent());
-		if (left.getParent() != null)
-			left.getParent().setLeft(left);
+		if (left.getParent() != null) {
+			if (node.getKey() < left.getParent().getKey())
+				left.getParent().setLeft(left);
+			else
+				left.getParent().setRight(left);
+		}
 		node.setLeft(left.getRight());
 		if (node.getLeft() != null)
 			node.getLeft().setParent(node);
@@ -202,8 +206,12 @@ public class BinarySearchTree extends Tree
 	
 	public void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
 		right.setParent(node.getParent());
-		if (right.getParent() != null)
-			right.getParent().setLeft(right);
+		if (right.getParent() != null) {
+			if (node.getKey() < right.getParent().getKey())
+				right.getParent().setLeft(right);
+			else
+				right.getParent().setRight(right);
+		}
 		left.setRight(right.getLeft());
 		if (left.getRight() != null)
 			left.getRight().setParent(left);
@@ -218,8 +226,12 @@ public class BinarySearchTree extends Tree
 	
 	public void leftRotation(BSTNode node, BSTNode right) {
 		right.setParent(node.getParent());
-		if (right.getParent() != null)
-			right.getParent().setRight(right);
+		if (right.getParent() != null) {
+			if (node.getKey() < right.getParent().getKey())
+				right.getParent().setLeft(right);
+			else
+				right.getParent().setRight(right);
+		}
 		node.setRight(right.getLeft());
 		if (node.getRight() != null)
 			node.getRight().setParent(node);
@@ -229,8 +241,12 @@ public class BinarySearchTree extends Tree
 	
 	public void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
 		left.setParent(node.getParent());
-		if (left.getParent() != null)
-			left.getParent().setRight(left);
+		if (left.getParent() != null) {
+			if (node.getKey() < left.getParent().getKey())
+				left.getParent().setLeft(left);
+			else
+				left.getParent().setRight(left);
+		}
 		right.setLeft(left.getRight());
 		if (right.getLeft() != null)
 			right.getLeft().setParent(right);
