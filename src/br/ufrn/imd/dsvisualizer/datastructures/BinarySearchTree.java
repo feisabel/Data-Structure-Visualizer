@@ -259,11 +259,12 @@ public class BinarySearchTree extends Tree
 		node.setParent(left);
 	}
 
-    class BSTDrawer extends Drawer {
+    protected class BSTDrawer extends Drawer {
 		public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
+			System.out.println(root() + " " );
 			preOrderCell(cells, root(), x, y, root().getColor());
 			
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

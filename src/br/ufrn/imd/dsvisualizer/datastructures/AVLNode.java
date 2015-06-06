@@ -10,6 +10,7 @@ public class AVLNode extends BSTNode {
      */
 	public AVLNode() {
 		balance = 0;
+		selectColor();
 	}
 	
 	/**
@@ -23,6 +24,7 @@ public class AVLNode extends BSTNode {
 	public AVLNode(AVLNode parent, AVLNode left, AVLNode right, int key, int balance) {
 		super(parent, left, right, key);
 		this.balance = balance;
+		selectColor();
 	}
 
 	/**
@@ -39,6 +41,17 @@ public class AVLNode extends BSTNode {
     */
    public void setBalance(int balance) {
        this.balance = balance;
+       selectColor();
+   }
+   
+   private void selectColor(){
+	   if(balance == 0){
+		   setColor(java.awt.Color.BLUE);
+	   }else if(balance == 1){
+		   setColor(java.awt.Color.GREEN); 
+	   }else{
+		   setColor(java.awt.Color.ORANGE);
+	   }
    }
    
    public AVLNode getLeft() {
