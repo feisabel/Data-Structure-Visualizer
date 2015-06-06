@@ -7,11 +7,11 @@ public class Ref<T> {
 		internal = obj;
 	}
 	
-	T get() {
+	public T get() {
 		return internal;
 	}
 	
-	void set(T obj) {
+	public void set(T obj) {
 		internal = obj;
 	}
 }
