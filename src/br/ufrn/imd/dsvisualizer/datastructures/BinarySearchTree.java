@@ -205,6 +205,9 @@ public class BinarySearchTree extends Tree
 	}
 	
 	public void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
+		if (right == null) {
+			System.out.println("node ta null ");
+		}
 		right.setParent(node.getParent());
 		if (right.getParent() != null) {
 			if (node.getKey() < right.getParent().getKey())
@@ -240,6 +243,9 @@ public class BinarySearchTree extends Tree
 	}
 	
 	public void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
+		if (left == null) {
+			System.out.println("node ta null ");
+		}
 		left.setParent(node.getParent());
 		if (left.getParent() != null) {
 			if (node.getKey() < left.getParent().getKey())

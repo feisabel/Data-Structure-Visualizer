@@ -12,10 +12,6 @@ public class AVLTree extends BinarySearchTree {
         root = null;
  //       drawer = new AVLTreeDrawer();
     }
-    
-    private AVLNode root() {
-    	return root;
-    }
 
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Boolean>(true));
@@ -33,8 +29,10 @@ public class AVLTree extends BinarySearchTree {
 			b.set(true);
 		}
 		else {
-			if (key == node.getKey())
+			if (key == node.getKey()) {
+				b.set(false);
 				return;
+			}
 			else if (key < node.getKey()) {
 				privateInsert(key, node.getLeft(), node, b);
 				if (b.get()) {
