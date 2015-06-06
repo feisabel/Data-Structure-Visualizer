@@ -1,5 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+import java.awt.Color;
+
 public class RBTree extends BinarySearchTree {
 	
 	private RBNode root;
@@ -14,10 +16,10 @@ public class RBTree extends BinarySearchTree {
 	
 	private void privateInsert(int key, RBNode node, RBNode dad, int b) {
 		if (node == null) {
-			node = new RBNode(null, null, null, key, RBNode.Color.RED);
+			node = new RBNode(null, null, null, key, Color.RED);
 			if (root == null) {
 				root = node;
-				node.setColor(RBNode.Color.BLACK);
+				node.setColor(Color.BLACK);
 			}
 			else {
 				if (key < dad.getKey())

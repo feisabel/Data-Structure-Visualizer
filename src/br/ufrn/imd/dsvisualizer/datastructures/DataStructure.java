@@ -80,7 +80,7 @@ abstract public class DataStructure {
 				try {
 					method = this.getClass().getMethod(command, paramsTypes);
 					for (int i=0; i < params.length - numOfParams; i++) {
-						method.invoke(this, Arrays.copyOfRange(params, i, i + numOfParams + 1));
+						method.invoke(this, Arrays.copyOfRange(params, i, i + numOfParams));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
