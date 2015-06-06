@@ -253,7 +253,7 @@ public class BinarySearchTree extends Tree
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	
-		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, BSTNode root, int x, int y, Color col){
+		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, BSTNode root, int x, int y, java.awt.Color col){
 			if(root != null){
 				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeft() != null){

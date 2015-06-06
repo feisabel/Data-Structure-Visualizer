@@ -72,7 +72,7 @@ public abstract class Drawer extends JApplet {
 	 *node, os inteiros x e y das coordenadas e uma cor, o HashMap é utilizado para mapear
 	 *os nodes e vértices que já foram criados.
 	 * */
-	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, int n, int x, int y, Color c){
+	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, int n, int x, int y, java.awt.Color c){
 		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n)));
 		g.put(n, v);
 		DefaultPort port = new DefaultPort();
