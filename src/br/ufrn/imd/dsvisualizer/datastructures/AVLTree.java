@@ -18,7 +18,7 @@ public class AVLTree extends BinarySearchTree {
     public AVLTree()
     {
         root = null;
-        drawer = new AVLTreeDrawer();
+ //       drawer = new AVLTreeDrawer();
     }
     
     private AVLNode root() {
@@ -142,8 +142,12 @@ public class AVLTree extends BinarySearchTree {
 			root = left;
 	}
 
-	class AVLTreeDrawer extends Drawer{
-			public void draw(){
+	/*class AVLTreeDrawer extends Drawer{
+		public void draw(){
+			BinarySearchTree.BSTDrawer.draw();
+		}
+		
+		public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
@@ -168,8 +172,8 @@ public class AVLTree extends BinarySearchTree {
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}
 			}
-		} 
-    }
+		}
+    }*/
 	
 }
 

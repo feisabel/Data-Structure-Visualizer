@@ -2,22 +2,22 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class RBNode extends BSTNode {
 	
-	private Color color;
+	private MyColor color;
 	
 	public RBNode() {
-		color = Color.RED;
+		color = MyColor.RED;
 	}
 	
-	public RBNode(RBNode parent, RBNode left, RBNode right, int key, Color color) {
+	public RBNode(RBNode parent, RBNode left, RBNode right, int key, MyColor color) {
 		super(parent, left, right, key);
 		this.color = color;
 	}
 	
-	public Color getColor() {
+	public MyColor getMyColor() {
 		return color;
 	}
 	
-	public void setColor(Color color) {
+	public void setMyColor(MyColor color) {
 		this.color = color;
 	}
 	
@@ -33,7 +33,7 @@ public class RBNode extends BSTNode {
 		   return (RBNode)super.getParent();
 	   }
 
-	   public enum Color {
+	   public enum MyColor {
 	   	RED, BLACK
 	   }
 }
