@@ -1,8 +1,6 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-import java.util.LinkedList;
 import java.util.Random;
-
 
 public final class Factory {
 	public static final int BINARYTREE = 0;
@@ -85,7 +83,6 @@ public final class Factory {
 		BinarySearchTree tree = new BinarySearchTree();
 		for(int i = 0; i < size; i++){
 			int n = number(30);
-			System.out.println(n);
 			tree.insert(n);
 		}
 		return tree;
@@ -108,7 +105,9 @@ public final class Factory {
 	private static AVLTree avl(int size){
 		AVLTree m = new AVLTree();
 		for(int i = 0; i < size; i++){
-			m.insert(number(30));
+			int n = number(30);
+			System.out.println(n);
+			m.insert(n);
 		}
 		return m;
 	}
