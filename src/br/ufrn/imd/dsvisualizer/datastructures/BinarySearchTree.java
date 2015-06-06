@@ -34,7 +34,7 @@ public class BinarySearchTree extends Tree
      * Gets the root of the tree.
      * @return  the root of the tree
      */
-    private BSTNode root()
+    protected BSTNode root()
     {
         return head.getLeft();
     }

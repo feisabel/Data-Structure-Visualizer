@@ -13,6 +13,10 @@ public class AVLTree extends BinarySearchTree {
  //       drawer = new AVLTreeDrawer();
     }
 
+    protected AVLNode root() {
+    	return root;
+    }
+    
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Boolean>(true));
 	}
