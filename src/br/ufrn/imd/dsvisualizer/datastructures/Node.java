@@ -1,26 +1,28 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+import java.awt.Color;
+
 public abstract class Node {
 
 	private Node parent;
-	private java.awt.Color c;
+	protected Color color;
 	
 	public Node(){
 		parent = null;
-		c = java.awt.Color.red;
+		color = Color.RED;
 	}
 	
 	public Node(Node parent){
 		this.parent = parent;
-		c = java.awt.Color.red;
+		color = Color.RED;
 	}
 	
-	public java.awt.Color getColor(){
-		return c;
+	public Color getColor(){
+		return color;
 	}
 	
-	public void setColor(java.awt.Color c){
-		this.c = c;
+	public void setColor(Color color){
+		this.color = color;
 	}
 	
     /**
@@ -38,6 +40,4 @@ public abstract class Node {
    public void setParent(Node parent) {
        this.parent = parent;
    }
-
-
 }
