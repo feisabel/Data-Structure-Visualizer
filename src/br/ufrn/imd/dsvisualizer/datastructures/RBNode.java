@@ -3,6 +3,10 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class RBNode extends BSTNode {	
 	
+	public RBNode () {
+		
+	}
+	
 	public RBNode(RBNode parent, RBNode left, RBNode right, int key) {
 		super(parent, left, right, key);
 	}
