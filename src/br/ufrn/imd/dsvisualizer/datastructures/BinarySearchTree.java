@@ -248,7 +248,7 @@ public class BinarySearchTree extends Tree
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-			preOrderCell(cells, root(), x, y, Color.blue);
+			preOrderCell(cells, root(), x, y, root().getColor());
 			
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
@@ -258,13 +258,13 @@ public class BinarySearchTree extends Tree
 				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeft() != null){
 					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
-							y + deltaY, Color.blue);
+							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}
 				if(root.getRight() != null){
 					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
-							y + deltaY, Color.blue);
+							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}

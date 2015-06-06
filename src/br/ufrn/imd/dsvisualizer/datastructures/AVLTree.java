@@ -135,7 +135,7 @@ public class AVLTree extends BinarySearchTree {
 	}
 
 	class AVLTreeDrawer extends Drawer{
-		public void draw(){
+			public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
