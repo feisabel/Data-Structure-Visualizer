@@ -14,10 +14,10 @@ public class RBTree extends BinarySearchTree {
 	
 	private void privateInsert(int key, RBNode node, RBNode dad, int b) {
 		if (node == null) {
-			node = new RBNode(null, null, null, key, Color.RED);
+			node = new RBNode(null, null, null, key, RBNode.Color.RED);
 			if (root == null) {
 				root = node;
-				node.setColor(Color.BLACK);
+				node.setColor(RBNode.Color.BLACK);
 			}
 			else {
 				if (key < dad.getKey())

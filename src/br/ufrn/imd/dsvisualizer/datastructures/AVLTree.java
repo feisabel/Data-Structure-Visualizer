@@ -97,6 +97,8 @@ public class AVLTree extends BinarySearchTree {
 		super.rightRotation(node, left);
 		node.setBalance(0);
 		left.setBalance(0);
+		if (root == node)
+			root = left;
 	}
 	
 	public void doubleRightRotation(AVLNode node) {
@@ -111,6 +113,8 @@ public class AVLTree extends BinarySearchTree {
 		else
 			left.setBalance(0);
 		right.setBalance(0);
+		if (root == node)
+			root = right;
 	}
 	
 	public void leftRotation(AVLNode node) {
@@ -118,6 +122,8 @@ public class AVLTree extends BinarySearchTree {
 		super.leftRotation(node, right);
 		node.setBalance(0);
 		right.setBalance(0);
+		if (root == node)
+			root = right;
 	}
 	
 	public void doubleLeftRotation(AVLNode node) {
@@ -132,6 +138,8 @@ public class AVLTree extends BinarySearchTree {
 		else
 			right.setBalance(0);
 		left.setBalance(0);
+		if (root == node)
+			root = left;
 	}
 
 	class AVLTreeDrawer extends Drawer{
