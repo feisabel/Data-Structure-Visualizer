@@ -239,7 +239,7 @@ public class BinarySearchTree extends Tree
 			node.getRight().setParent(node);
 		left.setRight(right);
 		right.setParent(left);
-		right.setLeft(node);
+		left.setLeft(node);
 		node.setParent(left);
 	}
 

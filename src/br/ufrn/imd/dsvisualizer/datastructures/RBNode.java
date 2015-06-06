@@ -32,4 +32,8 @@ public class RBNode extends BSTNode {
 	   public RBNode getParent() {
 		   return (RBNode)super.getParent();
 	   }
+
+	   public enum Color {
+	   	RED, BLACK
+	   }
 }
