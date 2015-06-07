@@ -10,13 +10,26 @@ import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
+/**
+ * Class stack.
+ * @author Ana Caroline
+ *
+ */
 public class MyStack extends DataStructure{ /*Pilha*/
 	List<Integer> stack;
+	/**
+	 * Constructor with no parameters.
+	 */
 	public MyStack(){
 		stack = new LinkedList<Integer>();
 		drawer = new MyStackDrawer();
 	}
 	
+	/**
+	 * Adds new node in the top.
+	 * @param a new node
+	 * @return true if inserted, false otherwise
+	 */
 	public boolean push(int a){
 		if(!stack.contains(a)){
 			stack.add(stack.size(), new Integer(a));
@@ -25,6 +38,10 @@ public class MyStack extends DataStructure{ /*Pilha*/
 		return false;
 	}
 	
+	/**
+	 * Removes the node in the top if exists.
+	 * @return true if removed, false otherwise
+	 */
 	public boolean pop(){
 		if(stack.size() > 0){
 			stack.remove(stack.size()-1);
@@ -33,15 +50,28 @@ public class MyStack extends DataStructure{ /*Pilha*/
 		return false;
 	}
 	
-	public boolean search(int a){
+	/**
+	 * Returns the node's position.  
+	 * @param a node to be searched
+	 * @return position 
+	 */
+	public int search(int a){
 		if(stack.contains(a)){
-			a = stack.get(a);
-			return true;
+			a = stack.indexOf(a);
+			return a;
 		}
-		return false;
+		return 0;
 	}
 	
+	/**
+	 * Class to draw the structure.
+	 * @author Ana Caroline
+	 *
+	 */
 	class MyStackDrawer extends Drawer{
+		/**
+		 * Method to draw the structure.
+		 */
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;

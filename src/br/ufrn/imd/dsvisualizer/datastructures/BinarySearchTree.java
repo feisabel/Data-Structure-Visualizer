@@ -22,7 +22,7 @@ public class BinarySearchTree extends Tree
 	private BSTNode head;
 	
     /**
-     * Constructor for class Tree
+     * Constructor for class BInarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
@@ -32,7 +32,7 @@ public class BinarySearchTree extends Tree
 
     /**
      * Gets the root of the tree.
-     * @return  the root of the tree
+     * @return the root of the tree
      */
     protected BSTNode root()
     {
@@ -189,6 +189,11 @@ public class BinarySearchTree extends Tree
         return null;
     }
     
+    /**
+     * Does the right rotation to correct the tree's balance.
+     * @param node to be changed position
+     * @param left to be changed position
+     */
     protected void rightRotation(BSTNode node, BSTNode left) {
 		left.setParent(node.getParent());
 		if (left.getParent() != null) {
@@ -204,6 +209,12 @@ public class BinarySearchTree extends Tree
 		node.setParent(left);
 	}
 	
+    /**
+     * Does the double right rotation to correct the tree's balance.
+     * @param node to be changed position
+     * @param left to be changed position
+     * @param right to be changed position
+     */
 	protected void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
 		if (right == null) {
 			System.out.println("node ta null ");
@@ -227,6 +238,11 @@ public class BinarySearchTree extends Tree
 		node.setParent(right);
 	}
 	
+	/**
+	 * Does the double left rotation to correct the tree's balance.
+	 * @param node to be balanced
+	 * @param right to be balanced
+	 */
 	protected void leftRotation(BSTNode node, BSTNode right) {
 		right.setParent(node.getParent());
 		if (right.getParent() != null) {
@@ -242,6 +258,12 @@ public class BinarySearchTree extends Tree
 		node.setParent(right);
 	}
 	
+	/**
+	 * Does double left rotation to correct the tree's balance.
+	 * @param node to be changed location
+	 * @param right to be changed location
+	 * @param left to bem changed location
+	 */
 	protected void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
 		if (left == null) {
 			System.out.println("node ta null ");
@@ -264,29 +286,43 @@ public class BinarySearchTree extends Tree
 		left.setLeft(node);
 		node.setParent(left);
 	}
-
+	
+	/**
+	 * Class BSTDrawer contains the methods to draw the structure.
+	 * @author Ana Caroline
+	 *
+	 */
     protected class BSTDrawer extends Drawer {
-		public void draw(){
+		/**
+		 * Method to draw the structure.
+		 */
+    	public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-			System.out.println(root() + " " );
 			preOrderCell(cells, root(), x, y, root().getColor());
-			
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
-	
+    	
+    	/**
+    	 * Method to help the draw process. Using pre order access.
+    	 * @param c used to mapping the jgraph cells
+    	 * @param root node to be inserted
+    	 * @param x node's position axis x
+    	 * @param y node's position axis y
+    	 * @param col node's color
+    	 */
 		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, BSTNode root, int x, int y, java.awt.Color col){
 			if(root != null){
 				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
+					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}
 				if(root.getRight() != null){
-					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getRight().getKey()), model));

@@ -20,7 +20,7 @@ public class RBTree extends BinarySearchTree {
 	
 	private void privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
 		if (node == null) {
-			node = new RBNode(null, null, null, key);
+			node = new RBNode(dad, null, null, key);
 			if (root == null) {
 				root = node;
 				node.setColor(Color.BLACK);
@@ -30,7 +30,6 @@ public class RBTree extends BinarySearchTree {
 					dad.setLeft(node);
 				else
 					dad.setRight(node);
-				node.setParent(dad);
 			}
 		}
 		else {

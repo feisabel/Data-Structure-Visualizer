@@ -10,12 +10,20 @@ import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
-
+/**
+ * Class Union Find.
+ * @author Ana Caroline
+ *
+ */
 public class UnionFind extends DataStructure {
 	private int[] unionfind;
 	private int[] ordem;
 	private int len;
 	
+	/**
+	 * Constructor with one parameter.
+	 * @param n number of trees
+	 */
 	public UnionFind(int n){
 		drawer = new UnionFindDrawer();
 		len = n;
@@ -30,10 +38,20 @@ public class UnionFind extends DataStructure {
 		support("find", 1);
 	}
 	
+	/**
+	 * Unites x with y.
+	 * @param x element to be united 
+	 * @param y element to be united
+	 */
 	public void unite(int x, int y){
 		link(unionfind[x], unionfind[y]);
 	}
 	
+	/**
+	 * Helper method to links two elements.
+	 * @param x element to be united
+	 * @param y element to be united
+	 */
 	private void link(int x, int y){
 		if(ordem[x] > ordem[y]){
 			unionfind[y] = x;
@@ -43,7 +61,11 @@ public class UnionFind extends DataStructure {
 			ordem[y]++;
 		}
 	}
-	
+	/**
+	 * Finds the ???.
+	 * @param x element to be found.
+	 * @return ???
+	 */
 	public int find(int x){
 		try{
 			if(x != unionfind[x]){

@@ -9,13 +9,27 @@ import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
-
+/**
+ * Class deque.
+ * @author Ana Caroline
+ *
+ */
 public class MyDeque extends DataStructure{
 	List<Integer> deque;
+	
+	/**
+	 * Constructor with no parameters. 
+	 */
 	public MyDeque(){
 		deque = new LinkedList<Integer>();
 		drawer = new MyDequeDrawer();
 	}
+	
+	/**
+	 * Inserts new node in the first position.
+	 * @param a new node 
+	 * @return true if inserted, false otherwise
+	 */
 	public boolean insertFirst(int a){ //insere sempre no primeiro
 		if(!deque.contains(a)){
 			deque.add(0, new Integer(a));
@@ -24,6 +38,11 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
+	/**
+	 * Inserts new node in the last position. 
+	 * @param a new node
+	 * @return true if inserted, false otherwise
+	 */
 	public boolean insertLast(int a){ //insere sempre no último
 		if(!deque.contains(a)){
 			deque.add(deque.size(), new Integer(a));
@@ -32,6 +51,10 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
+	/**
+	 * Removes the first node if exists in the structure.
+	 * @return true if removed, false otherwise
+	 */
 	public boolean removeFirst(){ //remove no primeiro
 		if(deque.size() > 0){
 			deque.remove(0);
@@ -40,6 +63,10 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
+	/**
+	 * Removes the last node if exists in the structure.
+	 * @return true if removed, false otherwise
+	 */
 	public boolean removeLast(){ //remove no último
 		if(deque.size() > 0){
 			deque.remove(deque.size()-1);
@@ -48,15 +75,28 @@ public class MyDeque extends DataStructure{
 		return false;
 	}
 	
-	public boolean search(int a){
+	/**
+	 * Returns the node's position.  
+	 * @param a node to be searched
+	 * @return position 
+	 */
+	public int search(int a){
 		if(deque.contains(a)){
-			a = deque.get(a);
-			return true;
+			a = deque.indexOf(a);
+			return a;
 		}
-		return false;
+		return 0;
 	}
 	
+	/**
+	 * Class to draw the structure.
+	 * @author Ana Caroline
+	 *
+	 */
 	class MyDequeDrawer extends Drawer{
+		/**
+		 * Method to draw the structure.
+		 */
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;
