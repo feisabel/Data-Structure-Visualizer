@@ -18,7 +18,7 @@ public class RBTree extends BinarySearchTree {
 		privateInsert(key, root, null, new Ref<Integer>(1));
 	}
 	
-	private void privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
+	private RBNode privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
 		if (node == null) {
 			node = new RBNode(dad, null, null, key);
 			if (root == null) {
@@ -39,7 +39,7 @@ public class RBTree extends BinarySearchTree {
 					node = node.getLeft();
 				else
 					node = node.getRight();
-				privateInsert(key, node, dad, b);
+				node = privateInsert(key, node, dad, b);
 				if (dad.getColor() == Color.BLACK)
 					b.set(2);
 				else if (b.get() == 1)
@@ -50,6 +50,7 @@ public class RBTree extends BinarySearchTree {
 			else
 				b.set(2);
 		}
+		return node;
 	}
 	
 	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
@@ -58,7 +59,7 @@ public class RBTree extends BinarySearchTree {
 			uncle = grandad.getRight();
 		else
 			uncle = grandad.getLeft();
-		if (uncle.getColor() == Color.RED) {
+		if (uncle != null && uncle.getColor() == Color.RED) {
 			b.set(0);
 			uncle.setColor(Color.BLACK);
 			dad.setColor(Color.BLACK);

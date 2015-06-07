@@ -52,7 +52,7 @@ public final class Factory {
 	
 	private static RBTree rb(int size) {
 		RBTree rb = new RBTree();
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++) 
 			rb.insert(number(30));
 		return rb;
 	}
@@ -160,11 +160,8 @@ public final class Factory {
 	 */
 	private static AVLTree avl(int size){
 		AVLTree m = new AVLTree();
-		for(int i = 0; i < size; i++){
-			int n = number(30);
-			System.out.println(n);
-			m.insert(n);
-		}
+		for(int i = 0; i < size; i++)
+			m.insert(number(30));
 		return m;
 	}
 }
