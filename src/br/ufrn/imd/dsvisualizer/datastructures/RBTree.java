@@ -31,6 +31,7 @@ public class RBTree extends BinarySearchTree {
 				else
 					dad.setRight(node);
 			}
+			return node;
 		}
 		else {
 			if (key != node.getKey()) {
@@ -49,8 +50,8 @@ public class RBTree extends BinarySearchTree {
 			}
 			else
 				b.set(2);
+			return dad;
 		}
-		return node;
 	}
 	
 	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
