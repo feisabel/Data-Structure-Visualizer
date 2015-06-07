@@ -1,6 +1,7 @@
-package structures;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
-public class HeapMax<T> extends AbstractHeap<T>{
+
+public class HeapMax extends AbstractHeap{
 	
 	/**
 	 * Assistant method for the removing method.
@@ -9,14 +10,14 @@ public class HeapMax<T> extends AbstractHeap<T>{
 	 */
 	private void goDown(int index){
 		int aux = getLeftIndex(index);
-		if(aux <= super.myVector.size()-1){
-			if(aux + 1 <= super.myVector.size()-1){
-				if(super.myVector.get(aux+1) < super.myVector.get(index)){
+		if(aux <= myVector.size()-1){
+			if(aux + 1 <= myVector.size()-1){
+				if(myVector.get(aux+1) < myVector.get(index)){
 					aux++;
 				}
 			}
-			if(super.myVector.get(index) < super.myVector.get(aux)){
-				super.swap(index, aux);
+			if(myVector.get(index) < myVector.get(aux)){
+				swap(index, aux);
 				goDown(aux);
 			}
 		}
@@ -30,8 +31,8 @@ public class HeapMax<T> extends AbstractHeap<T>{
 	protected void goUp(int index){
 		int aux = getParentIndex(index);
 		if(aux > 0){
-			if(super.myVector.get(index) > super.myVector.get(aux)){
-				super.swap(index, aux);
+			if(myVector.get(index) > myVector.get(aux)){
+				swap(index, aux);
 				goUp(aux);
 			}
 		}
@@ -42,10 +43,10 @@ public class HeapMax<T> extends AbstractHeap<T>{
 	 * 
 	 * @param key Value wished to be inserted in vector
 	 */
-	public void insert(T key){
-		if(!super.myVector.contains(key)){
-			super.myVector.add(super.myVector.size(), key);
-			goUp(super.myVector.size());
+	public void insert(int key){
+		if(!myVector.contains(key)){
+			myVector.add(myVector.size(), key);
+			goUp(myVector.size());
 		}
 	}
 	
@@ -54,9 +55,9 @@ public class HeapMax<T> extends AbstractHeap<T>{
 	 * 
 	 * @param key Value wished to be removed from vector
 	 */
-	public void remove(T key){
-		super.swap(0, super.myVector.size()-1);
-		super.myVector.remove(super.myVector.size()-1);
+	public void remove(int key){
+		swap(0, myVector.size()-1);
+		myVector.remove(myVector.size()-1);
 		goDown(0);
 	}
 }

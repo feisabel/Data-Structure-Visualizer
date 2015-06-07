@@ -12,7 +12,7 @@ import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 public class Main {
 	public static void main(String[] args){
-		RBTree u = (RBTree)Factory.create(Factory.RB, 15);
+		DataStructure u = Factory.create(Factory.HEAPMAX, 15);
 		u.draw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));

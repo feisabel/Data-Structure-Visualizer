@@ -1,6 +1,6 @@
-package structures;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
-public class HeapMin<T> extends AbstractHeap<T>{
+public class HeapMin extends AbstractHeap{
 	
 	/**
 	 * Assistant method for the removing method.
@@ -42,7 +42,7 @@ public class HeapMin<T> extends AbstractHeap<T>{
 	 * 
 	 * @param key Value wished to be inserted in vector
 	 */
-	public void insert(T key){
+	public void insert(int key){
 		if(!super.myVector.contains(key)){
 			super.myVector.add(super.myVector.size(), key);
 			goUp(super.myVector.size());
@@ -54,7 +54,7 @@ public class HeapMin<T> extends AbstractHeap<T>{
 	 * 
 	 * @param key Value wished to be removed from vector
 	 */
-	public void remove(T key){
+	public void remove(int key){
 		super.swap(0, super.myVector.size()-1);
 		super.myVector.remove(super.myVector.size()-1);
 		goDown(0);

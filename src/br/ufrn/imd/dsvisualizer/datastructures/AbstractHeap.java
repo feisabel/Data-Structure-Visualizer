@@ -1,9 +1,16 @@
-package structures;
+package br.ufrn.imd.dsvisualizer.datastructures;
 
+
+import java.awt.Color;
+import java.util.HashMap;
 import java.util.Vector;
 
-public abstract class AbstractHeap<T>{
-	Vector<T> myVector;
+import org.jgraph.graph.DefaultGraphCell;
+
+import br.ufrn.imd.dsvisualizer.gui.Drawer;
+
+public abstract class AbstractHeap extends DataStructure{
+	protected Vector<Integer> myVector;
 	
 	
 	/**
@@ -11,7 +18,7 @@ public abstract class AbstractHeap<T>{
 	 * 
 	 */
 	public AbstractHeap (){
-		this.myVector = new Vector<T>();
+		this.myVector = new Vector<Integer>();
 	}
 	
 	/**
@@ -20,9 +27,9 @@ public abstract class AbstractHeap<T>{
 	 *  @param key The specified key to be searched throughout the vector
 	 *  @return true if contains the specified key
 	 */
-	public boolean containsKey(T key) {
+	public boolean containsKey(int key) {
 		boolean contains = false;
-		for(T i : this.myVector) {
+		for(Integer i : this.myVector) {
 			if(i == key){
 				contains = true;
 			}
@@ -43,7 +50,7 @@ public abstract class AbstractHeap<T>{
 	 * @param index Defines the element
 	 * @return right kid of said element
 	 */
-	public T getRight(int index){
+	public int getRight(int index){
 		return myVector.get((2*index)+2);
 	}
 	
@@ -53,7 +60,7 @@ public abstract class AbstractHeap<T>{
 	 * @param index Defines the element
 	 * @return left kid of said element
 	 */
-	public T getLeft(int index){
+	public int getLeft(int index){
 		return myVector.get((2*index)+1);
 	}
 	
@@ -63,7 +70,7 @@ public abstract class AbstractHeap<T>{
 	 * @param index Defines the element
 	 * @return element's parent
 	 */
-	public T getParent(int index){
+	public int getParent(int index){
 		if(index%2 == 0 && index != 0){
 			return myVector.get((index/2)-1);
 		} else if (index == 0){
@@ -116,8 +123,45 @@ public abstract class AbstractHeap<T>{
 	 * @param j Position of second element to be swapped
 	 */
 	protected void swap(int i, int j){
-		T aux = myVector.get(i);
+		int aux = myVector.get(i);
 		myVector.add(i, myVector.get(j));
 		myVector.add(j, aux);
+	}
+	
+	class HeapDrawer extends Drawer{
+		public void draw(){
+			int x = 0;
+			int y = 30;
+			int lvl = 1;
+			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
+			HashMap<Integer, Integer> positionX = new HashMap<Integer, Integer>();
+			int help = 0;
+			for(int i = 0; i < myVector.size(); i++){
+				if(i%2 == 0){
+					if(i != 0){
+						help = myVector.get(i/2 - 1);
+						x = (int) (positionX.get(help) + DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
+					}else
+						x = (int) (DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
+				}
+				else{
+					help = myVector.get(i/2);
+					x = (int) (positionX.get(help) - DEFAULT_SIZE.width/Math.scalb(1.0, lvl+1));
+					
+				}
+				if(Math.scalb(1.0, lvl) == i+1){
+					lvl++;
+					y+=deltaY;
+				}
+				createMyVertex(cells, myVector.get(i), x, y, Color.red);
+				positionX.put(myVector.get(i), x);
+				if(i != 0){
+					insertEdge(getDefaultPort(cells.get(help), model), 
+							getDefaultPort(cells.get(myVector.get(i)), model));
+				}
+			}
+			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
+		}
+	
 	}
 }

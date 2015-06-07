@@ -8,15 +8,16 @@ import java.util.Random;
  */
 public final class Factory {
 	public static final int BST = 0;
-	public static final int HEAP = 2;
-	public static final int AVL = 3;
-	public static final int RB = 4;
-	public static final int NARIA = 5;
-	public static final int UNIONFIND = 6;
-	public static final int LIST = 7; 
-	public static final int STACK = 8; 
-	public static final int QUEUE = 9; 
-	public static final int DEQUE = 10; 
+	public static final int HEAPMAX = 2;
+	public static final int HEAPMIN = 3;
+	public static final int AVL = 4;
+	public static final int RB = 5;
+	public static final int NARIA = 6;
+	public static final int UNIONFIND = 7;
+	public static final int LIST = 8; 
+	public static final int STACK = 9; 
+	public static final int QUEUE = 10; 
+	public static final int DEQUE = 11; 
 	
 	private Factory() {}
 	/**
@@ -29,8 +30,10 @@ public final class Factory {
 		switch (dataStructure){
 		case BST:
 			return binarySearchTree(initialSize);
-		case HEAP: 
-			return heapfake(initialSize);
+		case HEAPMAX: 
+			return heapmax(initialSize);
+		case HEAPMIN:
+			return heapmin(initialSize);
 		case AVL:
 			return avl(initialSize);
 		case RB: 
@@ -50,6 +53,37 @@ public final class Factory {
 		}
 	}
 	
+	/**
+	 * Creates a heapmax given an initial size.
+	 * @param size initial size
+	 * @return new heapmax
+	 */
+	private static HeapMax heapmax(int size){
+		HeapMax h = new HeapMax();
+		for(int i = 0; i < size; i++){
+			h.insert(number(30));
+		}
+		return h;
+	}
+	
+	/**
+	 * Creates a heapmin given an initial size.
+	 * @param size initial size
+	 * @return new heapmin
+	 */
+	private static HeapMin heapmin(int size){
+		HeapMin h = new HeapMin();
+		for(int i = 0; i < size; i++){
+			h.insert(number(30));
+		}
+		return h;
+	}
+	
+	/**
+	 * Creates a RBTRee given an initial size.
+	 * @param size initial size
+	 * @return new RBTree
+	 */
 	private static RBTree rb(int size) {
 		RBTree rb = new RBTree();
 		for (int i = 0; i < size; i++) 
