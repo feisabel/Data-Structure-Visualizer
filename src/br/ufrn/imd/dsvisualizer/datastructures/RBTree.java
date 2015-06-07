@@ -10,11 +10,15 @@ public class RBTree extends BinarySearchTree {
 		root = null;
 	}
 	
-	public void insert(int key) {
-		privateInsert(key, root, null, 1);
+	protected RBNode root() {
+		return root;
 	}
 	
-	private void privateInsert(int key, RBNode node, RBNode dad, int b) {
+	public void insert(int key) {
+		privateInsert(key, root, null, new Ref<Integer>(1));
+	}
+	
+	private void privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
 		if (node == null) {
 			node = new RBNode(null, null, null, key);
 			if (root == null) {
@@ -37,8 +41,68 @@ public class RBTree extends BinarySearchTree {
 				else
 					node = node.getRight();
 				privateInsert(key, node, dad, b);
-				if (b == 1);
+				if (dad.getColor() == Color.BLACK)
+					b.set(2);
+				else if (b.get() == 1)
+					adjustColors(node, dad, b);
+				else if (b.get() == 0)
+					b.set(1);
 			}
+			else
+				b.set(2);
+		}
+	}
+	
+	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
+		RBNode grandad = dad.getParent(), uncle;
+		if (grandad.getLeft() == dad)
+			uncle = grandad.getRight();
+		else
+			uncle = grandad.getLeft();
+		if (uncle.getColor() == Color.RED) {
+			b.set(0);
+			uncle.setColor(Color.BLACK);
+			dad.setColor(Color.BLACK);
+			grandad.setColor(Color.RED);
+		}
+		else {
+			rotate(node, dad, grandad);
+			b.set(2);
+		}
+		if (root.getColor() == Color.RED)
+			root.setColor(Color.BLACK);
+	}
+	
+	private void rotate(RBNode node, RBNode dad, RBNode grandad) {
+		if (dad == grandad.getLeft()) {
+			if (node == dad.getLeft()) {
+				rightRotation(grandad, dad);
+				if (root == grandad)
+					root = dad;
+				dad.setColor(Color.BLACK);
+			}
+			else {
+				doubleRightRotation(grandad, dad, node);
+				if (root == grandad)
+					root = node;
+				node.setColor(Color.BLACK);
+			}
+			grandad.setColor(Color.RED);
+		}
+		else {
+			if (node == dad.getRight()) {
+				leftRotation(grandad, dad);
+				if (root == grandad)
+					root = dad;
+				dad.setColor(Color.BLACK);
+			}
+			else {
+				doubleLeftRotation(grandad, dad, node);
+				if (root == grandad)
+					root = node;
+				node.setColor(Color.BLACK);
+			}
+			grandad.setColor(Color.RED);
 		}
 	}
 }

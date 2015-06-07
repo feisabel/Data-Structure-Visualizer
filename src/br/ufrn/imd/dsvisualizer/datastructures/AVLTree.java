@@ -70,70 +70,54 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
-	public void rightRotations(AVLNode node) {
-		if (node.getLeft().getBalance() == -1 ) {
-			rightRotation(node);
-		}
-		else 
-			doubleRightRotation(node);
-		
-	}
-	
-	public void leftRotations(AVLNode node) {
-		if (node.getRight().getBalance() == 1)
-			leftRotation(node);
-		else
-			doubleLeftRotation(node);
-	}
-	
-	public void rightRotation(AVLNode node) {
-		AVLNode left = node.getLeft();
-		super.rightRotation(node, left);
-		node.setBalance(0);
-		left.setBalance(0);
-		if (root == node)
-			root = left;
-	}
-	
-	public void doubleRightRotation(AVLNode node) {
+	private void rightRotations(AVLNode node) {
 		AVLNode left = node.getLeft(), right = left.getRight();
-		super.doubleRightRotation(node, left, right);
-		if (right.getBalance() == -1)
-			node.setBalance(1);
-		else
+		if (left.getBalance() == -1 ) {
+			rightRotation(node, left);
 			node.setBalance(0);
-		if (right.getBalance() == 1)
-			left.setBalance(-1);
-		else
 			left.setBalance(0);
-		right.setBalance(0);
-		if (root == node)
-			root = right;
-	}
-	
-	public void leftRotation(AVLNode node) {
-		AVLNode right = node.getRight();
-		super.leftRotation(node, right);
-		node.setBalance(0);
-		right.setBalance(0);
-		if (root == node)
-			root = right;
-	}
-	
-	public void doubleLeftRotation(AVLNode node) {
-		AVLNode right = node.getRight(), left = right.getLeft();
-		super.doubleLeftRotation(node, right, left);
-		if (left.getBalance() == 1)
-			node.setBalance(-1);
-		else
-			node.setBalance(0);
-		if (left.getBalance() == -1)
-			right.setBalance(1);
-		else
+			if (root == node)
+				root = left;
+		}
+		else {
+			doubleRightRotation(node, left, right);
+			if (right.getBalance() == -1)
+				node.setBalance(1);
+			else
+				node.setBalance(0);
+			if (right.getBalance() == 1)
+				left.setBalance(-1);
+			else
+				left.setBalance(0);
 			right.setBalance(0);
-		left.setBalance(0);
-		if (root == node)
-			root = left;
-	}	
+			if (root == node)
+				root = right;
+		}
+	}
+	
+	private void leftRotations(AVLNode node) {
+		AVLNode right = node.getRight(), left = right.getLeft();
+		if (right.getBalance() == 1) {
+			leftRotation(node, right);
+			node.setBalance(0);
+			right.setBalance(0);
+			if (root == node)
+				root = right;
+		}
+		else {
+			doubleLeftRotation(node, right, left);
+			if (left.getBalance() == 1)
+				node.setBalance(-1);
+			else
+				node.setBalance(0);
+			if (left.getBalance() == -1)
+				right.setBalance(1);
+			else
+				right.setBalance(0);
+			left.setBalance(0);
+			if (root == node)
+				root = left;
+		}
+	}
 }
 

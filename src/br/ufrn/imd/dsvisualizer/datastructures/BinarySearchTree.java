@@ -189,7 +189,7 @@ public class BinarySearchTree extends Tree
         return null;
     }
     
-    public void rightRotation(BSTNode node, BSTNode left) {
+    protected void rightRotation(BSTNode node, BSTNode left) {
 		left.setParent(node.getParent());
 		if (left.getParent() != null) {
 			if (node.getKey() < left.getParent().getKey())
@@ -204,7 +204,7 @@ public class BinarySearchTree extends Tree
 		node.setParent(left);
 	}
 	
-	public void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
+	protected void doubleRightRotation(BSTNode node, BSTNode left, BSTNode right) {
 		if (right == null) {
 			System.out.println("node ta null ");
 		}
@@ -227,7 +227,7 @@ public class BinarySearchTree extends Tree
 		node.setParent(right);
 	}
 	
-	public void leftRotation(BSTNode node, BSTNode right) {
+	protected void leftRotation(BSTNode node, BSTNode right) {
 		right.setParent(node.getParent());
 		if (right.getParent() != null) {
 			if (node.getKey() < right.getParent().getKey())
@@ -242,7 +242,7 @@ public class BinarySearchTree extends Tree
 		node.setParent(right);
 	}
 	
-	public void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
+	protected void doubleLeftRotation(BSTNode node, BSTNode right, BSTNode left) {
 		if (left == null) {
 			System.out.println("node ta null ");
 		}

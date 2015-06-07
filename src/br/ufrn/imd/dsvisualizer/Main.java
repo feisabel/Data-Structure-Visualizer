@@ -10,17 +10,7 @@ import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 public class Main {
 	public static void main(String[] args){
-		AVLTree u = (AVLTree)Factory.create(Factory.AVL, 0);
-		u.insert(29);
-		u.insert(2);
-		u.insert(25);
-		u.insert(9);
-		u.insert(15);
-		u.insert(29);
-		u.insert(2);
-		u.insert(20);
-		u.insert(0);
-		u.insert(2);
+		AVLTree u = (AVLTree)Factory.create(Factory.AVL, 10);
 		u.draw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));
