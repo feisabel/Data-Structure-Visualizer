@@ -34,8 +34,9 @@ public abstract class Drawer extends JApplet {
 	
 	public abstract void draw();
 	
-	/*Construtur sem parâmetros.
-	 * */
+	/*
+	 * Construtor sem parâmetros.
+	 */
 	public Drawer(){
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());

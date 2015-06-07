@@ -3,11 +3,10 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 import java.util.Random;
 
 public final class Factory {
-	public static final int BINARYTREE = 0;
-	public static final int HEAPMAX = 1;
-	public static final int HEAPMIN = 2;
+	public static final int BST = 0;
+	public static final int HEAP = 2;
 	public static final int AVL = 3;
-	public static final int RN = 4;
+	public static final int RB = 4;
 	public static final int NARIA = 5;
 	public static final int UNIONFIND = 6;
 	public static final int LIST = 7; //okay
@@ -19,31 +18,34 @@ public final class Factory {
 	
 	public static DataStructure create(int dataStructure, int initialSize){
 		switch (dataStructure){
-		case 0:
+		case BST:
 			return binarySearchTree(initialSize);
-		case 1: 
+		case HEAP: 
 			return heapfake(initialSize);
-		case 2:
-			return heapfake(initialSize);
-		case 3: 
+		case AVL:
 			return avl(initialSize);
-/*		case 4: 
-			return
-		case 5: 
-			return
-*/		case 6: 
+		case RB: 
+			return rb(initialSize);
+		case UNIONFIND: 
 			return unionfind(initialSize);
-		case 7: 
+		case LIST: 
 			return list(initialSize);
-		case 8:
+		case STACK:
 			return stack(initialSize);
-		case 9:
+		case QUEUE:
 			return queue(initialSize);
-		case 10:
+		case DEQUE:
 			return deque(initialSize);
 		default:
 			return null;
 		}
+	}
+	
+	private static RBTree rb(int size) {
+		RBTree rb = new RBTree();
+		for (int i = 0; i < size; i++)
+			rb.insert(number(30));
+		return rb;
 	}
 	
 	private static MyQueue queue(int size){

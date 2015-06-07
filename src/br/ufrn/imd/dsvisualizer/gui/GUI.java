@@ -163,15 +163,15 @@ public class GUI {
 		JButton binaryTree = new JButton("Binary Search Tree");
 		binaryTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.BINARYTREE, "BST" + tabs.getComponentCount());
+				newTab(Factory.BST, "BST" + tabs.getComponentCount());
 			}
 		});
 		trees.add(binaryTree);
 		
-		JButton heapMax = new JButton("Heap Max");
+		JButton heapMax = new JButton("Heap");
 		heapMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.HEAPMAX, "HeapMax" + tabs.getComponentCount());
+				newTab(Factory.HEAP, "Heap" + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMax);
@@ -187,7 +187,7 @@ public class GUI {
 		JButton rBTree = new JButton("Red-Black Tree");
 		rBTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.RN, "RBTree" + tabs.getComponentCount());
+				newTab(Factory.RB, "RBTree" + tabs.getComponentCount());
 			}
 		});
 		trees.add(rBTree);
