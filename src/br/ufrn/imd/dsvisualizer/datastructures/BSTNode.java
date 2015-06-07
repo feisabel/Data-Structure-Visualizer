@@ -135,10 +135,10 @@ public class BSTNode extends Node
      * Returns the node's level.
      * @return level 
      */
-    public int nodeLevel(){
+    public int nodeLevel(Node root){
     	int i;
     	BSTNode a = this;
-    	for(i = 0; a != null; a = a.getParent(), i++);	
+    	for(i = 1; a != root; a = a.getParent(), i++);	
     	return i;
     }
 

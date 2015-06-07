@@ -300,11 +300,10 @@ public class BinarySearchTree extends Tree
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-			System.out.println(root() + " " );
 			preOrderCell(cells, root(), x, y, root().getColor());
-			
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
+    	
     	/**
     	 * Method to help the draw process. Using pre order access.
     	 * @param c used to mapping the jgraph cells
@@ -317,13 +316,13 @@ public class BinarySearchTree extends Tree
 			if(root != null){
 				createMyVertex(c, root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())),
+					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}
 				if(root.getRight() != null){
-					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., root.nodeLevel())), 
+					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getRight().getKey()), model));
