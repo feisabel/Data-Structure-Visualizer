@@ -1,5 +1,11 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+/**
+ * Defines exceptions used in DataStructure.
+ * @author João Pedro Holanda
+ *
+ */
+
 public class DSIllegalNumberOfArgumentsException extends Exception {
 	public DSIllegalNumberOfArgumentsException(String operation, Class<?> c, int expected, int got) {
 		super("Illegal number of arguments on " + c.getName() + "." + operation + ":" +

@@ -5,22 +5,36 @@ public class AVLTree extends BinarySearchTree {
 	private AVLNode root;
     
     /**
-     * Constructor for class Tree
+     * Constructor for class AVLTree with no parameters. 
      */
     public AVLTree()
     {
         root = null;
- //       drawer = new AVLTreeDrawer();
     }
 
+    /**
+     * Access method to the root.
+     * @return the root.
+     */
     protected AVLNode root() {
     	return root;
     }
     
+    /**
+     * Inserts a new node if does not exists one with the same key.
+     * @param key new node's key.
+     */
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Boolean>(true));
 	}
 	
+	/**
+	 * Inserts a new node if does not exists one with the same key.
+	 * @param key new node's key.
+	 * @param node current node.
+	 * @param dad current's father node.
+	 * @param b indicates if the method will be called again.
+	 */
 	private void privateInsert(int key, AVLNode node, AVLNode dad, Ref<Boolean> b) {
 		if (node == null) {
 			AVLNode newNode = new AVLNode(dad, null, null, key, 0);
@@ -70,6 +84,10 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * Does the right rotation to correct the tree's balance.
+	 * @param node node will be balanced.
+	 */
 	private void rightRotations(AVLNode node) {
 		AVLNode left = node.getLeft(), right = left.getRight();
 		if (left.getBalance() == -1 ) {
@@ -95,6 +113,10 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * Does the right rotation to correct the tree's balance.
+	 * @param node node will be balanced.
+	 */
 	private void leftRotations(AVLNode node) {
 		AVLNode right = node.getRight(), left = right.getLeft();
 		if (right.getBalance() == 1) {

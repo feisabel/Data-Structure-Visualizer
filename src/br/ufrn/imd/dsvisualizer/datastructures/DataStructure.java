@@ -10,6 +10,11 @@ import org.jgraph.JGraph;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
+/**
+ * Defines methods to draw a structure.
+ * @author Ana Caroline, João Pedro Holanda
+ *
+ */
 abstract public class DataStructure {
 	// data structure drawer
 	protected Drawer drawer;
@@ -41,8 +46,7 @@ abstract public class DataStructure {
 	public JGraph getJGraph() {
 		return drawer.getJGraph();
 	}
-	
-	
+		
 	/* Call-related methods */	
 	
 	/**

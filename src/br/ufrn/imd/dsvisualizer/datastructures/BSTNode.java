@@ -23,7 +23,7 @@ public class BSTNode extends Node
     }
     
     /**
-     * Constructor of the class BSTNode with three parameters.
+     * Constructor of the class BSTNode with four parameters.
      * @param parent Object to be assigned to the BSTNode parent.
      * @param left Object to be assigned to the BSTNode left.
      * @param right Object to be assigned to the BSTNode right.
@@ -36,17 +36,28 @@ public class BSTNode extends Node
         this.key = key;
     }
     
+    /**
+     * Constructor with one parameter.
+     * @param a node's key
+     */
     public BSTNode(int a){
         left = null;
         right = null;
         key = a;
-    	
     }
     
+    /**
+     * Modifier method to set x.
+     * @param a new position x
+     */
     public void setX(int a){
     	x = a;
     }
     
+    /**
+     * Access method to get position x.
+     * @return position x
+     */
     public int getX(){
     	return x;
     }
@@ -107,6 +118,10 @@ public class BSTNode extends Node
         this.key = key;
     }
     
+    /**
+     * Returns if the current node is a leaf or no.
+     * @return true if is a leaf, false otherwise 
+     */
     public boolean isLeaf(){
     	if(this.getLeft() != null && this.getRight() != null){
     		return true;
@@ -116,6 +131,10 @@ public class BSTNode extends Node
     	}
     }
 
+    /**
+     * Returns the node's level.
+     * @return level 
+     */
     public int nodeLevel(){
     	int i;
     	BSTNode a = this;
