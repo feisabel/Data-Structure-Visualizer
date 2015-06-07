@@ -99,7 +99,7 @@ public final class Factory {
 	private static MyList list(int size){
 		MyList m = new MyList();
 		for(int i = 0; i < size; i++)
-			m.insert(number(30));
+			m.insert(number(30), 0);
 		return m;
 	}
 	

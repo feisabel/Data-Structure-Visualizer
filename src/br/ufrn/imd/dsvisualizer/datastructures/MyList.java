@@ -9,8 +9,17 @@ import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
+/**
+ * Class list.
+ * @author Ana Caroline
+ *
+ */
 public class MyList extends DataStructure {
 	List<Integer> list;
+	
+	/**
+	 * Constructor with no parameters. 
+	 */
 	public MyList(){
 		list = new LinkedList<Integer>();
 		drawer = new MyListDrawer();
@@ -20,11 +29,25 @@ public class MyList extends DataStructure {
 		support("search", 1);
 	}
 	
-	public void insert(int a){
-		list.add(new Integer(a));
+	/**
+	 * Inserts new node given a position.
+	 * @param a new node 
+	 * @param position the node position
+	 * @return true if inserted, false otherwise
+	 */
+	public boolean insert(int a, int position){
+		if(!list.contains(a) && position >= 0 && position < list.size()){
+			list.add(position, new Integer(a));
+			return true;
+		}
+		return false;
 	}
 	
-	public boolean delete(int a){
+	/**
+	 * Removes the node given the key if exists in the structure.
+	 * @return true if removed, false otherwise
+	 */
+	public boolean remove(int a){
 		if(list.contains(a)){
 			list.remove(new Integer(a));
 			return true;
@@ -32,15 +55,28 @@ public class MyList extends DataStructure {
 		return false;
 	}
 	
-	public boolean search(int a){
+	/**
+	 * Returns the node's position.  
+	 * @param a node to be searched
+	 * @return position 
+	 */
+	public int search(int a){
 		if(list.contains(a)){
-			a = list.get(a);
-			return true;
+			a = list.indexOf(a);
+			return a;
 		}
-		return false;
+		return 0;
 	}
 	
+	/**
+	 * Class to draw the structure.
+	 * @author Ana Caroline
+	 *
+	 */
 	class MyListDrawer extends Drawer{
+		/**
+		 * Method to draw the structure.
+		 */
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;
