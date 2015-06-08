@@ -7,7 +7,6 @@ import java.util.Vector;
 
 import org.jgraph.graph.DefaultGraphCell;
 
-import br.ufrn.imd.dsvisualizer.datastructures.HeapFake.HeapDrawer;
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public abstract class AbstractHeap extends DataStructure{
@@ -125,9 +124,12 @@ public abstract class AbstractHeap extends DataStructure{
 	 * @param j Position of second element to be swapped
 	 */
 	protected void swap(int i, int j){
-		int aux = myVector.get(i);
-		myVector.add(i, myVector.get(j));
-		myVector.add(j, aux);
+		int aux1 = myVector.get(i);
+		int aux2 = myVector.get(j);
+		myVector.remove(i);
+		myVector.add(i, aux2);
+		myVector.remove(j);
+		myVector.add(j, aux1);
 	}
 	
 	class HeapDrawer extends Drawer{
@@ -156,7 +158,6 @@ public abstract class AbstractHeap extends DataStructure{
 					y+=deltaY;
 				}
 				createMyVertex(cells, myVector.get(i), x, y, Color.red);
-				System.out.println(myVector.get(i) + " " + x + " "+ y);
 				positionX.put(myVector.get(i), x);
 				if(i != 0){
 					insertEdge(getDefaultPort(cells.get(help), model), 
