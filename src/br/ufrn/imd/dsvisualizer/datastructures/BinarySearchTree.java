@@ -71,12 +71,15 @@ public class BinarySearchTree extends Tree
         
         if (q != null) {  // if is in the tree
             if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
-                remove(q);  // delete it
+            	if (q == q.getParent().getLeft()) 
+            		q.setLeft(q.getParent()); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
+            	remove(q);  // delete it
                 return q;
             }
             else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
                 swap(q, q.getLeft());  // value swap with child
                 BSTNode left = q.getLeft();
+                left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
                 remove(left);  // delete child
                 return left;
             }
@@ -89,6 +92,8 @@ public class BinarySearchTree extends Tree
             else {  // if q has two children
                 BSTNode m = max(q.getLeft());  // gets the immediate predecessor
                 swap(q, m);  // value swaps q with it
+                if (m == m.getParent().getLeft())
+                	m.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
                 remove(m);  // delete m
                 return m;
             }
