@@ -145,6 +145,11 @@ public abstract class AbstractHeap extends DataStructure{
 	 */
 	class HeapDrawer extends Drawer{
 		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/**
 		 * Method to draw the heap.
 		 */
 		public void draw(){

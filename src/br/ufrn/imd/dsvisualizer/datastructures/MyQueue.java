@@ -58,6 +58,11 @@ public class MyQueue extends DataStructure {
 	 *
 	 */
 	class MyQueueDrawer extends Drawer{
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;

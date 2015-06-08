@@ -10,7 +10,6 @@ import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
 
-import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree.BSTDrawer;
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public class RBTree extends BinarySearchTree {
@@ -125,6 +124,10 @@ public class RBTree extends BinarySearchTree {
 	 */
 	class RBTreeDrawer extends Drawer{
 	
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
 		
 		/**

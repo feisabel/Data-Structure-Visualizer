@@ -1,14 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-import java.awt.Color;
 import java.util.HashMap;
 
-import javax.swing.JPanel;
-
-import org.jgraph.JGraph;
-import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultGraphCell;
-import org.jgraph.graph.GraphLayoutCache;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
@@ -287,6 +281,11 @@ public class BinarySearchTree extends Tree
 	 *
 	 */
     protected class BSTDrawer extends Drawer {
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Method to draw the structure.
 		 */

@@ -95,6 +95,11 @@ public class MyDeque extends DataStructure{
 	 */
 	class MyDequeDrawer extends Drawer{
 		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/**
 		 * Method to draw the structure.
 		 */
 		public void draw(){
