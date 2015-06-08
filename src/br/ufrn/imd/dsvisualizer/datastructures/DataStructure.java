@@ -31,6 +31,11 @@ abstract public class DataStructure {
 	}
 	
 	/* Draw-related methods */
+	/**
+	 * Data description.
+	 * @return
+	 */
+	public abstract String getDescription();
 	
 	/**
 	 * Redraws the data structure on the screen.

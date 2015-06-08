@@ -11,24 +11,47 @@ import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
-
+/**
+ * Class Red Black tree.
+ * @author Fernanda Isabel
+ *
+ */
 public class RBTree extends BinarySearchTree {
 	
 	private RBNode root;
 	
+	/**
+	 * Constructor with no parameters.
+	 */
 	public RBTree() {
 		root = null;
 		drawer = new RBTreeDrawer();
 	}
 	
+	/**
+	 * Access method to the root.
+	 * @return root
+	 */
 	protected RBNode root() {
 		return root;
 	}
 	
+	/**
+	 * Inserts a new node.
+	 * @param key new node's key
+	 */
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Integer>(1));
 	}
 	
+	/**
+	 * Helper method to insert a new node.
+	 * @param key new node's key
+	 * @param node current node
+	 * @param dad current node's dad
+	 * @param b indicates current case 
+	 * @return node used to recursion
+	 */
 	private RBNode privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
 		if (node == null) {
 			node = new RBNode(dad, null, null, key);

@@ -24,6 +24,20 @@ public class HeapMax extends AbstractHeap{
 	}
 	
 	/**
+     * Returns structure description.
+     * @return description
+     */
+    public String getDescription(){
+    	return "A principal caracterísica da heapmax é cada pai ser maior que seus filhos." + 
+    			" Além disso, ela é implementada em um vetor, é necessário que ela seja completa à esquerda."
+    			+ " Apesar da representação como árvore, por ser implementada em vetor, os acessos são feitos "+
+    			" calculando os índices. " + "Inserção é feita inserindo um novo valor no final do vetor e subindo" +
+    			" até o lugar adequado na árvore, enquanto ele for maior que o pai." + " Remoção só é feita do topo."
+    			+ " Suas operações são log n. " +"Uma conhecida aplicação é na heapsort, possibilitando um algoritmo" +
+    					" de ordenação ótimo.";
+    }
+	
+	/**
 	 * Assistant method for the inserting method.
 	 * 
 	 * @param index Starter index for the goUp method (decreases recursively)
