@@ -59,6 +59,14 @@ abstract public class DataStructure {
 	}
 	
 	/**
+	 * Gets the set of operations supported by this data structure.
+	 * @return set of operations supported by this data structure
+	 */
+	public Set<String> getSupportedOperations() {
+		return operationNumOfParams.keySet();
+	}
+	
+	/**
 	 * Calls the command, passing it the given parameters.
 	 * @param command  command to execute
 	 * @param params   parameters to be passed to the command

@@ -1,10 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.util.Random;
+
 /**
  * Factory class that creates a new structure with a given number of nodes.
  * @author Ana Caroline, João Pedro Holanda
- *
  */
 public final class Factory {
 	public static final int BST = 0;
