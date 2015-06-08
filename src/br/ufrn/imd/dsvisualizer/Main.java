@@ -15,20 +15,7 @@ import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 public class Main {
 	public static void main(String[] args){
 		HeapMin u = (HeapMin) Factory.create(Factory.HEAPMIN, 9);
-		u.remove();
-		u.remove();
-		u.remove();
-		u.remove();
-		u.remove();
-		/*	u.insert(3);
-		u.insert(20);
-		u.insert(1);
-		u.insert(27);
-		u.insert(20);
-		u.insert(29);
-		u.insert(17);
-		u.insert(12);
-		u.insert(21);*/
+		
 		u.draw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));
