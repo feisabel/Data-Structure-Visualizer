@@ -168,10 +168,10 @@ public class GUI {
 		});
 		trees.add(binaryTree);
 		
-		JButton heapMax = new JButton("Heap");
+		JButton heapMax = new JButton("HeapMax");
 		heapMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.HEAP, "Heap" + tabs.getComponentCount());
+				newTab(Factory.HEAPMAX, "HeapMax" + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMax);

@@ -30,10 +30,11 @@ public class HeapMax extends AbstractHeap{
 	 */
 	protected void goUp(int index){
 		int aux = getParentIndex(index);
-		if(aux > 0){
+		if(aux >= 0){
 			if(myVector.get(index) > myVector.get(aux)){
 				swap(index, aux);
-				goUp(aux);
+				if(aux > 0)
+					goUp(aux);
 			}
 		}
 	}
@@ -44,9 +45,11 @@ public class HeapMax extends AbstractHeap{
 	 * @param key Value wished to be inserted in vector
 	 */
 	public void insert(int key){
+		System.out.println(key);
 		if(!myVector.contains(key)){
 			myVector.add(myVector.size(), key);
-			goUp(myVector.size());
+			if(myVector.size() > 1)
+				goUp(myVector.size()-1);
 		}
 	}
 	

@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import org.jgraph.graph.DefaultGraphCell;
 
+import br.ufrn.imd.dsvisualizer.datastructures.HeapFake.HeapDrawer;
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public abstract class AbstractHeap extends DataStructure{
@@ -19,6 +20,7 @@ public abstract class AbstractHeap extends DataStructure{
 	 */
 	public AbstractHeap (){
 		this.myVector = new Vector<Integer>();
+		drawer = new HeapDrawer();
 	}
 	
 	/**
@@ -135,7 +137,7 @@ public abstract class AbstractHeap extends DataStructure{
 			int lvl = 1;
 			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
 			HashMap<Integer, Integer> positionX = new HashMap<Integer, Integer>();
-			int help = 0;
+			int help = 0; //dad index
 			for(int i = 0; i < myVector.size(); i++){
 				if(i%2 == 0){
 					if(i != 0){
@@ -154,6 +156,7 @@ public abstract class AbstractHeap extends DataStructure{
 					y+=deltaY;
 				}
 				createMyVertex(cells, myVector.get(i), x, y, Color.red);
+				System.out.println(myVector.get(i) + " " + x + " "+ y);
 				positionX.put(myVector.get(i), x);
 				if(i != 0){
 					insertEdge(getDefaultPort(cells.get(help), model), 

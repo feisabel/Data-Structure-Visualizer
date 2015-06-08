@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import br.ufrn.imd.dsvisualizer.datastructures.AVLTree;
+import br.ufrn.imd.dsvisualizer.datastructures.HeapMax;
 import br.ufrn.imd.dsvisualizer.datastructures.RBTree;
 import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree;
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
@@ -12,7 +13,16 @@ import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 public class Main {
 	public static void main(String[] args){
-		DataStructure u = Factory.create(Factory.HEAPMAX, 15);
+		HeapMax u = (HeapMax) Factory.create(Factory.HEAPMAX, 0);
+		u.insert(3);
+		u.insert(20);
+		u.insert(1);
+		u.insert(27);
+		u.insert(20);
+		u.insert(29);
+		u.insert(17);
+		u.insert(12);
+		u.insert(21);
 		u.draw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));
