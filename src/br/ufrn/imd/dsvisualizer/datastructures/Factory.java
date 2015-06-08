@@ -1,10 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.util.Random;
+
 /**
  * Factory class that creates a new structure with a given number of nodes.
  * @author Ana Caroline, João Pedro Holanda
- *
  */
 public final class Factory {
 	public static final int BST = 0;
@@ -99,7 +99,7 @@ public final class Factory {
 	private static MyQueue queue(int size){
 		MyQueue m = new MyQueue();
 		for(int i = 0; i < size; i++)
-			m.insertLast(number(30));
+			m.enqueue(number(30));
 		return m;
 	}
 	

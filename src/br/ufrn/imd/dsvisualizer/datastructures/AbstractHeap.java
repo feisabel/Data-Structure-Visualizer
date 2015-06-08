@@ -20,6 +20,8 @@ public abstract class AbstractHeap extends DataStructure{
 	public AbstractHeap (){
 		this.myVector = new Vector<Integer>();
 		drawer = new HeapDrawer();
+		support("insert", 1);
+		support("remove", 0);
 	}
 	
 	/**
@@ -131,6 +133,11 @@ public abstract class AbstractHeap extends DataStructure{
 		myVector.remove(j);
 		myVector.add(j, aux1);
 	}
+
+
+	abstract public void insert(int key);
+	abstract public void remove();
+	
 	/**
 	 * Class to draw the structure heap.
 	 * @author Ana Caroline

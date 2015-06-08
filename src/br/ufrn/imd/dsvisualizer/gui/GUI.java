@@ -29,6 +29,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.Set;
 
 public class GUI {
 
@@ -195,7 +196,7 @@ public class GUI {
 	
 	private void newTab(int selectedDS, String title) {
 		DataStructure ds = DSManager.create(selectedDS);
-		DSManager.DSActionListener al = (DSManager.DSActionListener)DSManager.getActionListener(ds);
+		DSManager.DSActionListener al = DSManager.getActionListener(ds);
 		al.setFrame(frame);
 		ds.draw();
 		
@@ -208,20 +209,13 @@ public class GUI {
 		operations.setLayout(new BoxLayout(operations, BoxLayout.PAGE_AXIS));
 		view.add(operations, BorderLayout.WEST);
 	
-		JButton search = new JButton("Search");
-		search.setActionCommand("search");
-		search.addActionListener(al);
-		operations.add(search);
-		
-		JButton insert = new JButton("Insert");
-		insert.setActionCommand("insert");
-		insert.addActionListener(al);
-		operations.add(insert);
-		
-		JButton remove = new JButton("Remove");
-		remove.setActionCommand("remove");
-		remove.addActionListener(al);
-		operations.add(remove);
+		Set<String> ops = ds.getSupportedOperations();
+		for (String op : ops) {
+			JButton opButton = new JButton(op);
+			opButton.setActionCommand(op);
+			opButton.addActionListener(al);
+			operations.add(opButton);
+		}
 		
 		tabs.addTab(title, view);
 	}
