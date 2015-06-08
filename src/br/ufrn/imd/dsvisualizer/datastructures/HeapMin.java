@@ -22,6 +22,10 @@ public class HeapMin extends AbstractHeap{
 		}
 	}
 	
+	/**
+     * Returns structure description.
+     * @return description
+     */
 	public String getDescription(){
 		return "A principal caracterísica da heapmin é cada pai ser menor que seus filhos." + 
     			" Além disso, ela é implementada em um vetor, é necessário que ela seja completa à esquerda."
