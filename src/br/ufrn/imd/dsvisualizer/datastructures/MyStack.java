@@ -41,6 +41,18 @@ public class MyStack extends DataStructure{ /*Pilha*/
 	}
 	
 	/**
+     * Returns structure description.
+     * @return description
+     */
+	public String getDescription(){
+		return "Stack é uma estrutura composta por uma sequência de nodes que possuem referência para o " +
+				"anterior e para o seguinte. " +
+				"Ela só permite remoção e inserção no topo, isto é, no último lugar da sequência." + 
+				"A pesquisa percorre toda a pilha, logo é O(n). Inserção e remoção possui complexidade O(1)" +
+				"quando é guardada referência do topo.";
+	}
+	
+	/**
 	 * Removes the node in the top if exists.
 	 * @return true if removed, false otherwise
 	 */
