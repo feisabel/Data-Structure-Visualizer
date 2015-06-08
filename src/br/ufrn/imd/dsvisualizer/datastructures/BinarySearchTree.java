@@ -78,19 +78,25 @@ public class BinarySearchTree extends Tree
         if (q != null) {  // if is in the tree
             if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
                 remove(q);  // delete it
+                return q;
             }
             else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
                 swap(q, q.getLeft());  // value swap with child
-                remove(q.getLeft());  // delete child
+                BSTNode left = q.getLeft();
+                remove(left);  // delete child
+                return left;
             }
             else if (q.getLeft() == null && q.getRight() != null) {  // if q has one child, at the right
                 swap(q, q.getRight());  // value swap with child
-                remove(q.getRight());  // delete child
+                BSTNode right = q.getRight();
+                remove(right);  // delete child
+                return right;
             }
             else {  // if q has two children
                 BSTNode m = max(q.getLeft());  // gets the immediate predecessor
                 swap(q, m);  // value swaps q with it
                 remove(m);  // delete m
+                return m;
             }
         }
         return q;
