@@ -118,11 +118,21 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
-	
+	/**
+	 * Class to draw the RBTree.
+	 * @author Ana Caroline 
+	 *
+	 */
 	class RBTreeDrawer extends Drawer{
 	
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
-					
+		
+		/**
+		 * Special method to draw a null node, according this structure type. 
+		 * @param x position x
+		 * @param y position y
+		 * @param dad vertex dad
+		 */
 		private void createNullVertex(int x, int y, DefaultGraphCell dad){
 			System.out.println("LALALALA");
 			DefaultGraphCell v = new DefaultGraphCell("");
