@@ -131,8 +131,15 @@ public abstract class AbstractHeap extends DataStructure{
 		myVector.remove(j);
 		myVector.add(j, aux1);
 	}
-	
+	/**
+	 * Class to draw the structure heap.
+	 * @author Ana Caroline
+	 *
+	 */
 	class HeapDrawer extends Drawer{
+		/**
+		 * Method to draw the heap.
+		 */
 		public void draw(){
 			int x = 0;
 			int y = 30;

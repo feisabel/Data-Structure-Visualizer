@@ -3,18 +3,13 @@ package br.ufrn.imd.dsvisualizer;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import br.ufrn.imd.dsvisualizer.datastructures.AVLTree;
-import br.ufrn.imd.dsvisualizer.datastructures.HeapMax;
-import br.ufrn.imd.dsvisualizer.datastructures.HeapMin;
-import br.ufrn.imd.dsvisualizer.datastructures.RBTree;
-import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree;
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 
 public class Main {
 	public static void main(String[] args){
-		HeapMin u = (HeapMin) Factory.create(Factory.HEAPMIN, 9);
+		DataStructure u = Factory.create(Factory.RB, 9);
 		
 		u.draw();
 		JFrame j = new JFrame();
