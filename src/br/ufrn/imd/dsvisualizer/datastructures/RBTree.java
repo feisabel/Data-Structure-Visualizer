@@ -19,7 +19,7 @@ public class RBTree extends BinarySearchTree {
 	
 	public RBTree() {
 		root = null;
-		drawer = new BSTDrawer();
+		drawer = new RBTreeDrawer();
 	}
 	
 	protected RBNode root() {
@@ -131,7 +131,7 @@ public class RBTree extends BinarySearchTree {
 			v.add(port);
 			port.setParent(v);
 			GraphConstants.setBounds(v.getAttributes(), new
-					 Rectangle2D.Double(x,y,30,15));
+					 Rectangle2D.Double(x,y,15,15));
 			GraphConstants.setGradientColor(v.getAttributes(), Color.black);
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad, model), 
@@ -167,8 +167,6 @@ public class RBTree extends BinarySearchTree {
 					System.out.println("LALALALALALAALALALALA");
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							c.get(root.getKey()) );
-					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
 					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
@@ -176,9 +174,6 @@ public class RBTree extends BinarySearchTree {
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getRight().getKey()), model));
 				}else{
-					System.out.println("LALALALALALAALALALALA");
-					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
 					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							c.get(root.getKey()) );
 				}
