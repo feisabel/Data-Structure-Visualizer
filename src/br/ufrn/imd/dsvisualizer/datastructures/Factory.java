@@ -99,7 +99,7 @@ public final class Factory {
 	private static MyQueue queue(int size){
 		MyQueue m = new MyQueue();
 		for(int i = 0; i < size; i++)
-			m.insertLast(number(30));
+			m.enqueue(number(30));
 		return m;
 	}
 	
