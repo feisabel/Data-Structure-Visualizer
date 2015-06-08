@@ -29,32 +29,32 @@ public class HeapMin extends AbstractHeap{
 	 */
 	protected void goUp(int index){
 		int aux = getParentIndex(index);
-		if(aux > 0){
-			if(super.myVector.get(index) < super.myVector.get(aux)){
-				super.swap(index, aux);
-				goUp(aux);
+		if(aux >= 0){
+			if(myVector.get(index) < myVector.get(aux)){
+				swap(index, aux);
+				if(aux > 0)
+					goUp(aux);
 			}
 		}
 	}
-	
 	/**
 	 * Insertion method for this variation of priority queue (HeapMin)
 	 * 
 	 * @param key Value wished to be inserted in vector
 	 */
 	public void insert(int key){
-		if(!super.myVector.contains(key)){
-			super.myVector.add(super.myVector.size(), key);
-			goUp(super.myVector.size());
+		if(!myVector.contains(key)){
+			myVector.add(myVector.size(), key);
+			if(myVector.size() > 1)
+				goUp(myVector.size()-1);
 		}
 	}
-	
 	/**
 	 * Removing method for this variation of priority queue (HeapMin)
 	 * 
 	 * @param key Value wished to be removed from vector
 	 */
-	public void remove(int key){
+	public void remove(){
 		super.swap(0, super.myVector.size()-1);
 		super.myVector.remove(super.myVector.size()-1);
 		goDown(0);

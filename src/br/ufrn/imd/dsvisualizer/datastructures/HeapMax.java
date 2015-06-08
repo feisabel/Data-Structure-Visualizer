@@ -45,7 +45,6 @@ public class HeapMax extends AbstractHeap{
 	 * @param key Value wished to be inserted in vector
 	 */
 	public void insert(int key){
-		System.out.println(key);
 		if(!myVector.contains(key)){
 			myVector.add(myVector.size(), key);
 			if(myVector.size() > 1)
@@ -58,7 +57,7 @@ public class HeapMax extends AbstractHeap{
 	 * 
 	 * @param key Value wished to be removed from vector
 	 */
-	public void remove(int key){
+	public void remove(){
 		swap(0, myVector.size()-1);
 		myVector.remove(myVector.size()-1);
 		goDown(0);

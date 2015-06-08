@@ -173,20 +173,7 @@ public final class Factory {
 		return r.nextInt(max);
 	}
 	
-	/**
-	 * Creates a heapmax given a number of nodes.
-	 * @param a number of nodes
-	 * @return new heapmax
-	 */
-	private static HeapFake heapfake(int a){
-		HeapFake h = new HeapFake();
-		for(int i = 0; i < a;){
-			if(h.insert(number(30)))
-				i++;
-		}
-		return h;
-	}
-	
+
 	/**
 	 * Creates a AVL tree given a initial size.
 	 * @param size initial size
