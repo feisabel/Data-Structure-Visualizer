@@ -96,6 +96,37 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
+	public AVLNode delete(int key) {
+		AVLNode node = (AVLNode)super.delete(key);
+		if (node != null)
+			updateBalance(node.getParent(), node.getKey());
+		return node;
+	}
+	
+	private void updateBalance(AVLNode node, int key) {
+		AVLNode parent = node.getParent();
+		if (node != null) {
+			if (key < node.getKey())
+				node.setBalance(node.getBalance() + 1);
+			else
+				node.setBalance(node.getBalance() - 1);
+			if (node.getBalance() != 1 && node.getBalance() != -1) {
+				if (node.getBalance() != 0)
+					adjustBalance(node);
+				updateBalance(parent, key);
+			}
+		}
+	}
+	
+	private void adjustBalance(AVLNode node) {
+		if (node != null) {
+			if (node.getBalance() == 2) 
+				leftRotations(node);
+			else if (node.getBalance() == -2) 
+				rightRotations(node);
+		}
+	}
+	
 	/**
 	 * Does the right rotation to correct the tree's balance.
 	 * @param node node will be balanced.
