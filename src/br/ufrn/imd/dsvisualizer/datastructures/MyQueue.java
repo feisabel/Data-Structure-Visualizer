@@ -22,6 +22,9 @@ public class MyQueue extends DataStructure {
 	public MyQueue(){
 		queue = new LinkedList<Integer>();
 		drawer = new MyQueueDrawer();
+		
+		support("enqueue", 1);
+		support("dequeue", 0);
 	}
 	
 	/**
@@ -29,7 +32,7 @@ public class MyQueue extends DataStructure {
 	 * @param a new node
 	 * @return true if inserted, false otherwise
 	 */
-	public boolean insertLast(int a){ //insere sempre no último
+	public boolean enqueue(int a){ //insere sempre no último
 		if(!queue.contains(a)){
 			queue.add(queue.size(), new Integer(a));
 			return true;
@@ -41,7 +44,7 @@ public class MyQueue extends DataStructure {
 	 * Removes node given a key if it exists. 
 	 * @return true if removed, false otherwise
 	 */
-	public boolean removeFirst(){ //remove no primeiro
+	public boolean dequeue(){ //remove no primeiro
 		if(queue.size() > 0){
 			queue.remove(0);
 			return true;
@@ -50,24 +53,16 @@ public class MyQueue extends DataStructure {
 	}
 	
 	/**
-	 * Returns the node's position.  
-	 * @param a node to be searched
-	 * @return position 
-	 */
-	public int search(int a){
-		if(queue.contains(a)){
-			a = queue.indexOf(a);
-			return a;
-		}
-		return 0;
-	}
-	
-	/**
 	 * Class to draw the structure.
 	 * @author Ana Caroline
 	 *
 	 */
 	class MyQueueDrawer extends Drawer{
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public void draw(){
 			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;

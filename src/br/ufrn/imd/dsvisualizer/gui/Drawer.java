@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import javax.swing.JApplet;
-import javax.swing.JPanel;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.ConnectionSet;
@@ -27,7 +26,7 @@ import org.jgraph.graph.Port;
 public abstract class Drawer extends JApplet {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 500, 300 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 600, 600 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
@@ -35,12 +34,8 @@ public abstract class Drawer extends JApplet {
 	
 	public abstract void draw();
 	
-	/*
-<<<<<<< HEAD
-	 * Construtor sem parâmetros.
-=======
+	/**
 	 * Constructor with no parameters.
->>>>>>> 1b25a7ea15198ff037bcf87d1bbea3a7ac687d99
 	 */
 	public Drawer(){
 		model = new DefaultGraphModel();
@@ -121,7 +116,7 @@ public abstract class Drawer extends JApplet {
 	
 	/**
 	 * Returns a port, structure used by the jgraph library.
-	 * @param vertex currente vertex
+	 * @param vertex current vertex
 	 * @param model model used to create the jgraph
 	 * @return current vertex's port
 	 */
@@ -129,7 +124,7 @@ public abstract class Drawer extends JApplet {
 		for(int i = 0; i < model.getChildCount(vertex); i++) {
 			Object child = model.getChild(vertex, i);
 		 	return (Port) child;
-		}
+		}//NAO EH DEADCODE, ECLIPSE EH UMA MENTIRA 
 	     // No Ports Found
 	    return null;
 	 }

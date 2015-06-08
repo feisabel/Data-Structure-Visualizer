@@ -24,8 +24,8 @@ public class MyList extends DataStructure {
 		list = new LinkedList<Integer>();
 		drawer = new MyListDrawer();
 		
-		support("insert", 1);
-		support("delete", 1);
+		support("insert", 2);
+		support("remove", 1);
 		support("search", 1);
 	}
 	
@@ -65,7 +65,7 @@ public class MyList extends DataStructure {
 			a = list.indexOf(a);
 			return a;
 		}
-		return 0;
+		return -1;
 	}
 	
 	/**
@@ -74,6 +74,11 @@ public class MyList extends DataStructure {
 	 *
 	 */
 	class MyListDrawer extends Drawer{
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Method to draw the structure.
 		 */

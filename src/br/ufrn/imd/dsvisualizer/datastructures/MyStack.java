@@ -23,6 +23,8 @@ public class MyStack extends DataStructure{ /*Pilha*/
 	public MyStack(){
 		stack = new LinkedList<Integer>();
 		drawer = new MyStackDrawer();
+		support("push", 1);
+		support("pop", 1);
 	}
 	
 	/**

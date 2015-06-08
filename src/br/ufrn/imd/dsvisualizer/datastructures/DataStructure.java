@@ -59,6 +59,23 @@ abstract public class DataStructure {
 	}
 	
 	/**
+	 * Gets the set of operations supported by this data structure.
+	 * @return set of operations supported by this data structure
+	 */
+	public Set<String> getSupportedOperations() {
+		return operationNumOfParams.keySet();
+	}
+	
+	/**
+	 * Gets the number of parameters accepted by the given operation
+	 * @param operation  selected operation, must be defined on this data structure 
+	 * @return  number of parameters accepted by the given operation
+	 */
+	public int getNumOfParams(String operation) {
+		return operationNumOfParams.get(operation);
+	}
+	
+	/**
 	 * Calls the command, passing it the given parameters.
 	 * @param command  command to execute
 	 * @param params   parameters to be passed to the command
@@ -75,7 +92,7 @@ abstract public class DataStructure {
 			if (command.equals(operation)) {
 				int numOfParams = operationNumOfParams.get(operation);
 				
-				if (params.length < numOfParams)
+				if (params.length != numOfParams)
 					throw new DSIllegalNumberOfArgumentsException(command, this.getClass(), numOfParams, params.length);
 				Class<?>[] paramsTypes = new Class<?>[params.length];
 				Arrays.fill(paramsTypes, int.class);
@@ -83,9 +100,7 @@ abstract public class DataStructure {
 				Method method = null;
 				try {
 					method = this.getClass().getMethod(command, paramsTypes);
-					for (int i=0; i < params.length - numOfParams; i++) {
-						method.invoke(this, Arrays.copyOfRange(params, i, i + numOfParams));
-					}
+					method.invoke(this, params);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new DSUnsupportedOperationException(command, this.getClass());
