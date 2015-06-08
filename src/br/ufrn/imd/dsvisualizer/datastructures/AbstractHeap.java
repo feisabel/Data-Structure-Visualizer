@@ -127,6 +127,7 @@ public abstract class AbstractHeap extends DataStructure{
 	protected void swap(int i, int j){
 		int aux = myVector.get(i);
 		myVector.add(i, myVector.get(j));
+		myVector.remove(j+1);
 		myVector.add(j, aux);
 	}
 	
