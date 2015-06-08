@@ -134,7 +134,6 @@ public class RBTree extends BinarySearchTree {
 		 * @param dad vertex dad
 		 */
 		private void createNullVertex(int x, int y, DefaultGraphCell dad){
-			System.out.println("LALALALA");
 			DefaultGraphCell v = new DefaultGraphCell("");
 			nullnodes.add(v);
 			DefaultPort port = new DefaultPort();
@@ -174,7 +173,6 @@ public class RBTree extends BinarySearchTree {
 					insertEdge(getDefaultPort((c.get(root.getKey())), model),
 							getDefaultPort(c.get(root.getLeft().getKey()), model));	
 				}else{
-					System.out.println("LALALALALALAALALALALA");
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							c.get(root.getKey()) );
 				}
