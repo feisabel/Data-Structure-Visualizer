@@ -37,6 +37,14 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
+	 * Modifier method to the root.
+	 * @param the new root
+	 */
+	protected void root(RBNode root) {
+		this.root = root;
+	}
+	
+	/**
 	 * Inserts a new node.
 	 * @param key new node's key
 	 */
@@ -200,16 +208,16 @@ public class RBTree extends BinarySearchTree {
      * Returns structure description.
      * @return description
      */
-	static public String getDescription(){
-		return "A Red Black tree é uma árvore binária de busca que possui algumas características específicas." +
-				" Primeiro, ela conta com nós externos, que possuem altura 0." +
-				" Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
+	public String getDescription(){
+		return "A Red-Black Tree é uma árvore binária de busca que possui algumas características específicas.\n" +
+				"Primeiro, ela conta com nós externos, que possuem altura 0.\n" +
+				"Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
 				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
-				" sempre pretos." + " A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
+				" sempre pretos.\n" + "A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
 				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
-				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura." +
+				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura.\n" +
 				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
-				" árvore.";
+				" árvore.\n";
 	}
 	
 	/**

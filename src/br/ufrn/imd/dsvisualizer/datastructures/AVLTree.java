@@ -25,6 +25,16 @@ public class AVLTree extends BinarySearchTree {
     }
     
     /**
+     * Modifier method to the root.
+     * @param new root.
+     */
+    protected void root(BSTNode root) {
+    	System.out.println("chamou da avl");
+
+    	this.root = (AVLNode)root;
+    }
+    
+    /**
      * Inserts a new node if does not exists one with the same key.
      * @param key new node's key
      */
@@ -40,12 +50,12 @@ public class AVLTree extends BinarySearchTree {
      * Returns structure description.
      * @return description
      */
-	static public String getDescription(){
+	public String getDescription(){
 		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
-				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós)." + 
-				" Para isso a diferença entre as altudas das subárvores de um nó não pode ser maior do "
-				+ "que módulo de 1." + " Inserção é feita similar a da binária de busca exceto que é necessário"
-				+ " fazer ajustes para se manter balanceada." + " A busca é exatamente a mesma da BST." + 
+				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós).\n" + 
+				"Para isso a diferença entre as alturas das subárvores de um nó não pode ser maior do "
+				+ "que módulo de 1.\n" + "Inserção é feita similar a da binária de busca exceto que é necessário"
+				+ " fazer ajustes para se manter balanceada.\n" + "A busca é exatamente a mesma da BST.\n" + 
 				" A cor azul do node representa balanço 0, a cor verde balanço 1 e laranja -1.";
 	}
 	/**
@@ -111,19 +121,33 @@ public class AVLTree extends BinarySearchTree {
 	 */
 	public AVLNode delete(int key) {
 		AVLNode node = (AVLNode)super.delete(key);
-		if (node != null) {
-			if (node.getParent() != null) {
-				if (node.getLeft() != null)
-					key = node.getParent().getKey() - 1;
-				else
-					key = node.getParent().getKey() + 1;
+		if (node.getLeft() != null && node.getRight() != null) {
+			if (node.getLeft() != root) {
+				if (node.getKey() < node.getParent().getKey()) {
+					node.getParent().getLeft().setBalance(node.getBalance());
+					adjustBalance(node.getParent().getLeft(), node.getParent().getLeft().getKey() - 1);
+				}
+				else {
+					node.getParent().getRight().setBalance(node.getBalance());
+					adjustBalance(node.getParent().getRight(), node.getParent().getRight().getKey() - 1);
+				}
 			}
-			updateBalance(node.getParent(), key);
+			else {
+				node.getLeft().setBalance(node.getBalance());
+				adjustBalance(node.getLeft(), node.getLeft().getKey() - 1);
+			}
+		}
+		else {
+			if (node.getLeft() != null)
+				node.getLeft().setBalance(0);
+			else if (node.getRight() != null)
+				node.getRight().setBalance(0);
+			adjustBalance(node.getParent(), node.getKey());
 		}
 		return node;
 	}
 	
-	private void updateBalance(AVLNode node, int key) {
+	private void adjustBalance(AVLNode node, int key) {
 		if (node != null) {
 			AVLNode parent = node.getParent();
 			if (key < node.getKey())
@@ -135,7 +159,7 @@ public class AVLTree extends BinarySearchTree {
 					leftRotations(node);
 				else if (node.getBalance() == -2) 
 					rightRotations(node);
-				updateBalance(parent, key);
+				adjustBalance(parent, key);
 			}
 		}
 	}

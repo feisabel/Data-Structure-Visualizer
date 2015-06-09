@@ -30,16 +30,17 @@ public class BinarySearchTree extends Tree
      */
     protected BSTNode root()
     {
-        return head.getLeft();
+    	return head.getLeft();
     }
     
     /**
      * Sets the root of the tree to the given node.
      * @param  node  the node to which the root will be set
      */
-    private void root(BSTNode node)
+    protected void root(BSTNode node)
     {
-        head.setLeft(node);
+    	System.out.println("chamou da bst");
+    	head.setLeft(node);
     }
     
     /**
@@ -70,49 +71,48 @@ public class BinarySearchTree extends Tree
         BSTNode q = search(key);
         
         if (q != null) {  // if is in the tree
-            if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
-            	if (q == q.getParent().getLeft()) 
-            		q.setLeft(q.getParent()); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-            	remove(q);  // delete it
-                return q;
-            }
-            else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
-                swap(q, q.getLeft());  // value swap with child
-                BSTNode left = q.getLeft();
-                if (left.getLeft() == null)
-                	left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-                remove(left);  // delete child
-                return left;
-            }
-            else if (q.getLeft() == null && q.getRight() != null) {  // if q has one child, at the right
-                swap(q, q.getRight());  // value swap with child
-                BSTNode right = q.getRight();
-                remove(right);  // delete child
-                return right;
-            }
-            else {  // if q has two children
-                BSTNode m = max(q.getLeft());  // gets the immediate predecessor
-                swap(q, m);  // value swaps q with it
-                if (m == m.getParent().getLeft())
-                	m.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-                remove(m);  // delete m
-                return m;
-            }
+            if (q.getLeft() == null && q.getRight() == null) // if q is leaf
+            	remove(q, null);  // delete it
+            else if (q.getLeft() != null && q.getRight() == null) // if q has one child, at the left
+                remove(q, q.getLeft());  // delete child
+            else if (q.getLeft() == null && q.getRight() != null) // if q has one child, at the right
+                remove(q, q.getRight());  // delete child
+            else // if q has two children
+                replace(q, max(q.getLeft()));  // value swaps q with it
         }
         return q;
     }
     
     /**
-     * Swaps contents of the nodes.
-     * @param  node1  node to be swapped
-     * @param  node2  node to be swapped
+     * Replaces one node by another.
+     * @param  node1  node to be replace
+     * @param  node2  node that will replace
      */
-    private void swap(BSTNode node1, BSTNode node2)
+    private void replace(BSTNode node1, BSTNode node2)
     {
+    	if (root() == node1)
+    		root(node2);
         if (node1 != null && node2 != null) {
-            int p = node1.getKey();
-            node1.setKey(node2.getKey());
-            node2.setKey(p);
+            BSTNode parent1 = node1.getParent(), parent2 = node2.getParent(), left = node2.getLeft();
+            node2.setParent(parent1);
+            if (parent1 != null) {
+            	if (parent1.getLeft() == node1)
+            		parent1.setLeft(node2);
+            	else
+            		parent1.setRight(node2);
+            }
+            if (node1.getLeft() != node2)
+            	node2.setLeft(node1.getLeft());
+            node2.setRight(node1.getRight());
+            if (node2.getLeft() != null)
+            	node2.getLeft().setParent(node2);
+            if (node2.getRight() != null)
+            	node2.getRight().setParent(node2);
+            if (parent2 != node1) {
+            	parent2.setRight(left);
+            	if (left != null)
+            		left.setParent(parent2);
+            }
         }
     }
     
@@ -120,18 +120,20 @@ public class BinarySearchTree extends Tree
      * Removes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void remove(BSTNode node)
+    private void remove(BSTNode node, BSTNode son)
     {
+    	if (root() == node)
+    		root(son);
         if (node != null) {
-        	BSTNode parent = (BSTNode) node.getParent();
+        	BSTNode parent = node.getParent();
             if (parent != null) {
-                if (parent.getLeft() == node) {
-                    parent.setLeft(node.getLeft());
-                }
-                else {
-                    parent.setRight(node.getRight());
-                }
+                if (parent.getLeft() == node)
+                    parent.setLeft(son);
+                else
+                    parent.setRight(son);
             }
+            if (son != null)
+            	son.setParent(parent);
         }
     }
     
@@ -296,13 +298,13 @@ public class BinarySearchTree extends Tree
      * Returns structure description.
      * @return description
      */
-    static public String getDescription(){
+    public String getDescription(){
     	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
+    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros.\n" +
     			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
-    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita. " +
+    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita.\n" +
     			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
-    			" à direita. " + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
+    			" à direita.\n" + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
     			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
     			+ " da árvore.";
     }
@@ -338,7 +340,7 @@ public class BinarySearchTree extends Tree
     	 * @param col node's color
     	 */
 		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
-			if(root != null){
+			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
 					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),

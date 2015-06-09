@@ -115,7 +115,7 @@ abstract public class DataStructure implements Serializable {
 					method.invoke(this, (Object[])params);
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new DSUnsupportedOperationException(command, this.getClass());
+					throw new DSUnsupportedOperationException(command, this);
 				}
 				
 				success = true;
@@ -123,6 +123,8 @@ abstract public class DataStructure implements Serializable {
 		}
 		
 		if (!success)
-			throw new DSUnsupportedOperationException(command, this.getClass());
+			throw new DSUnsupportedOperationException(command, this);
 	}
+
+	abstract public String getDescription();
 }
