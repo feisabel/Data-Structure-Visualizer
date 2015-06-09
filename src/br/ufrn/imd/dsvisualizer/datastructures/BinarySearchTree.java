@@ -149,7 +149,7 @@ public class BinarySearchTree extends Tree
      * Helper method for search.
      * @param  node  root of the tree to search
      * @param  key  key to search
-     * @param  insert  if creates a new node when not found
+     * @param  insert  if true inserts new node, otherwise the method just to a search
      * @return  node with key 'key'
      */
     private BSTNode privateSearch(BSTNode node, int key, boolean insert)
@@ -182,7 +182,7 @@ public class BinarySearchTree extends Tree
      * @param  r  the root of the subtree
      * @return  the node with the max key in the subtree r
      */
-    private BSTNode max(BSTNode r)
+    protected BSTNode max(BSTNode r)
     {
         if (r != null) {
             if (r.getRight() == null) {
@@ -214,7 +214,7 @@ public class BinarySearchTree extends Tree
 		left.setRight(node);
 		node.setParent(left);
 	}
-	
+		
     /**
      * Does the double right rotation to correct the tree's balance.
      * @param node to be changed position

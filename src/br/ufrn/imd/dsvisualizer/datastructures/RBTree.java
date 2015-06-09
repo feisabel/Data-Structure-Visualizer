@@ -29,7 +29,7 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Access method to the root.
+	 * Access method to the root.		
 	 * @return root
 	 */
 	protected RBNode root() {
@@ -152,10 +152,50 @@ public class RBTree extends BinarySearchTree {
 		}
 	}
 	
+	/*Aqui começou a intervenção de Carol*/
+	
+	private void RBTransplant(RBNode u, RBNode v){
+		if(u.getParent() == null){
+			root = v;
+		}
+		else if(u == u.getParent().getLeft()){
+			u.getParent().setLeft(v);
+		}
+		else{
+			u.getParent().setRight(v);
+		}
+		v.setParent(u.getParent());
+	}
+	
+	public void delete(RBNode z){
+		RBNode y = z, x = null;
+		Color originalcolor = y.getColor();
+		if(z.getLeft() == null){
+			x = z.getRight();
+			RBTransplant(z, z.getRight());			
+		}
+		else if(z.getRight() == null){
+			x = z.getLeft();
+			RBTransplant(z, z.getLeft());
+		}
+		else{
+			y = (RBNode) max(z.getRight());
+		}
+	}
+	
+	
+	
+	/*Termina aqui minha intervenção!*/
+	
+	
+	/**
+	 * Returns shor name.
+	 * @return RB
+	 */
 	public String getShortName() {
 		return "RB";
 	}	
-	
+				
 	/**
      * Returns structure description.
      * @return description
@@ -180,7 +220,7 @@ public class RBTree extends BinarySearchTree {
 	class RBTreeDrawer extends Drawer{
 		/**
 		 * Generated serial ID.
-		 */
+		 */	
 		private static final long serialVersionUID = 7900579170125657322L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
 		
