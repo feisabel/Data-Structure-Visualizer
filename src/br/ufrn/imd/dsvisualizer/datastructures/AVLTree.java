@@ -101,6 +101,11 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * Deletes a node given a key.
+	 * @param key node's key
+	 * @return deleted node
+	 */
 	public AVLNode delete(int key) {
 		AVLNode node = (AVLNode)super.delete(key);
 		if (node != null) {
