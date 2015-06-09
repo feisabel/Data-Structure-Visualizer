@@ -17,11 +17,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -334,8 +338,17 @@ public class GUI {
 		view.setLayout(new BorderLayout(10, 10));
 		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
-		JScrollPane description = new JScrollPane(new JLabel("<html>"+ds.getDescription().replaceAll(Pattern.quote(". "), ".<br>")+"</html>"));
-		view.add(description, BorderLayout.NORTH);
+		JTextPane description = new JTextPane();
+		description.setText(ds.getDescription());
+		description.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		
+		SimpleAttributeSet sa = new SimpleAttributeSet();
+		StyleConstants.setAlignment(sa, StyleConstants.ALIGN_JUSTIFIED);
+		description.getStyledDocument().setParagraphAttributes(0, ds.getDescription().length(), sa, false);
+		
+		JScrollPane scroll = new JScrollPane(description);
+		scroll.setPreferredSize(new Dimension(205, 400));
+		view.add(scroll, BorderLayout.EAST);
 		
 		JPanel operations = new JPanel();
 		operations.setLayout(new BoxLayout(operations, BoxLayout.PAGE_AXIS));

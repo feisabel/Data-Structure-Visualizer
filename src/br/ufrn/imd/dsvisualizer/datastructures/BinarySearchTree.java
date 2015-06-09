@@ -300,11 +300,11 @@ public class BinarySearchTree extends Tree
      */
     public String getDescription(){
     	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
+    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros.\n" +
     			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
-    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita. " +
+    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita.\n" +
     			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
-    			" à direita. " + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
+    			" à direita.\n" + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
     			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
     			+ " da árvore.";
     }

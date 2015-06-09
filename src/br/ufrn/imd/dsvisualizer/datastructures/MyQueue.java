@@ -65,8 +65,8 @@ public class MyQueue extends DataStructure {
      * @return description
      */
 	public String getDescription(){
-		return "Queue é uma estrutura que permite inserção sempre na última posição." +
-				" Já a remoção é feita na primeira posição." + " Logo essas operações são O(1) quando a implementação"
+		return "Queue é uma estrutura que permite inserção sempre na última posição, e" +
+				" remoção na primeira posição.\n" + "Dessa forma, essas operações são O(1) quando a implementação"
 				+ " guarda referência para primeiro e último lugar.";
 	}
 	
