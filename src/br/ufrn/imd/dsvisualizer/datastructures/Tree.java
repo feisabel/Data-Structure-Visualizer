@@ -11,9 +11,9 @@ public abstract class Tree extends DataStructure {
 	 * Constructor with no parameters. 
 	 */
 	public Tree() {
-		support("insert", 1);
-		support("delete", 1);
-		support("search", 1);
+		support("insert", "key");
+		support("delete", "key");
+		support("search", "key");
 	}
 	
 	/**

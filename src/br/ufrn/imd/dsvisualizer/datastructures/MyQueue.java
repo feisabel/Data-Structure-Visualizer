@@ -23,8 +23,8 @@ public class MyQueue extends DataStructure {
 		queue = new LinkedList<Integer>();
 		drawer = new MyQueueDrawer();
 		
-		support("enqueue", 1);
-		support("dequeue", 0);
+		support("enqueue", "num");
+		support("dequeue");
 	}
 	
 	/**
@@ -59,11 +59,10 @@ public class MyQueue extends DataStructure {
 	 */
 	class MyQueueDrawer extends Drawer{
 		public void draw(){
-			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			int x = 30, y = 30;
 			boolean d = true;
 			for(int i = 0; i < queue.size(); i++){
-				createMyVertex(c, queue.get(i), x, y, Color.red);
+				createMyVertex(queue.get(i), x, y, Color.red);
 				if(x + 60 > DEFAULT_SIZE.width && d){
 					d = false;
 					y+= 60;
@@ -77,13 +76,13 @@ public class MyQueue extends DataStructure {
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((c.get(queue.get(i-1))), model),
-							getDefaultPort(c.get(queue.get(i)), model));
-					insertEdge(getDefaultPort((c.get(queue.get(i))), model),
-							getDefaultPort(c.get(queue.get(i-1)), model));
+					insertEdge(getDefaultPort((cells.get(queue.get(i-1))), model),
+							getDefaultPort(cells.get(queue.get(i)), model));
+					insertEdge(getDefaultPort((cells.get(queue.get(i))), model),
+							getDefaultPort(cells.get(queue.get(i-1)), model));
 				}
 			}
-			jgraph.getGraphLayoutCache().insert(c.values().toArray());
+			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
 	}
 

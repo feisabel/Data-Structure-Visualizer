@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args){
 		DataStructure u = Factory.create(Factory.RB, 9);
 		
-		u.draw();
+		u.redraw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));
 		j.pack();

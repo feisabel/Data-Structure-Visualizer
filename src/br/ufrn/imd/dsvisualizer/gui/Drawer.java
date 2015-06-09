@@ -32,17 +32,24 @@ public abstract class Drawer extends JApplet {
 	protected GraphModel model;
 	protected JGraph jgraph;
 	protected GraphLayoutCache view;
+	protected HashMap<Integer, DefaultGraphCell> cells;
 	
 	public abstract void draw();
 	
+	public void clear() {
+		jgraph.getGraphLayoutCache().remove(cells.values().toArray());
+	}
+	
+	public void redraw() {
+		clear();
+		draw();
+	}
+	
 	/*
-<<<<<<< HEAD
-	 * Construtor sem parâmetros.
-=======
 	 * Constructor with no parameters.
->>>>>>> 1b25a7ea15198ff037bcf87d1bbea3a7ac687d99
 	 */
 	public Drawer(){
+		cells = new HashMap<Integer, DefaultGraphCell>();
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
 		jgraph = new JGraph( model, view );
@@ -88,17 +95,15 @@ public abstract class Drawer extends JApplet {
 	 * @param y position y
 	 * @param c node's color
 	 */
-	protected void createMyVertex(HashMap<Integer, DefaultGraphCell> g, int n, int x, int y, java.awt.Color c){
+	protected void createMyVertex(int n, int x, int y, java.awt.Color c){
 		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n)));
-		g.put(n, v);
+		cells.put(n, v);
 		DefaultPort port = new DefaultPort();
 		v.add(port);
 		port.setParent(v);
-		GraphConstants.setBounds(v.getAttributes(), new
-				 Rectangle2D.Double(x,y,30,15));
+		GraphConstants.setBounds(v.getAttributes(), new Rectangle2D.Double(x,y,30,15));
 		GraphConstants.setGradientColor(v.getAttributes(), c);
 		GraphConstants.setOpaque(v.getAttributes(), true);
-	
 	}
 	
 	/**
@@ -121,7 +126,7 @@ public abstract class Drawer extends JApplet {
 	
 	/**
 	 * Returns a port, structure used by the jgraph library.
-	 * @param vertex currente vertex
+	 * @param vertex current vertex
 	 * @param model model used to create the jgraph
 	 * @return current vertex's port
 	 */

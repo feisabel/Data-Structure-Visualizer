@@ -20,14 +20,14 @@ abstract public class DataStructure {
 	protected Drawer drawer;
 	
 	 // associates each operation to a minimum number of arguments
-	private HashMap<String, Integer> operationNumOfParams;
+	private HashMap<String, String[]> operationParams;
 
 	/**
 	 * Default constructor.
 	 */
 	public DataStructure() {
 		// initializes HashMap
-		operationNumOfParams = new HashMap<String, Integer>();
+		operationParams = new HashMap<String, String[]>();
 	}
 	
 	/* Draw-related methods */
@@ -35,9 +35,11 @@ abstract public class DataStructure {
 	/**
 	 * Redraws the data structure on the screen.
 	 */
-	public void draw() {
-		drawer.draw();
+	public void redraw() {
+		drawer.redraw();
 	}
+	
+	
 	
 	/**
 	 * Gets the graph representation of the data structure.
@@ -54,8 +56,8 @@ abstract public class DataStructure {
 	 * @param command  command to be supported
 	 * @param numOfParams command's minimum number of parameters
 	 */
-	protected void support(String command, int numOfParams) {
-		operationNumOfParams.put(command, numOfParams);
+	protected void support(String command, String... params) {
+		operationParams.put(command, params);
 	}
 	
 	/**
@@ -63,7 +65,7 @@ abstract public class DataStructure {
 	 * @return set of operations supported by this data structure
 	 */
 	public Set<String> getSupportedOperations() {
-		return operationNumOfParams.keySet();
+		return operationParams.keySet();
 	}
 	
 	/**
@@ -71,8 +73,8 @@ abstract public class DataStructure {
 	 * @param operation  selected operation, must be defined on this data structure 
 	 * @return  number of parameters accepted by the given operation
 	 */
-	public int getNumOfParams(String operation) {
-		return operationNumOfParams.get(operation);
+	public String[] getParams(String operation) {
+		return operationParams.get(operation);
 	}
 	
 	/**
@@ -82,15 +84,15 @@ abstract public class DataStructure {
 	 * @throws DSIllegalNumberOfArgumentsException
 	 * @throws DSUnsupportedOperationException
 	 */
-	public void call(String command, int[] params)
+	public void call(String command, Integer... params)
 			throws DSIllegalNumberOfArgumentsException, DSUnsupportedOperationException
 	{
-		Set<String> operations = operationNumOfParams.keySet();
+		Set<String> operations = operationParams.keySet();
 		boolean success = false;
 		
 		for(String operation : operations) {
 			if (command.equals(operation)) {
-				int numOfParams = operationNumOfParams.get(operation);
+				int numOfParams = operationParams.get(operation).length;
 				
 				if (params.length != numOfParams)
 					throw new DSIllegalNumberOfArgumentsException(command, this.getClass(), numOfParams, params.length);

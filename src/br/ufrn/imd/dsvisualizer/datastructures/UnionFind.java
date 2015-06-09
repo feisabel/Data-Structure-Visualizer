@@ -34,8 +34,8 @@ public class UnionFind extends DataStructure {
 			ordem[i] = 0;
 		}
 		
-		support("unite", 2);
-		support("find", 1);
+		support("unite", "num1", "num2");
+		support("find", "num");
 	}
 	
 	/**
@@ -117,7 +117,6 @@ public class UnionFind extends DataStructure {
 		}
 		
 		public void draw(){
-			HashMap<Integer, DefaultGraphCell> c = new HashMap<Integer, DefaultGraphCell>();
 			HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
 			
 			int x = 50, y = 50;
@@ -136,20 +135,20 @@ public class UnionFind extends DataStructure {
 							Y = parentPos.b;
 							parentPos.a += 50;
 						}
-						createMyVertex(c, i, X, Y + 50, Color.red );
+						createMyVertex(i, X, Y + 50, Color.red );
 						pos.put(i, new Pos(X, Y + 50));
 						if(j == 0){
-							insertEdge(getDefaultPort((c.get(i)), model),
-									getDefaultPort((c.get(i)), model));
+							insertEdge(getDefaultPort((cells.get(i)), model),
+									getDefaultPort((cells.get(i)), model));
 						}else{
-							insertEdge(getDefaultPort((c.get(i)), model),
-							   getDefaultPort(c.get(unionfind[i]), model));
+							insertEdge(getDefaultPort((cells.get(i)), model),
+							   getDefaultPort(cells.get(unionfind[i]), model));
 						}
 					}
 				}//pegar todos os irmãos de um i que estão na ordem j
 				//tem que saber quando "irmãos há nessa ordem"
 			}			
-			jgraph.getGraphLayoutCache().insert(c.values().toArray());
+			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 	
 		}
 		

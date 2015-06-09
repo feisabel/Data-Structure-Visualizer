@@ -198,7 +198,7 @@ public class GUI {
 		DataStructure ds = DSManager.create(selectedDS);
 		DSManager.DSActionListener al = DSManager.getActionListener(ds);
 		al.setFrame(frame);
-		ds.draw();
+		ds.redraw();
 		
 		JPanel view = new JPanel();
 		

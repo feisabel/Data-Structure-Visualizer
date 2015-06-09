@@ -141,8 +141,7 @@ public class RBTree extends BinarySearchTree {
 		public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
-			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
-			preOrderCell(cells, root(), x, y, root().getColor());
+			preOrderCell(root(), x, y, root().getColor());
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 			jgraph.getGraphLayoutCache().insert(nullnodes.toArray());
 		}
@@ -155,32 +154,32 @@ public class RBTree extends BinarySearchTree {
     	 * @param y node's position axis y
     	 * @param col node's color
     	 */
-		void preOrderCell(HashMap<Integer, DefaultGraphCell> c, BSTNode root, int x, int y, java.awt.Color col){
+		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
 			if(root != null){
-				createMyVertex(c, root.getKey(), x, y, col);
+				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(c, root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
-					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getLeft().getKey()), model));	
+					insertEdge(getDefaultPort((cells.get(root.getKey())), model),
+							getDefaultPort(cells.get(root.getLeft().getKey()), model));	
 				}else{
 					System.out.println("LALALALALALAALALALALA");
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
+							cells.get(root.getKey()) );
 					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
+							cells.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
-					preOrderCell(c, root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
-					insertEdge(getDefaultPort((c.get(root.getKey())), model),
-							getDefaultPort(c.get(root.getRight().getKey()), model));
+					insertEdge(getDefaultPort((cells.get(root.getKey())), model),
+							getDefaultPort(cells.get(root.getRight().getKey()), model));
 				}else{
 					System.out.println("LALALALALALAALALALALA");
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
+							cells.get(root.getKey()) );
 					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							c.get(root.getKey()) );
+							cells.get(root.getKey()) );
 				}
 			}
 		} 

@@ -20,8 +20,8 @@ public abstract class AbstractHeap extends DataStructure{
 	public AbstractHeap (){
 		this.myVector = new Vector<Integer>();
 		drawer = new HeapDrawer();
-		support("insert", 1);
-		support("remove", 0);
+		support("insert", "key");
+		support("remove");
 	}
 	
 	/**
@@ -151,7 +151,6 @@ public abstract class AbstractHeap extends DataStructure{
 			int x = 0;
 			int y = 30;
 			int lvl = 1;
-			HashMap<Integer,DefaultGraphCell> cells = new HashMap<Integer, DefaultGraphCell>();
 			HashMap<Integer, Integer> positionX = new HashMap<Integer, Integer>();
 			int help = 0; //dad index
 			for(int i = 0; i < myVector.size(); i++){
@@ -171,7 +170,7 @@ public abstract class AbstractHeap extends DataStructure{
 					lvl++;
 					y+=deltaY;
 				}
-				createMyVertex(cells, myVector.get(i), x, y, Color.red);
+				createMyVertex(myVector.get(i), x, y, Color.red);
 				positionX.put(myVector.get(i), x);
 				if(i != 0){
 					insertEdge(getDefaultPort(cells.get(help), model), 
@@ -180,6 +179,5 @@ public abstract class AbstractHeap extends DataStructure{
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
-	
 	}
 }

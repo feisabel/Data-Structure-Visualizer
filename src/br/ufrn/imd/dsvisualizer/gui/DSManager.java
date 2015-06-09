@@ -42,21 +42,22 @@ public final class DSManager {
 		
 		public void actionPerformed(ActionEvent ev) {
 			String command = ev.getActionCommand();
-			String[] input = ((String)JOptionPane.showInputDialog(frame, "Numbers to " + command + ":",
-													"", JOptionPane.PLAIN_MESSAGE)).split(" +");
-			int[] args = new int[input.length];
-			for (int i = 0; i < args.length; i++) {
-				args[i] = Integer.parseInt(input[i]);
+			String[] paramsStr = ds.getParams(command);
+			Integer[] params = new Integer[paramsStr.length];
+			
+			for (int i = 0; i < params.length; i++) {
+				String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
+													"", JOptionPane.PLAIN_MESSAGE);
+				params[i] = Integer.parseInt(input);
 			}
 			
 			try {
-				ds.call(command, args);
+				ds.call(command, params);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
 			}
 			
-			ds.draw();
+			ds.redraw();
 		}
 	}
 }
