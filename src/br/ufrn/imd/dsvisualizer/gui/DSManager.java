@@ -1,63 +1,51 @@
 package br.ufrn.imd.dsvisualizer.gui;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 public final class DSManager {
-	static private HashMap<DataStructure, DSActionListener> actionListeners = new HashMap<DataStructure, DSActionListener>();
+	static private List<DataStructure> dataStructures = new LinkedList<DataStructure>();
 	static private Random rand = new Random();
 	
 	private DSManager() {}
 	
 	public static DataStructure create(int dataStructure) {
-		DataStructure ds = Factory.create(dataStructure, rand.nextInt(9));
-		actionListeners.put(ds, new DSManager.DSActionListener(ds));
+		DataStructure ds = Factory.create(dataStructure, rand.nextInt(12));
+		dataStructures.add(ds);
 		return ds;
 	}
 	
-	public static DSActionListener getActionListener(DataStructure ds) {
-		return actionListeners.get(ds);
+	public static void destroy(DataStructure ds) {
+		dataStructures.remove(ds);
 	}
 	
-	public static class DSActionListener implements ActionListener {
-		private DataStructure ds;
-		private JFrame frame;
-		
-		public DSActionListener(DataStructure ds) {
-			this.ds = ds;
+	public static void destroyAll() {
+		dataStructures = new LinkedList<DataStructure>();
+	}
+	
+	public static void saveDataStructures(FileOutputStream fos) throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeInt(dataStructures.size());
+		for (DataStructure ds : dataStructures) {
+			oos.writeObject(ds);
 		}
-		
-		public void setFrame(JFrame frame) {
-			this.frame = frame;
-		}
-		
-		public void actionPerformed(ActionEvent ev) {
-			String command = ev.getActionCommand();
-			String[] paramsStr = ds.getParams(command);
-			Integer[] params = new Integer[paramsStr.length];
-			
-			for (int i = 0; i < params.length; i++) {
-				String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
-													"", JOptionPane.PLAIN_MESSAGE);
-				params[i] = Integer.parseInt(input);
-			}
-			
-			try {
-				ds.call(command, params);
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			ds.redraw();
+		oos.close();
+	}
+	
+	public static void loadDataStructures(FileInputStream fis) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		int size = ois.readInt();
+		for (int i = 0; i < size; i++) {
+			dataStructures.add((DataStructure) ois.readObject());
 		}
 	}
 }

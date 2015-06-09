@@ -6,15 +6,20 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
@@ -78,7 +83,7 @@ public class GUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+	
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -86,19 +91,46 @@ public class GUI {
 		menuBar.add(file);
 		
 		JMenuItem fileNew = new JMenuItem("New");
+		fileNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabs.removeAll();
+				DSManager.destroyAll();
+				tabs.addTab("Home", homepage);
+				frame.pack();
+			}
+		});
 		file.add(fileNew);
 		
 		JMenuItem fileSave = new JMenuItem("Save");
+		fileSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser saver = new JFileChooser();
+				
+				int rVal = saver.showSaveDialog(frame);
+				if (rVal == JFileChooser.APPROVE_OPTION) {
+					saveToFile(saver.getCurrentDirectory().toString() +
+							   saver.getSelectedFile().getName());
+				}
+			}
+		});
 		file.add(fileSave);
 		
 		JMenuItem fileLoad = new JMenuItem("Load");
+		fileLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser loader = new JFileChooser();
+				
+				int rVal = loader.showOpenDialog(frame);
+				if (rVal == JFileChooser.APPROVE_OPTION) {
+					loadFromFile(loader.getCurrentDirectory().toString() +
+							   loader.getSelectedFile().getName());
+				}
+			}
+		});
 		file.add(fileLoad);
 		
 		JMenu options = new JMenu("Options");
 		menuBar.add(options);
-		
-		JMenuItem optionsPrefs = new JMenuItem("Preferences");
-		options.add(optionsPrefs);
 		
 		JMenuItem optionsAbout = new JMenuItem("About");
 		options.add(optionsAbout);
@@ -128,7 +160,8 @@ public class GUI {
 		JButton linkedList = new JButton("Linked List");
 		linkedList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.LIST, "List" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.LIST);
+				newTab(ds, "List" + tabs.getComponentCount());
 			}
 		});
 		lists.add(linkedList);
@@ -136,7 +169,8 @@ public class GUI {
 		JButton stack = new JButton("Stack");
 		stack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.STACK, "Stack" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.STACK);
+				newTab(ds, "Stack" + tabs.getComponentCount());
 			}
 		});
 		lists.add(stack);
@@ -144,7 +178,8 @@ public class GUI {
 		JButton queue = new JButton("Queue");
 		queue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.QUEUE, "Queue" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.QUEUE);
+				newTab(ds, "Queue" + tabs.getComponentCount());
 			}
 		});
 		lists.add(queue);
@@ -152,7 +187,8 @@ public class GUI {
 		JButton deque = new JButton("Deque");
 		deque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.DEQUE, "Deque" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.DEQUE);
+				newTab(ds, "Deque" + tabs.getComponentCount());
 			}
 		});
 		lists.add(deque);
@@ -165,7 +201,8 @@ public class GUI {
 		JButton binaryTree = new JButton("Binary Search Tree");
 		binaryTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.BST, "BST" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.BST);
+				newTab(ds, "BST" + tabs.getComponentCount());
 			}
 		});
 		trees.add(binaryTree);
@@ -173,7 +210,8 @@ public class GUI {
 		JButton heapMax = new JButton("HeapMax");
 		heapMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.HEAPMAX, "HeapMax" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.HEAPMAX);
+				newTab(ds, "HeapMax" + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMax);
@@ -181,7 +219,8 @@ public class GUI {
 		JButton heapMin = new JButton("HeapMin");
 		heapMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.HEAPMIN, "HeapMin" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.HEAPMIN);
+				newTab(ds, "HeapMin" + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMin);
@@ -189,7 +228,8 @@ public class GUI {
 		JButton aVLTree = new JButton("AVL Tree");
 		aVLTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.AVL, "AVL" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.AVL);
+				newTab(ds, "AVL" + tabs.getComponentCount());
 			}
 		});
 		trees.add(aVLTree);
@@ -197,7 +237,8 @@ public class GUI {
 		JButton rBTree = new JButton("Red-Black Tree");
 		rBTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.RB, "RBTree" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.RB);
+				newTab(ds, "RBTree" + tabs.getComponentCount());
 			}
 		});
 		trees.add(rBTree);
@@ -205,27 +246,49 @@ public class GUI {
 		JButton unionFind = new JButton("Union-Find");
 		unionFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newTab(Factory.UNIONFIND, "UnionFind" + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(Factory.UNIONFIND);
+				newTab(ds, "UnionFind" + tabs.getComponentCount());
 			}
 		});
 		trees.add(unionFind);
+		
+		frame.pack();
 	}
 	
-	private void newTab(int selectedDS, String title) {
-		DataStructure ds = DSManager.create(selectedDS);
-		DSManager.DSActionListener al = DSManager.getActionListener(ds);
-		al.setFrame(frame);
+	private void newTab(final DataStructure ds, String title) {
 		ds.redraw();
+		
+		ActionListener al = new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				String command = ev.getActionCommand();
+				String[] paramsStr = ds.getParams(command);
+				Integer[] params = new Integer[paramsStr.length];
+				
+				for (int i = 0; i < params.length; i++) {
+					String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
+														"", JOptionPane.PLAIN_MESSAGE);
+					params[i] = Integer.parseInt(input);
+				}
+				
+				try {
+					ds.call(command, params);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				ds.redraw();
+			}
+		};
 		
 		final JPanel view = new JPanel();
 		view.setPreferredSize(ds.getPreferredSize());
 		view.setLayout(new BorderLayout(10, 10));
 		view.add(ds.getJGraph(), BorderLayout.CENTER);
-	
+		
 		JPanel operations = new JPanel();
 		operations.setLayout(new BoxLayout(operations, BoxLayout.PAGE_AXIS));
 		view.add(operations, BorderLayout.WEST);
-	
+		
 		Set<String> ops = ds.getSupportedOperations();
 		for (String op : ops) {
 			JButton opButton = new JButton(op);
@@ -243,6 +306,7 @@ public class GUI {
 			    if (i != -1) {
 			    	tabs.remove(i);
 			    }
+			    DSManager.destroy(ds);
 			    frame.pack();
 			}
 		});
@@ -251,5 +315,13 @@ public class GUI {
 		tabs.addTab(title, view);
 		tabs.setSelectedIndex(tabs.getComponentCount()-1);
 		frame.pack();
+	}
+	
+	private void saveToFile(String filename) {
+		// TODO
+	}
+	
+	private void loadFromFile(String filename) {
+		// TODO
 	}
 }

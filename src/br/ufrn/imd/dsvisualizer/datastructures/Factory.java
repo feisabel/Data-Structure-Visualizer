@@ -20,6 +20,7 @@ public final class Factory {
 	public static final int DEQUE = 11; 
 	
 	private Factory() {}
+	
 	/**
 	 * Creates a new structure given a initial size and a constant to indicates what structure
 	 * @param dataStructure constant to indicates the structure

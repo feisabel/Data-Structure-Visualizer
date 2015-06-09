@@ -45,17 +45,16 @@ public class BinarySearchTree extends Tree
      * Returns structure description.
      * @return description
      */
-    public String getDescription(){
-    	return "BST possui como característica principal o fato de cada node ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros." +
-    			"a busca é feita comparando o valor buscado com o valor de cada node, caso seja maior " +
-    			"que o valor do node, chama-se o filho da direita, caso contrário o da direita." +
-    			"A remoção é feita substituindo o node removido pelo node mais a direita da subárvore " +
-    			" à direita." + " A complexidade das operações estão baseadas na altura da árvore, uma vez"
-    			+ " que no máximo será acessados um caminho da raiz até o node mais distante, ou seja, altura"
+    static public String getDescription(){
+    	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
+    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
+    			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
+    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita. " +
+    			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
+    			" à direita. " + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
+    			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
     			+ " da árvore.";
     }
-    
     
     /**
      * Check if the tree is empty.
