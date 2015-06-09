@@ -2,6 +2,10 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class AVLTree extends BinarySearchTree {
 	
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = 2759166979168262260L;
 	private AVLNode root;
     
     /**

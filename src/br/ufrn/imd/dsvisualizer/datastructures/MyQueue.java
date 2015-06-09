@@ -1,11 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
@@ -14,7 +11,12 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  *
  */
 public class MyQueue extends DataStructure {
-	List<Integer> queue;
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -6295021590949956107L;
+	
+	private List<Integer> queue;
 	
 	/**
 	 * Constructor with no parameters.
@@ -69,9 +71,9 @@ public class MyQueue extends DataStructure {
 	 */
 	class MyQueueDrawer extends Drawer{
 		/**
-		 * Default serial version.
+		 * Generated serial ID.
 		 */
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = -2802583675001878176L;
 
 		public void draw(){
 			int x = 30, y = 30;
@@ -91,10 +93,10 @@ public class MyQueue extends DataStructure {
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((cells.get(queue.get(i-1))), model),
-							getDefaultPort(cells.get(queue.get(i)), model));
-					insertEdge(getDefaultPort((cells.get(queue.get(i))), model),
-							getDefaultPort(cells.get(queue.get(i-1)), model));
+					insertEdge(getDefaultPort(cells.get(queue.get(i-1))),
+							getDefaultPort(cells.get(queue.get(i))));
+					insertEdge(getDefaultPort(cells.get(queue.get(i))),
+							getDefaultPort(cells.get(queue.get(i-1))));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

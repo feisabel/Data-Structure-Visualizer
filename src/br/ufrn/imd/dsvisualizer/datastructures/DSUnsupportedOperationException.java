@@ -6,6 +6,8 @@ package br.ufrn.imd.dsvisualizer.datastructures;
  *
  */
 public class DSUnsupportedOperationException extends RuntimeException {
+	private static final long serialVersionUID = -4586266027780129181L;
+
 	public DSUnsupportedOperationException(String operation, Class<?> c) {
 		super("Unsupported operation " + operation + " on " + c.getName());
 	}

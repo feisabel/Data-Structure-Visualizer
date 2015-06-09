@@ -1,13 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
-
-import org.jgraph.graph.DefaultGraphCell;
-
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 /**
@@ -16,7 +11,10 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  *
  */
 public class MyStack extends DataStructure{ /*Pilha*/
-	List<Integer> stack;
+	private static final long serialVersionUID = -2034904035673369825L;
+	
+	private List<Integer> stack;
+	
 	/**
 	 * Constructor with no parameters.
 	 */
@@ -83,6 +81,8 @@ public class MyStack extends DataStructure{ /*Pilha*/
 	 *
 	 */
 	class MyStackDrawer extends Drawer{
+		private static final long serialVersionUID = 5841607402665557330L;
+
 		/**
 		 * Method to draw the structure.
 		 */
@@ -104,10 +104,10 @@ public class MyStack extends DataStructure{ /*Pilha*/
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((cells.get(stack.get(i-1))), model),
-							getDefaultPort(cells.get(stack.get(i)), model));
-					insertEdge(getDefaultPort((cells.get(stack.get(i))), model),
-							getDefaultPort(cells.get(stack.get(i-1)), model));
+					insertEdge(getDefaultPort(cells.get(stack.get(i-1))),
+							getDefaultPort(cells.get(stack.get(i))));
+					insertEdge(getDefaultPort(cells.get(stack.get(i))),
+							getDefaultPort(cells.get(stack.get(i-1))));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

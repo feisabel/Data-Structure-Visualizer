@@ -3,8 +3,6 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 import java.awt.Color;
 import java.util.HashMap;
 
-import org.jgraph.graph.DefaultGraphCell;
-
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
  * Class Union Find.
@@ -12,6 +10,10 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  *
  */
 public class UnionFind extends DataStructure {
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = 8165513710592468614L;
 	private int[] unionfind;
 	private int[] order;
 	private int len;
@@ -189,11 +191,9 @@ public class UnionFind extends DataStructure {
 						createMyVertex(i, X, Y + 50, Color.red );
 						pos.put(i, new Pos(X, Y + 50));
 						if(j == 0){
-							insertEdge(getDefaultPort((cells.get(i)), model),
-									getDefaultPort((cells.get(i)), model));
+							insertEdge(getDefaultPort(cells.get(i)), getDefaultPort(cells.get(i)));
 						}else{
-							insertEdge(getDefaultPort((cells.get(i)), model),
-							   getDefaultPort(cells.get(unionfind[i]), model));
+							insertEdge(getDefaultPort(cells.get(i)), getDefaultPort(cells.get(unionfind[i])));
 						}
 						if(X > DEFAULT_SIZE.width - 50){
 							x = 50;

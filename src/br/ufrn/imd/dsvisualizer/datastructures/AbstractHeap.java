@@ -5,17 +5,18 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.jgraph.graph.DefaultGraphCell;
-
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public abstract class AbstractHeap extends DataStructure{
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -8211104633957183086L;
 	protected Vector<Integer> myVector;
 	
-	
 	/**
-	 * Standard constructor, initializes a generic vector according to the type passed as a parameter (default capacity set to 10, doubles when needed).
-	 * 
+	 * Standard constructor, initializes a generic vector according to the
+	 * type passed as a parameter (default capacity set to 10, doubles when needed). 
 	 */
 	public AbstractHeap (){
 		this.myVector = new Vector<Integer>();
@@ -178,8 +179,8 @@ public abstract class AbstractHeap extends DataStructure{
 				createMyVertex(myVector.get(i), x, y, Color.red);
 				positionX.put(myVector.get(i), x);
 				if(i != 0){
-					insertEdge(getDefaultPort(cells.get(help), model), 
-							getDefaultPort(cells.get(myVector.get(i)), model));
+					insertEdge(getDefaultPort(cells.get(help)), 
+							getDefaultPort(cells.get(myVector.get(i))));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

@@ -26,7 +26,7 @@ import org.jgraph.graph.Port;
 public abstract class Drawer extends JApplet {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 600, 600 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 900, 400 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
@@ -48,16 +48,33 @@ public abstract class Drawer extends JApplet {
 		resize( DEFAULT_SIZE );
 	}
 	
+	/**
+	 * Draws the structure on the screen.
+	 */
 	public abstract void draw();
 	
+	/**
+	 * Clears the screen.
+	 */
 	public void clear() {
 		model.remove(cells.values().toArray());
 		cells = new HashMap<Integer, DefaultGraphCell>();
 	}
 	
+	/**
+	 * Redraws the structure on the screen.
+	 */
 	public void redraw() {
 		clear();
 		draw();
+	}
+	
+	/**
+	 * Gets the graph's preferred size.
+	 * @return the graph's preferred size
+	 */
+	public Dimension getPreferredSize() {
+		return DEFAULT_SIZE;
 	}
 	
 	/**
@@ -130,9 +147,9 @@ public abstract class Drawer extends JApplet {
 	 * @param model model used to create the jgraph
 	 * @return current vertex's port
 	 */
-	protected Port getDefaultPort(Object vertex, GraphModel model) {
-		for(int i = 0; i < model.getChildCount(vertex); i++) {
-			Object child = model.getChild(vertex, i);
+	protected Port getDefaultPort(Object vertex) {
+		if (model.getChildCount(vertex) > 0) {
+			Object child = model.getChild(vertex, 0);
 		 	return (Port) child;
 		} 
 	     // No Ports Found
