@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,14 +17,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeSelectionModel;
 
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,8 +43,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import javax.swing.tree.DefaultTreeModel;
 
 public class GUI {
 
@@ -78,7 +92,7 @@ public class GUI {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -91,6 +105,9 @@ public class GUI {
 		frame.pack();
 	}
 	
+	/**
+	 * Create menu bar for the frame. 
+	 */
 	private void createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -149,9 +166,19 @@ public class GUI {
 		options.add(optionsAbout);
 		
 		JMenuItem optionsHelp = new JMenuItem("Help");
+		optionsHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = new File("");
+				JOptionPane.showMessageDialog(frame, "Open " + file.getAbsolutePath() + "/help/usermanual.pdf"
+						                      + " to access the user manual.", null, JOptionPane.PLAIN_MESSAGE);
+			}
+		});
 		options.add(optionsHelp);
 	}
 	
+	/**
+	 * Create frame content.
+	 */
 	private void createContent() {
 		tabs = new JTabbedPane();
 		frame.getContentPane().add(tabs);
@@ -268,6 +295,11 @@ public class GUI {
 		trees.add(unionFind);
 	}
 	
+	/**
+	 * Create new tab with given data structure and title.
+	 * @param ds  data structure to be manipulated
+	 * @param title  title of the tab
+	 */
 	private void newTab(final DataStructure ds, String title) {
 		ds.redraw();
 		
@@ -334,6 +366,10 @@ public class GUI {
 		frame.pack();
 	}
 	
+	/**
+	 * Save data structures to file.
+	 * @param file  file to save to
+	 */
 	private void saveToFile(File file) {
 		String filename = file.getAbsolutePath();
 		String[] format = filename.split(Pattern.quote("."));
@@ -359,6 +395,10 @@ public class GUI {
 		}
 	}
 	
+	/**
+	 * Load data structures from file.
+	 * @param file  file to be loaded from
+	 */
 	private void loadFromFile(File file) {
 		tabs.removeAll();
 		DSManager.destroyAll();
@@ -397,6 +437,10 @@ public class GUI {
 		}
 	}
 	
+	/**
+	 * Gets the 'about' dialog content. 
+	 * @return  application info
+	 */
 	private String getAboutString() {
 		return "<html><b>Version:</b> 0.1.0<br>" +
 	           "<b>Authors:</b><br>" +
