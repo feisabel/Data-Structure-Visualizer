@@ -13,10 +13,11 @@ import br.ufrn.imd.dsvisualizer.datastructures.MyList;
 
 public class Main {
 	public static void main(String[] args){
-		HeapMin u = (HeapMin)Factory.create(Factory.HEAPMIN, 10);
-		u.remove();
-		u.remove();
-		u.remove();
+		AVLTree u = (AVLTree)Factory.create(Factory.AVL, 0);
+		u.insert(20); u.insert(10); u.insert(50); u.insert(9);
+		u.insert(17); u.insert(23); u.insert(95); u.insert(7);
+		u.insert(16); u.insert(19); u.insert(53); u.insert(99);
+		u.delete(10);
 		u.redraw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));
