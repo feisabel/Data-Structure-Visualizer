@@ -9,6 +9,7 @@ import br.ufrn.imd.dsvisualizer.datastructures.AVLTree;
 import br.ufrn.imd.dsvisualizer.datastructures.HeapMax;
 import br.ufrn.imd.dsvisualizer.datastructures.HeapMin;
 import br.ufrn.imd.dsvisualizer.datastructures.MyList;
+import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree;
 
 
 public class Main {

@@ -39,6 +39,7 @@ public class BinarySearchTree extends Tree
      */
     private void root(BSTNode node)
     {
+    	System.out.println("chamou o da bst");
         head.setLeft(node);
     }
     
@@ -70,49 +71,46 @@ public class BinarySearchTree extends Tree
         BSTNode q = search(key);
         
         if (q != null) {  // if is in the tree
-            if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
-            	if (q == q.getParent().getLeft()) 
-            		q.setLeft(q.getParent()); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-            	remove(q);  // delete it
-                return q;
-            }
-            else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
-                swap(q, q.getLeft());  // value swap with child
-                BSTNode left = q.getLeft();
-                if (left.getLeft() == null)
-                	left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-                remove(left);  // delete child
-                return left;
-            }
-            else if (q.getLeft() == null && q.getRight() != null) {  // if q has one child, at the right
-                swap(q, q.getRight());  // value swap with child
-                BSTNode right = q.getRight();
-                remove(right);  // delete child
-                return right;
-            }
-            else {  // if q has two children
-                BSTNode m = max(q.getLeft());  // gets the immediate predecessor
-                swap(q, m);  // value swaps q with it
-                if (m == m.getParent().getLeft())
-                	m.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
-                remove(m);  // delete m
-                return m;
-            }
+            if (q.getLeft() == null && q.getRight() == null) // if q is leaf
+            	remove(q, null);  // delete it
+            else if (q.getLeft() != null && q.getRight() == null) // if q has one child, at the left
+                remove(q, q.getLeft());  // delete child
+            else if (q.getLeft() == null && q.getRight() != null) // if q has one child, at the right
+                remove(q, q.getRight());  // delete child
+            else // if q has two children
+                replace(q, max(q.getLeft()));  // value swaps q with it
         }
         return q;
     }
     
     /**
-     * Swaps contents of the nodes.
-     * @param  node1  node to be swapped
-     * @param  node2  node to be swapped
+     * Replaces one node by another.
+     * @param  node1  node to be replace
+     * @param  node2  node that will replace
      */
-    private void swap(BSTNode node1, BSTNode node2)
+    private void replace(BSTNode node1, BSTNode node2)
     {
         if (node1 != null && node2 != null) {
-            int p = node1.getKey();
-            node1.setKey(node2.getKey());
-            node2.setKey(p);
+            BSTNode parent1 = node1.getParent(), parent2 = node2.getParent(), left = node2.getLeft();
+            node2.setParent(parent1);
+            if (parent1 != null) {
+            	if (parent1.getLeft() == node1)
+            		parent1.setLeft(node2);
+            	else
+            		parent2.setRight(node2);
+            }
+            if (node1.getLeft() != node2)
+            	node2.setLeft(node1.getLeft());
+            node2.setRight(node1.getRight());
+            if (node2.getLeft() != null)
+            	node2.getLeft().setParent(node2);
+            if (node2.getRight() != null)
+            	node2.getRight().setParent(node2);
+            if (parent2 != node1) {
+            	parent2.setRight(left);
+            	if (left != null)
+            		left.setParent(parent2);
+            }
         }
     }
     
@@ -120,18 +118,18 @@ public class BinarySearchTree extends Tree
      * Removes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void remove(BSTNode node)
+    private void remove(BSTNode node, BSTNode son)
     {
         if (node != null) {
-        	BSTNode parent = (BSTNode) node.getParent();
+        	BSTNode parent = node.getParent();
             if (parent != null) {
-                if (parent.getLeft() == node) {
-                    parent.setLeft(node.getLeft());
-                }
-                else {
-                    parent.setRight(node.getRight());
-                }
+                if (parent.getLeft() == node)
+                    parent.setLeft(son);
+                else
+                    parent.setRight(son);
             }
+            if (son != null)
+            	son.setParent(parent);
         }
     }
     

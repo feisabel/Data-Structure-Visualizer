@@ -25,6 +25,15 @@ public class AVLTree extends BinarySearchTree {
     }
     
     /**
+     * Modifier method to the root.
+     * @param new root.
+     */
+    protected void root(AVLNode root) {
+    	System.out.println("chamou o da avl");
+    	this.root = root;
+    }
+    
+    /**
      * Inserts a new node if does not exists one with the same key.
      * @param key new node's key.
      */
@@ -111,19 +120,12 @@ public class AVLTree extends BinarySearchTree {
 	 */
 	public AVLNode delete(int key) {
 		AVLNode node = (AVLNode)super.delete(key);
-		if (node != null) {
-			if (node.getParent() != null) {
-				if (node.getLeft() != null)
-					key = node.getParent().getKey() - 1;
-				else
-					key = node.getParent().getKey() + 1;
-			}
-			updateBalance(node.getParent(), key);
-		}
+		if (node != null)
+			adjustBalance(node.getParent(), node.getKey());
 		return node;
 	}
 	
-	private void updateBalance(AVLNode node, int key) {
+	private void adjustBalance(AVLNode node, int key) {
 		if (node != null) {
 			AVLNode parent = node.getParent();
 			if (key < node.getKey())
@@ -135,7 +137,7 @@ public class AVLTree extends BinarySearchTree {
 					leftRotations(node);
 				else if (node.getBalance() == -2) 
 					rightRotations(node);
-				updateBalance(parent, key);
+				adjustBalance(parent, key);
 			}
 		}
 	}

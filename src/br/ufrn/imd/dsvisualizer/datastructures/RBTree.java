@@ -37,6 +37,14 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
+	 * Modifier method to the root.
+	 * @param the new root
+	 */
+	protected void root(RBNode root) {
+		this.root = root;
+	}
+	
+	/**
 	 * Inserts a new node.
 	 * @param key new node's key
 	 */
