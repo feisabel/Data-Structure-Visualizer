@@ -1,7 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 /**
- * Class to support exceptionds.
+ * Class to support exceptions.
  * @author João Pedro Holanda
  *
  */

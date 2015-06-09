@@ -38,7 +38,8 @@ public class AVLTree extends BinarySearchTree {
 				" Para isso a diferença entre as altudas das subárvores de um node não pode ser maior do "
 				+ "que módulo de 1." + " Inserção é feita similar a da binária de busca exceto que é necessário"
 				+ " fazer ajustes para manter balanceada." + " A busca é exatamente a mesma da BST." + 
-				" A remoção também tem a mesma preocupação de manter o balanceamento.";
+				" A remoção também tem a mesma preocupação de manter o balanceamento." +
+				" A cor azul do node representa balanço 0, a cor verde balanço 1 e laranja -1.";
 	}
 	/**
 	 * Inserts a new node if does not exists one with the same key.
