@@ -14,7 +14,7 @@ https://www.dropbox.com/sh/v5tmmywf1djaxc0/AAAoCshGKlY9Fu880bZIt2kWa?dl=0
 3. Para importar os arquivos:
 No project explorer:
 	Aperte como botão direito no projeto que você criou.
-	Import -> File system -> selecione o diretóro "src" do projeto enviado pelo grupo -> ok
+	Import -> File system -> selecione "ds-visualizer" -> ok
 	Selecione todos os arquivos e aperte em "finish"
 
-4. Dentre os arquivos importados, execute: 
+4. Dentre os arquivos importados, execute: GUI.java
