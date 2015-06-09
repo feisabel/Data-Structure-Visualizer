@@ -159,42 +159,7 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
-	
-	/*Aqui começou a intervenção de Carol*/
-	
-	private void RBTransplant(RBNode u, RBNode v){
-		if(u.getParent() == null){
-			root = v;
-		}
-		else if(u == u.getParent().getLeft()){
-			u.getParent().setLeft(v);
-		}
-		else{
-			u.getParent().setRight(v);
-		}
-		v.setParent(u.getParent());
-	}
-	
-	public void delete(RBNode z){
-		RBNode y = z, x = null;
-		Color originalcolor = y.getColor();
-		if(z.getLeft() == null){
-			x = z.getRight();
-			RBTransplant(z, z.getRight());			
-		}
-		else if(z.getRight() == null){
-			x = z.getLeft();
-			RBTransplant(z, z.getLeft());
-		}
-		else{
-			y = (RBNode) max(z.getRight());
-		}
-	}
-	
-	
-	
-	/*Termina aqui minha intervenção!*/
-	
+
 	
 	/**
 	 * Returns shor name.

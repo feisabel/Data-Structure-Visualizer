@@ -14,13 +14,13 @@ public class BinarySearchTree extends Tree
 	 */
 	private static final long serialVersionUID = -7455650965315566127L;
 	private BSTNode head;
-	
+	protected BSTNode action;
     /**
      * Constructor for class BInarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
-        head = new BSTNode();
+    	head = new BSTNode();
         drawer = new BSTDrawer();
     }
 
