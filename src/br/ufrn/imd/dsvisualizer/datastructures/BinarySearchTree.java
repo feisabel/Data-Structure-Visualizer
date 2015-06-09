@@ -30,17 +30,17 @@ public class BinarySearchTree extends Tree
      */
     protected BSTNode root()
     {
-        return head.getLeft();
+    	return head.getLeft();
     }
     
     /**
      * Sets the root of the tree to the given node.
      * @param  node  the node to which the root will be set
      */
-    private void root(BSTNode node)
+    protected void root(BSTNode node)
     {
-    	System.out.println("chamou o da bst");
-        head.setLeft(node);
+    	System.out.println("chamou da bst");
+    	head.setLeft(node);
     }
     
     /**
@@ -90,6 +90,8 @@ public class BinarySearchTree extends Tree
      */
     private void replace(BSTNode node1, BSTNode node2)
     {
+    	if (root() == node1)
+    		root(node2);
         if (node1 != null && node2 != null) {
             BSTNode parent1 = node1.getParent(), parent2 = node2.getParent(), left = node2.getLeft();
             node2.setParent(parent1);
@@ -97,7 +99,7 @@ public class BinarySearchTree extends Tree
             	if (parent1.getLeft() == node1)
             		parent1.setLeft(node2);
             	else
-            		parent2.setRight(node2);
+            		parent1.setRight(node2);
             }
             if (node1.getLeft() != node2)
             	node2.setLeft(node1.getLeft());
@@ -120,6 +122,8 @@ public class BinarySearchTree extends Tree
      */
     private void remove(BSTNode node, BSTNode son)
     {
+    	if (root() == node)
+    		root(son);
         if (node != null) {
         	BSTNode parent = node.getParent();
             if (parent != null) {
@@ -294,7 +298,7 @@ public class BinarySearchTree extends Tree
      * Returns structure description.
      * @return description
      */
-    static public String getDescription(){
+    public String getDescription(){
     	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
     			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
     			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
@@ -336,7 +340,7 @@ public class BinarySearchTree extends Tree
     	 * @param col node's color
     	 */
 		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
-			if(root != null){
+			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
 					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),

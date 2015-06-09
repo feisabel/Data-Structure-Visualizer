@@ -28,9 +28,10 @@ public class AVLTree extends BinarySearchTree {
      * Modifier method to the root.
      * @param new root.
      */
-    protected void root(AVLNode root) {
-    	System.out.println("chamou o da avl");
-    	this.root = root;
+    protected void root(BSTNode root) {
+    	System.out.println("chamou da avl");
+
+    	this.root = (AVLNode)root;
     }
     
     /**
@@ -49,7 +50,7 @@ public class AVLTree extends BinarySearchTree {
      * Returns structure description.
      * @return description
      */
-	static public String getDescription(){
+	public String getDescription(){
 		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
 				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós)." + 
 				" Para isso a diferença entre as altudas das subárvores de um nó não pode ser maior do "
@@ -120,8 +121,29 @@ public class AVLTree extends BinarySearchTree {
 	 */
 	public AVLNode delete(int key) {
 		AVLNode node = (AVLNode)super.delete(key);
-		if (node != null)
+		if (node.getLeft() != null && node.getRight() != null) {
+			if (node.getLeft() != root) {
+				if (node.getKey() < node.getParent().getKey()) {
+					node.getParent().getLeft().setBalance(node.getBalance());
+					adjustBalance(node.getParent().getLeft(), node.getParent().getLeft().getKey() - 1);
+				}
+				else {
+					node.getParent().getRight().setBalance(node.getBalance());
+					adjustBalance(node.getParent().getRight(), node.getParent().getRight().getKey() - 1);
+				}
+			}
+			else {
+				node.getLeft().setBalance(node.getBalance());
+				adjustBalance(node.getLeft(), node.getLeft().getKey() - 1);
+			}
+		}
+		else {
+			if (node.getLeft() != null)
+				node.getLeft().setBalance(0);
+			else if (node.getRight() != null)
+				node.getRight().setBalance(0);
 			adjustBalance(node.getParent(), node.getKey());
+		}
 		return node;
 	}
 	
