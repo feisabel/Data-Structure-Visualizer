@@ -38,6 +38,7 @@ public abstract class Drawer extends JApplet {
 	
 	public void clear() {
 		jgraph.getGraphLayoutCache().remove(cells.values().toArray());
+		cells = new HashMap<Integer, DefaultGraphCell>();
 	}
 	
 	public void redraw() {
