@@ -1,14 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-import java.awt.Color;
 import java.util.HashMap;
 
-import javax.swing.JPanel;
-
-import org.jgraph.JGraph;
-import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultGraphCell;
-import org.jgraph.graph.GraphLayoutCache;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
@@ -47,6 +41,21 @@ public class BinarySearchTree extends Tree
     {
         head.setLeft(node);
     }
+    /**
+     * Returns structure description.
+     * @return description
+     */
+    public String getDescription(){
+    	return "BST possui como característica principal o fato de cada node ter até dois filhos, " +
+    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros." +
+    			"a busca é feita comparando o valor buscado com o valor de cada node, caso seja maior " +
+    			"que o valor do node, chama-se o filho da direita, caso contrário o da direita." +
+    			"A remoção é feita substituindo o node removido pelo node mais a direita da subárvore " +
+    			" à direita." + " A complexidade das operações estão baseadas na altura da árvore, uma vez"
+    			+ " que no máximo será acessados um caminho da raiz até o node mais distante, ou seja, altura"
+    			+ " da árvore.";
+    }
+    
     
     /**
      * Check if the tree is empty.
@@ -77,20 +86,31 @@ public class BinarySearchTree extends Tree
         
         if (q != null) {  // if is in the tree
             if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
-                remove(q);  // delete it
+            	if (q == q.getParent().getLeft()) 
+            		q.setLeft(q.getParent()); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
+            	remove(q);  // delete it
+                return q;
             }
             else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
                 swap(q, q.getLeft());  // value swap with child
-                remove(q.getLeft());  // delete child
+                BSTNode left = q.getLeft();
+                left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
+                remove(left);  // delete child
+                return left;
             }
             else if (q.getLeft() == null && q.getRight() != null) {  // if q has one child, at the right
                 swap(q, q.getRight());  // value swap with child
-                remove(q.getRight());  // delete child
+                BSTNode right = q.getRight();
+                remove(right);  // delete child
+                return right;
             }
             else {  // if q has two children
                 BSTNode m = max(q.getLeft());  // gets the immediate predecessor
                 swap(q, m);  // value swaps q with it
+                if (m == m.getParent().getLeft())
+                	m.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
                 remove(m);  // delete m
+                return m;
             }
         }
         return q;
@@ -287,6 +307,11 @@ public class BinarySearchTree extends Tree
 	 *
 	 */
     protected class BSTDrawer extends Drawer {
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Method to draw the structure.
 		 */

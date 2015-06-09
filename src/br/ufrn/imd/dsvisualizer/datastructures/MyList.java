@@ -30,6 +30,18 @@ public class MyList extends DataStructure {
 	}
 	
 	/**
+     * Returns structure description.
+     * @return description
+     */
+	public String getDescription(){
+		return "Lista é uma estrutura em que cada node tem referência para o node anterior e seguinte. " +
+				"Dessa forma para inserir a lista é percorrida até o local indicado e então o node é inserido," +
+				" mesma ideia para remoção. Portanto as operações são log n. A pesquisa também percorre a lista de" +
+				" nodes até encontrar ou até chegar ao final.";
+	}
+	
+	
+	/**
 	 * Inserts new node given a position.
 	 * @param a new node 
 	 * @param position the node position
@@ -65,7 +77,7 @@ public class MyList extends DataStructure {
 			a = list.indexOf(a);
 			return a;
 		}
-		return 0;
+		return -1;
 	}
 	
 	/**
@@ -74,6 +86,11 @@ public class MyList extends DataStructure {
 	 *
 	 */
 	class MyListDrawer extends Drawer{
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Method to draw the structure.
 		 */

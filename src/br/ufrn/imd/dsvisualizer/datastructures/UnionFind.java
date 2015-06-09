@@ -1,12 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JPanel;
-
-import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
@@ -17,7 +13,7 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  */
 public class UnionFind extends DataStructure {
 	private int[] unionfind;
-	private int[] ordem;
+	private int[] order;
 	private int len;
 	
 	/**
@@ -28,10 +24,10 @@ public class UnionFind extends DataStructure {
 		drawer = new UnionFindDrawer();
 		len = n;
 		unionfind = new int[n];
-		ordem = new int[n];
+		order = new int[n];
 		for(int i = 0; i < n; i++){
 			unionfind[i] = i; 
-			ordem[i] = 0;
+			order[i] = 0;
 		}
 		
 		support("unite", "num1", "num2");
@@ -39,11 +35,28 @@ public class UnionFind extends DataStructure {
 	}
 	
 	/**
+     * Returns structure description.
+     * @return description
+     */
+	public String getDescription(){
+		return " Representam a ideia matemática de conjuntos que não possuem elementos em comum," +
+				" cada um aponta para si mesmo, é possível fazer a união entre dois elementos que na" +
+				" verdade consiste na união de toda a árvore onde está esse elemento." + "A operação find"
+				+ " além de retornar o representante (raiz) do conjunto também aproveita e faz a modificação" +
+				" na estrutura diminuindo o caminho do nó mandado até a root. A complexidade de find está relacionada a" +
+				" altura da árvore. Já unite é O(1), nem chega a percorrer o vetor. Uma utilidade comum dessa estrutura" +
+				" é fazer labirintos válidos.";
+	}
+	
+	
+	/**
 	 * Unites x with y.
 	 * @param x element to be united 
 	 * @param y element to be united
 	 */
 	public void unite(int x, int y){
+		if(x >= len || y >= len)
+			return;
 		link(unionfind[x], unionfind[y]);
 	}
 	
@@ -53,18 +66,22 @@ public class UnionFind extends DataStructure {
 	 * @param y element to be united
 	 */
 	private void link(int x, int y){
-		if(ordem[x] > ordem[y]){
-			unionfind[y] = x;
-		}
-		else{
-			unionfind[x] = y;
-			ordem[y]++;
+		try{
+			if(order[x] > order[y]){
+				unionfind[y] = x;
+			}
+			else{
+				unionfind[x] = y;
+				order[y]++;
+			}
+		}catch(Exception e){
+			System.out.println("Invalid arguments");
 		}
 	}
 	/**
-	 * Finds the ???.
+	 * Finds the root.
 	 * @param x element to be found.
-	 * @return ???
+	 * @return root
 	 */
 	public int find(int x){
 		try{
@@ -79,49 +96,82 @@ public class UnionFind extends DataStructure {
 		}
 	}
 	
-	private int maxOrdem(){
-		int m = ordem[0];
+	/**
+	 * Returns the greater order.
+	 * @return greater order
+	 */
+	private int maxOrder(){
+		int m = order[0];
 		for(int i = 1; i < len; i++){
-			if(m < ordem[i]){
-				m = ordem[i];
+			if(m < order[i]){
+				m = order[i];
 			}
 		}
 		
 		return m;
 	}
 	
+	/**
+	 * Returns node level.
+	 * @param i node
+	 * @return level
+	 */
 	private int level(int i){
-		int res = 0;
-		boolean t = false;
-		while(!t){
-			if(unionfind[i] == i)
-				t = true;
-			else{
-				int k = unionfind[i];
-				i = k;
-				res++;
+		try{
+			int res = 0;
+			boolean t = false;
+			while(!t){
+				if(unionfind[i] == i)
+					t = true;
+				else{
+					int k = unionfind[i];
+					i = k;
+					res++;
+				}
 			}
+			return res;
+		}catch(Exception e){
+			System.out.println("Invalid argument");
+			return -1;
 		}
-		
-		return res;
 	}
-
+	/**
+	 * Class to draw UnionFind.
+	 * @author Ana Caroline
+	 *
+	 */
 	private class UnionFindDrawer extends Drawer{
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
+		/**
+		 * Helper class to draw UnionFind.
+		 * @author Ana Caroline
+		 *
+		 */		
 		private class Pos {
 			int a;
 			int b;
+			/**
+			 * Constructor with no parameters.
+			 * @param x position axis x
+			 * @param y position axis y
+			 */
 			Pos(int x, int y){
 				a = x;
 				b = y;
 			}
 		}
-		
+		/**
+		 * Method to draw UnionFind.
+		 */
 		public void draw(){
 			HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
 			
-			int x = 50, y = 50;
+			int x = 50, y = 0;
 			
-			for(int j = 0; j <= maxOrdem(); j++){
+			for(int j = 0; j <= maxOrder(); j++){
 				for(int i = 0; i < len; i++){
 					if(level(i) == j){
 						int X, Y;
@@ -135,6 +185,7 @@ public class UnionFind extends DataStructure {
 							Y = parentPos.b;
 							parentPos.a += 50;
 						}
+						System.out.println(i + " " + X + " " + Y);
 						createMyVertex(i, X, Y + 50, Color.red );
 						pos.put(i, new Pos(X, Y + 50));
 						if(j == 0){
@@ -143,6 +194,10 @@ public class UnionFind extends DataStructure {
 						}else{
 							insertEdge(getDefaultPort((cells.get(i)), model),
 							   getDefaultPort(cells.get(unionfind[i]), model));
+						}
+						if(X > DEFAULT_SIZE.width - 50){
+							x = 50;
+							y+= 150;
 						}
 					}
 				}//pegar todos os irmãos de um i que estão na ordem j

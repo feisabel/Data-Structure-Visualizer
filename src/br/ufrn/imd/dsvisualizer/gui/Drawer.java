@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import javax.swing.JApplet;
-import javax.swing.JPanel;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.ConnectionSet;
@@ -27,7 +26,7 @@ import org.jgraph.graph.Port;
 public abstract class Drawer extends JApplet {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 500, 300 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 600, 600 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
@@ -38,6 +37,7 @@ public abstract class Drawer extends JApplet {
 	
 	public void clear() {
 		jgraph.getGraphLayoutCache().remove(cells.values().toArray());
+		model.remove(cells.values().toArray());
 		cells = new HashMap<Integer, DefaultGraphCell>();
 	}
 	
@@ -46,7 +46,7 @@ public abstract class Drawer extends JApplet {
 		draw();
 	}
 	
-	/*
+	/**
 	 * Constructor with no parameters.
 	 */
 	public Drawer(){
@@ -135,7 +135,7 @@ public abstract class Drawer extends JApplet {
 		for(int i = 0; i < model.getChildCount(vertex); i++) {
 			Object child = model.getChild(vertex, i);
 		 	return (Port) child;
-		}
+		} 
 	     // No Ports Found
 	    return null;
 	 }

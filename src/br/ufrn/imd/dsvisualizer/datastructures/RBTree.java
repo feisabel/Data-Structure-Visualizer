@@ -10,26 +10,64 @@ import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
 
-import br.ufrn.imd.dsvisualizer.datastructures.BinarySearchTree.BSTDrawer;
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
-
+/**
+ * Class Red Black tree.
+ * @author Fernanda Isabel
+ *
+ */
 public class RBTree extends BinarySearchTree {
 	
 	private RBNode root;
 	
+	/**
+	 * Constructor with no parameters.
+	 */
 	public RBTree() {
 		root = null;
-		drawer = new BSTDrawer();
+		drawer = new RBTreeDrawer();
 	}
 	
+	/**
+	 * Access method to the root.
+	 * @return root
+	 */
 	protected RBNode root() {
 		return root;
 	}
 	
+	/**
+	 * Inserts a new node.
+	 * @param key new node's key
+	 */
 	public void insert(int key) {
 		privateInsert(key, root, null, new Ref<Integer>(1));
 	}
 	
+	/**
+     * Returns structure description.
+     * @return description
+     */
+	public String getDescription(){
+		return "A Red Black tree é uma árvore binária de busca que possui algumas características específicas." +
+				" Primeiro, ela conta com nós externos, que possuem altura 0." +
+				" Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
+				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
+				" sempre pretos." + "A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
+				"a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
+				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura." +
+				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
+				" árvore.";
+	}
+	
+	/**
+	 * Helper method to insert a new node.
+	 * @param key new node's key
+	 * @param node current node
+	 * @param dad current node's dad
+	 * @param b indicates current case 
+	 * @return node used to recursion
+	 */
 	private RBNode privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
 		if (node == null) {
 			node = new RBNode(dad, null, null, key);
@@ -118,20 +156,33 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
-	
+	/**
+	 * Class to draw the RBTree.
+	 * @author Ana Caroline 
+	 *
+	 */
 	class RBTreeDrawer extends Drawer{
 	
+		/**
+		 * Default serial version.
+		 */
+		private static final long serialVersionUID = 1L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
-					
+		
+		/**
+		 * Special method to draw a null node, according this structure type. 
+		 * @param x position x
+		 * @param y position y
+		 * @param dad vertex dad
+		 */
 		private void createNullVertex(int x, int y, DefaultGraphCell dad){
-			System.out.println("LALALALA");
 			DefaultGraphCell v = new DefaultGraphCell("");
 			nullnodes.add(v);
 			DefaultPort port = new DefaultPort();
 			v.add(port);
 			port.setParent(v);
 			GraphConstants.setBounds(v.getAttributes(), new
-					 Rectangle2D.Double(x,y,30,15));
+					 Rectangle2D.Double(x,y,15,15));
 			GraphConstants.setGradientColor(v.getAttributes(), Color.black);
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad, model), 
@@ -163,11 +214,11 @@ public class RBTree extends BinarySearchTree {
 					insertEdge(getDefaultPort((cells.get(root.getKey())), model),
 							getDefaultPort(cells.get(root.getLeft().getKey()), model));	
 				}else{
-					System.out.println("LALALALALALAALALALALA");
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
+
 				}
 				if(root.getRight() != null){
 					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
