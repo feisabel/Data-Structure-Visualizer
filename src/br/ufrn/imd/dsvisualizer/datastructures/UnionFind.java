@@ -23,6 +23,8 @@ public class UnionFind extends DataStructure {
 	 * @param n number of trees
 	 */
 	public UnionFind(int n){
+		if(n > 10)
+			n = 10; //tamanho máximo permitido
 		drawer = new UnionFindDrawer();
 		len = n;
 		unionfind = new int[n];
