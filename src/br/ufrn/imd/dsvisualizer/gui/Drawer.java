@@ -33,19 +33,6 @@ public abstract class Drawer extends JApplet {
 	protected GraphLayoutCache view;
 	protected HashMap<Integer, DefaultGraphCell> cells;
 	
-	public abstract void draw();
-	
-	public void clear() {
-		jgraph.getGraphLayoutCache().remove(cells.values().toArray());
-		model.remove(cells.values().toArray());
-		cells = new HashMap<Integer, DefaultGraphCell>();
-	}
-	
-	public void redraw() {
-		clear();
-		draw();
-	}
-	
 	/**
 	 * Constructor with no parameters.
 	 */
@@ -59,6 +46,18 @@ public abstract class Drawer extends JApplet {
 		adjustDisplaySettings( jgraph );
 		getContentPane().add( jgraph );
 		resize( DEFAULT_SIZE );
+	}
+	
+	public abstract void draw();
+	
+	public void clear() {
+		model.remove(cells.values().toArray());
+		cells = new HashMap<Integer, DefaultGraphCell>();
+	}
+	
+	public void redraw() {
+		clear();
+		draw();
 	}
 	
 	/**

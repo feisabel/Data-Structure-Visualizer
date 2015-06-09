@@ -48,7 +48,7 @@ public class MyList extends DataStructure {
 	 * @return true if inserted, false otherwise
 	 */
 	public boolean insert(int a, int position){
-		if(!list.contains(a) && position >= 0 && position < list.size()){
+		if(!list.contains(a) && position >= 0 && position <= list.size()){
 			list.add(position, new Integer(a));
 			return true;
 		}

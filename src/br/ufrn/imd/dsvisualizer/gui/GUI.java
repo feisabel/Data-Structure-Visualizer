@@ -192,6 +192,13 @@ public class GUI {
 			}
 		});
 		trees.add(rBTree);
+		
+		JButton unionFind = new JButton("Union-Find");
+		unionFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newTab(Factory.UNIONFIND, "UnionFind" + tabs.getComponentCount());
+			}
+		});
 	}
 	
 	private void newTab(int selectedDS, String title) {
