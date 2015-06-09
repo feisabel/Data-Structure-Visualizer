@@ -118,19 +118,12 @@ public class AVLTree extends BinarySearchTree {
 			else
 				node.setBalance(node.getBalance() - 1);
 			if (node.getBalance() != 1 && node.getBalance() != -1) {
-				if (node.getBalance() != 0)
-					adjustBalance(node);
+				if (node.getBalance() == 2)
+					leftRotations(node);
+				else if (node.getBalance() == -2) 
+					rightRotations(node);
 				updateBalance(parent, key);
 			}
-		}
-	}
-	
-	private void adjustBalance(AVLNode node) {
-		if (node != null) {
-			if (node.getBalance() == 2) 
-				leftRotations(node);
-			else if (node.getBalance() == -2) 
-				rightRotations(node);
 		}
 	}
 	
