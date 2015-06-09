@@ -42,10 +42,10 @@ public class AVLTree extends BinarySearchTree {
      */
 	public String getDescription(){
 		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
-				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós)." + 
-				" Para isso a diferença entre as altudas das subárvores de um nó não pode ser maior do "
-				+ "que módulo de 1." + " Inserção é feita similar a da binária de busca exceto que é necessário"
-				+ " fazer ajustes para se manter balanceada." + " A busca é exatamente a mesma da BST." + 
+				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós).\n" + 
+				"Para isso a diferença entre as alturas das subárvores de um nó não pode ser maior do "
+				+ "que módulo de 1.\n" + "Inserção é feita similar a da binária de busca exceto que é necessário"
+				+ " fazer ajustes para se manter balanceada.\n" + "A busca é exatamente a mesma da BST.\n" + 
 				" A cor azul do node representa balanço 0, a cor verde balanço 1 e laranja -1.";
 	}
 	/**
