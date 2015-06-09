@@ -334,6 +334,9 @@ public class GUI {
 		view.setLayout(new BorderLayout(10, 10));
 		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
+		JScrollPane description = new JScrollPane(new JLabel("<html>"+ds.getDescription().replaceAll(Pattern.quote(". "), ".<br>")+"</html>"));
+		view.add(description, BorderLayout.NORTH);
+		
 		JPanel operations = new JPanel();
 		operations.setLayout(new BoxLayout(operations, BoxLayout.PAGE_AXIS));
 		view.add(operations, BorderLayout.WEST);

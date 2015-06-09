@@ -160,7 +160,7 @@ public class RBTree extends BinarySearchTree {
      * Returns structure description.
      * @return description
      */
-	static public String getDescription(){
+	public String getDescription(){
 		return "A Red Black tree é uma árvore binária de busca que possui algumas características específicas." +
 				" Primeiro, ela conta com nós externos, que possuem altura 0." +
 				" Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +

@@ -40,7 +40,7 @@ public class AVLTree extends BinarySearchTree {
      * Returns structure description.
      * @return description
      */
-	static public String getDescription(){
+	public String getDescription(){
 		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
 				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós)." + 
 				" Para isso a diferença entre as altudas das subárvores de um nó não pode ser maior do "

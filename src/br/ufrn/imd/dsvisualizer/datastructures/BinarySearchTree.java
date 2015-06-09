@@ -30,6 +30,7 @@ public class BinarySearchTree extends Tree
      */
     protected BSTNode root()
     {
+    	System.err.println("Passou BST.");
         return head.getLeft();
     }
     
@@ -70,7 +71,7 @@ public class BinarySearchTree extends Tree
         BSTNode q = search(key);
         
         if (q != null) {  // if is in the tree
-            if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
+        	if (q.getLeft() == null && q.getRight() == null) {  // if q is leaf
             	if (q == q.getParent().getLeft()) 
             		q.setLeft(q.getParent()); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
             	remove(q);  // delete it
@@ -296,7 +297,7 @@ public class BinarySearchTree extends Tree
      * Returns structure description.
      * @return description
      */
-    static public String getDescription(){
+    public String getDescription(){
     	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
     			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
     			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
@@ -338,7 +339,7 @@ public class BinarySearchTree extends Tree
     	 * @param col node's color
     	 */
 		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
-			if(root != null){
+			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
 					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),

@@ -49,7 +49,7 @@ public class UnionFind extends DataStructure {
 	public String getDescription(){
 		return " Representam a ideia matemática de conjuntos que não possuem elementos em comum," +
 				" cada um aponta para si mesmo, é possível fazer a união entre dois elementos que na" +
-				" verdade consiste na união de toda a árvore onde está esse elemento." + "A operação find"
+				" verdade consiste na união de toda a árvore onde está esse elemento." + " A operação find"
 				+ " além de retornar o representante (raiz) do conjunto também aproveita e faz a modificação" +
 				" na estrutura diminuindo o caminho do nó mandado até a root. A complexidade de find está relacionada a" +
 				" altura da árvore. Já unite é O(1), nem chega a percorrer o vetor. Uma utilidade comum dessa estrutura" +
