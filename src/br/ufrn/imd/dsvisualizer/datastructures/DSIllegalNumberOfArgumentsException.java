@@ -7,6 +7,8 @@ package br.ufrn.imd.dsvisualizer.datastructures;
  */
 
 public class DSIllegalNumberOfArgumentsException extends Exception {
+	private static final long serialVersionUID = 5782646695153433654L;
+
 	public DSIllegalNumberOfArgumentsException(String operation, Class<?> c, int expected, int got) {
 		super("Illegal number of arguments on " + c.getName() + "." + operation + ":" +
 			  "expected " + expected + ", got " + got);

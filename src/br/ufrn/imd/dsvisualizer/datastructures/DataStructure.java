@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-import java.lang.reflect.InvocationTargetException;
+import java.awt.Dimension;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +16,9 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  * @author Ana Caroline, João Pedro Holanda
  *
  */
-abstract public class DataStructure {
+abstract public class DataStructure implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	// data structure drawer
 	protected Drawer drawer;
 	
@@ -44,8 +47,6 @@ abstract public class DataStructure {
 		drawer.redraw();
 	}
 	
-	
-	
 	/**
 	 * Gets the graph representation of the data structure.
 	 * @return  the JGraph associated to this structure 
@@ -53,7 +54,15 @@ abstract public class DataStructure {
 	public JGraph getJGraph() {
 		return drawer.getJGraph();
 	}
-		
+	
+	/**
+	 * Gets this structure's preferred size.
+	 * @return  this structure's preferred size
+	 */
+	public Dimension getPreferredSize() {
+		return drawer.getPreferredSize();
+	}
+	
 	/* Call-related methods */	
 	
 	/**
@@ -107,7 +116,7 @@ abstract public class DataStructure {
 				Method method = null;
 				try {
 					method = this.getClass().getMethod(command, paramsTypes);
-					method.invoke(this, params);
+					method.invoke(this, (Object[])params);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new DSUnsupportedOperationException(command, this.getClass());

@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class HeapMin extends AbstractHeap{
+	private static final long serialVersionUID = 6924159814911487873L;
 	
 	/**
 	 * Assistant method for the removing method.

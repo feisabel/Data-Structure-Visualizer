@@ -2,7 +2,8 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 
 
 public class HeapMax extends AbstractHeap{
-	
+	private static final long serialVersionUID = -9077515488358323361L;
+
 	/**
 	 * Assistant method for the removing method.
 	 * 

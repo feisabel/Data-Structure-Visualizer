@@ -6,11 +6,12 @@ import javax.swing.JScrollPane;
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 import br.ufrn.imd.dsvisualizer.datastructures.AVLTree;
+import br.ufrn.imd.dsvisualizer.datastructures.MyList;
 
 
 public class Main {
 	public static void main(String[] args){
-		AVLTree u = (AVLTree)Factory.create(Factory.AVL, 10);
+		MyList u = (MyList)Factory.create(Factory.LIST, 10);
 		u.redraw();
 		JFrame j = new JFrame();
 		j.getContentPane().add(new JScrollPane(u.getJGraph()));

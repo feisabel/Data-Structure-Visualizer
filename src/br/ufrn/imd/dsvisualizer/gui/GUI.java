@@ -13,22 +13,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import java.util.Set;
 
 public class GUI {
@@ -44,8 +38,18 @@ public class GUI {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	public static void main(String[] args) {
+		try {
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (UnsupportedLookAndFeelException e1) {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.err.println("Error: could not initialize application.");
+			e.printStackTrace();
+		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -114,15 +118,12 @@ public class GUI {
 		welcome.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		homepage.add(welcome);
 		
-		JPanel structures = new JPanel();
-		structures.setLayout(new BoxLayout(structures, BoxLayout.PAGE_AXIS));
-		structures.setBorder(BorderFactory.createTitledBorder("Structures"));
-		homepage.add(structures);
+		homepage.add(Box.createGlue());
 		
 		JPanel lists = new JPanel();
-		lists.setLayout(new FlowLayout(FlowLayout.LEFT));
+		lists.setLayout(new FlowLayout(FlowLayout.CENTER));
 		lists.setBorder(BorderFactory.createTitledBorder("Lists"));
-		structures.add(lists);
+		homepage.add(lists);
 		
 		JButton linkedList = new JButton("Linked List");
 		linkedList.addActionListener(new ActionListener() {
@@ -157,9 +158,9 @@ public class GUI {
 		lists.add(deque);
 		
 		JPanel trees = new JPanel();
-		trees.setLayout(new FlowLayout(FlowLayout.LEFT));
+		trees.setLayout(new FlowLayout(FlowLayout.CENTER));
 		trees.setBorder(BorderFactory.createTitledBorder("Trees"));
-		structures.add(trees);
+		homepage.add(trees);
 		
 		JButton binaryTree = new JButton("Binary Search Tree");
 		binaryTree.addActionListener(new ActionListener() {
@@ -177,6 +178,14 @@ public class GUI {
 		});
 		trees.add(heapMax);
 		
+		JButton heapMin = new JButton("HeapMin");
+		heapMin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newTab(Factory.HEAPMIN, "HeapMin" + tabs.getComponentCount());
+			}
+		});
+		trees.add(heapMin);
+		
 		JButton aVLTree = new JButton("AVL Tree");
 		aVLTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -192,6 +201,14 @@ public class GUI {
 			}
 		});
 		trees.add(rBTree);
+		
+		JButton unionFind = new JButton("Union-Find");
+		unionFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newTab(Factory.UNIONFIND, "UnionFind" + tabs.getComponentCount());
+			}
+		});
+		trees.add(unionFind);
 	}
 	
 	private void newTab(int selectedDS, String title) {
@@ -200,8 +217,8 @@ public class GUI {
 		al.setFrame(frame);
 		ds.redraw();
 		
-		JPanel view = new JPanel();
-		
+		final JPanel view = new JPanel();
+		view.setPreferredSize(ds.getPreferredSize());
 		view.setLayout(new BorderLayout(10, 10));
 		view.add(ds.getJGraph(), BorderLayout.CENTER);
 	
@@ -217,6 +234,22 @@ public class GUI {
 			operations.add(opButton);
 		}
 		
+		operations.add(Box.createGlue());
+		
+		JButton close = new JButton("close");
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    int i = tabs.indexOfComponent(view);
+			    if (i != -1) {
+			    	tabs.remove(i);
+			    }
+			    frame.pack();
+			}
+		});
+		operations.add(close);
+		
 		tabs.addTab(title, view);
+		tabs.setSelectedIndex(tabs.getComponentCount()-1);
+		frame.pack();
 	}
 }

@@ -1,9 +1,5 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-import java.util.HashMap;
-
-import org.jgraph.graph.DefaultGraphCell;
-
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 /**
@@ -13,6 +9,10 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  */
 public class BinarySearchTree extends Tree
 {
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -7455650965315566127L;
 	private BSTNode head;
 	
     /**
@@ -318,7 +318,8 @@ public class BinarySearchTree extends Tree
     	public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
-			preOrderCell(root(), x, y, root().getColor());
+			if (root() != null)
+				preOrderCell(root(), x, y, root().getColor());
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 		}
     	
@@ -336,14 +337,14 @@ public class BinarySearchTree extends Tree
 				if(root.getLeft() != null){
 					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
-					insertEdge(getDefaultPort((cells.get(root.getKey())), model),
-							getDefaultPort(cells.get(root.getLeft().getKey()), model));	
+					insertEdge(getDefaultPort((cells.get(root.getKey()))),
+							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}
 				if(root.getRight() != null){
 					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
-					insertEdge(getDefaultPort((cells.get(root.getKey())), model),
-							getDefaultPort(cells.get(root.getRight().getKey()), model));
+					insertEdge(getDefaultPort((cells.get(root.getKey()))),
+							getDefaultPort(cells.get(root.getRight().getKey())));
 				}
 			}
 		} 

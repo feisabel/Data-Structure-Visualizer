@@ -1,21 +1,22 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 /**
  * Class deque.
  * @author Ana Caroline
- *
  */
 public class MyDeque extends DataStructure{
-	List<Integer> deque;
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -1888305749422593009L;
+	
+	private List<Integer> deque;
 	
 	/**
 	 * Constructor with no parameters. 
@@ -23,6 +24,11 @@ public class MyDeque extends DataStructure{
 	public MyDeque(){
 		deque = new LinkedList<Integer>();
 		drawer = new MyDequeDrawer();
+
+		support("insertFirst", "key");
+		support("insertLast", "key");
+		support("removeFirst");
+		support("removeLast");
 	}
 	
 	/**
@@ -131,10 +137,10 @@ public class MyDeque extends DataStructure{
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((cells.get(deque.get(i-1))), model),
-							getDefaultPort(cells.get(deque.get(i)), model));
-					insertEdge(getDefaultPort((cells.get(deque.get(i))), model),
-							getDefaultPort(cells.get(deque.get(i-1)), model));
+					insertEdge(getDefaultPort(cells.get(deque.get(i-1))),
+							getDefaultPort(cells.get(deque.get(i))));
+					insertEdge(getDefaultPort(cells.get(deque.get(i))),
+							getDefaultPort(cells.get(deque.get(i-1))));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

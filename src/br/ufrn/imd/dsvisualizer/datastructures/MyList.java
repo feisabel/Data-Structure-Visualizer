@@ -1,11 +1,8 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.jgraph.graph.DefaultGraphCell;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
@@ -15,7 +12,11 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  *
  */
 public class MyList extends DataStructure {
-	List<Integer> list;
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = 2554109786706088450L;
+	private List<Integer> list;
 	
 	/**
 	 * Constructor with no parameters. 
@@ -26,7 +27,6 @@ public class MyList extends DataStructure {
 		
 		support("insert", "key", "position");
 		support("remove", "key");
-		support("search", "key");
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class MyList extends DataStructure {
 	 * @return true if inserted, false otherwise
 	 */
 	public boolean insert(int a, int position){
-		if(!list.contains(a) && position >= 0 && position < list.size()){
+		if(!list.contains(a) && position >= 0 && position <= list.size()){
 			list.add(position, new Integer(a));
 			return true;
 		}
@@ -112,10 +112,10 @@ public class MyList extends DataStructure {
 					x-=60;
 				}
 				if(i != 0){
-					insertEdge(getDefaultPort((cells.get(list.get(i-1))), model),
-							getDefaultPort(cells.get(list.get(i)), model));
-					insertEdge(getDefaultPort((cells.get(list.get(i))), model),
-							getDefaultPort(cells.get(list.get(i-1)), model));
+					insertEdge(getDefaultPort(cells.get(list.get(i-1))),
+							getDefaultPort(cells.get(list.get(i))));
+					insertEdge(getDefaultPort(cells.get(list.get(i))),
+							getDefaultPort(cells.get(list.get(i-1))));
 				}
 			}
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());

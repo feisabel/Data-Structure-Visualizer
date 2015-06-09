@@ -8,12 +8,16 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 public abstract class Tree extends DataStructure {
 	
 	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -3867486410885252376L;
+
+	/**
 	 * Constructor with no parameters. 
 	 */
 	public Tree() {
 		support("insert", "key");
 		support("delete", "key");
-		support("search", "key");
 	}
 	
 	/**
