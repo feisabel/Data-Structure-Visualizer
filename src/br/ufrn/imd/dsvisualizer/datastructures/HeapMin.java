@@ -12,7 +12,7 @@ public class HeapMin extends AbstractHeap{
 		int aux = getLeftIndex(index);
 		if(aux <= super.myVector.size()-1){
 			if(aux + 1 <= super.myVector.size()-1){
-				if(super.myVector.get(aux+1) < super.myVector.get(index)){
+				if(super.myVector.get(aux+1) < super.myVector.get(aux)){
 					aux++;
 				}
 			}

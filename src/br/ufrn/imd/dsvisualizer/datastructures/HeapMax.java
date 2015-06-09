@@ -13,7 +13,7 @@ public class HeapMax extends AbstractHeap{
 		int aux = getLeftIndex(index);
 		if(aux <= myVector.size()-1){
 			if(aux + 1 <= myVector.size()-1){
-				if(myVector.get(aux+1) < myVector.get(index)){
+				if(myVector.get(aux+1) > myVector.get(aux)){
 					aux++;
 				}
 			}
@@ -61,6 +61,7 @@ public class HeapMax extends AbstractHeap{
 	 */
 	public void insert(int key){
 		if(!myVector.contains(key)){
+			System.out.println(key);
 			myVector.add(myVector.size(), key);
 			if(myVector.size() > 1)
 				goUp(myVector.size()-1);
