@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class MyDeque extends DataStructure{
 		support("insertLast", "key");
 		support("removeFirst");
 		support("removeLast");
+	}
+	
+	public String getShortName() {
+		return "Deque";
 	}
 	
 	/**
@@ -115,6 +120,13 @@ public class MyDeque extends DataStructure{
 		 * Default serial version.
 		 */
 		private static final long serialVersionUID = 1L;
+		
+		/**
+		 * Default constructor.
+		 */
+		public MyDequeDrawer() {
+			setPreferredSize(new Dimension(500, 350));
+		}
 
 		/**
 		 * Method to draw the structure.

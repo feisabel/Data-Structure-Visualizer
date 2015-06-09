@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,16 +44,6 @@ public class MyQueue extends DataStructure {
 	}
 	
 	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Queue é uma estrutura que permite inserção sempre na última posição." +
-				" Já a remoção é feita na primeira posição." + " Logo essas operações são O(1) quando a implementação"
-				+ " guarda referência para primeiro e último lugar.";
-	}
-	
-	/**
 	 * Removes node given a key if it exists. 
 	 * @return true if removed, false otherwise
 	 */
@@ -63,6 +54,22 @@ public class MyQueue extends DataStructure {
 		}
 		return false;
 	}
+	
+	
+	public String getShortName() {
+		return "Queue";
+	}	
+	
+	/**
+     * Returns structure description.
+     * @return description
+     */
+	public String getDescription(){
+		return "Queue é uma estrutura que permite inserção sempre na última posição." +
+				" Já a remoção é feita na primeira posição." + " Logo essas operações são O(1) quando a implementação"
+				+ " guarda referência para primeiro e último lugar.";
+	}
+	
 	
 	/**
 	 * Class to draw the structure.
@@ -75,6 +82,10 @@ public class MyQueue extends DataStructure {
 		 */
 		private static final long serialVersionUID = -2802583675001878176L;
 
+		public MyQueueDrawer() {
+			setPreferredSize(new Dimension(500, 350));
+		}
+		
 		public void draw(){
 			int x = 30, y = 30;
 			boolean d = true;

@@ -41,20 +41,6 @@ public class BinarySearchTree extends Tree
     {
         head.setLeft(node);
     }
-    /**
-     * Returns structure description.
-     * @return description
-     */
-    static public String getDescription(){
-    	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
-    			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
-    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita. " +
-    			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
-    			" à direita. " + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
-    			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
-    			+ " da árvore.";
-    }
     
     /**
      * Check if the tree is empty.
@@ -93,7 +79,8 @@ public class BinarySearchTree extends Tree
             else if (q.getLeft() != null && q.getRight() == null) {  // if q has one child, at the left
                 swap(q, q.getLeft());  // value swap with child
                 BSTNode left = q.getLeft();
-                left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
+                if (left.getLeft() == null)
+                	left.setLeft(q); // arranjo técnico para remoção da AVL (indica que q era filho esquerdo)
                 remove(left);  // delete child
                 return left;
             }
@@ -139,10 +126,10 @@ public class BinarySearchTree extends Tree
         	BSTNode parent = (BSTNode) node.getParent();
             if (parent != null) {
                 if (parent.getLeft() == node) {
-                    parent.setLeft(null);
+                    parent.setLeft(node.getLeft());
                 }
                 else {
-                    parent.setRight(null);
+                    parent.setRight(node.getRight());
                 }
             }
         }
@@ -299,6 +286,26 @@ public class BinarySearchTree extends Tree
 		left.setLeft(node);
 		node.setParent(left);
 	}
+	
+	
+	public String getShortName() {
+		return "BST";
+	}	
+    
+    /**
+     * Returns structure description.
+     * @return description
+     */
+    static public String getDescription(){
+    	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
+    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros. " +
+    			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
+    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita. " +
+    			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
+    			" à direita. " + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
+    			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
+    			+ " da árvore.";
+    }
 	
 	/**
 	 * Class BSTDrawer contains the methods to draw the structure.

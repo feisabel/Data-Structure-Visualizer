@@ -7,7 +7,7 @@ public class AVLTree extends BinarySearchTree {
 	 */
 	private static final long serialVersionUID = 2759166979168262260L;
 	private AVLNode root;
-    
+	
     /**
      * Constructor for class AVLTree with no parameters. 
      */
@@ -29,13 +29,17 @@ public class AVLTree extends BinarySearchTree {
      * @param key new node's key.
      */
 	public void insert(int key) {
-		privateInsert(key, root, null, new Ref<Boolean>(true));
+		privateInsert(key, root(), null, new Ref<Boolean>(true));
 	}
 	
-	
-	/**
-	 * 
-	 */
+	public String getShortName() {
+		return "AVL";
+	}	
+    
+    /**
+     * Returns structure description.
+     * @return description
+     */
 	static public String getDescription(){
 		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
 				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós)." + 

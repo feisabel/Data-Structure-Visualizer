@@ -24,6 +24,10 @@ public final class DSManager {
 		return ds;
 	}
 	
+	public static final List<DataStructure> getDataStructures() {
+		return dataStructures;
+	}
+	
 	public static void destroy(DataStructure ds) {
 		dataStructures.remove(ds);
 	}

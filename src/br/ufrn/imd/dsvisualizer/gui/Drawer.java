@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
+import java.util.HashSet;
+
 import javax.swing.JApplet;
 
 import org.jgraph.JGraph;
@@ -26,23 +28,24 @@ import org.jgraph.graph.Port;
 public abstract class Drawer extends JApplet {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 900, 400 );
+    protected static final Dimension DEFAULT_SIZE = new Dimension( 800, 300 );
 	protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
 	protected GraphLayoutCache view;
 	protected HashMap<Integer, DefaultGraphCell> cells;
+	protected HashSet<DefaultEdge> arrows;
 	
 	/**
 	 * Constructor with no parameters.
 	 */
 	public Drawer(){
 		cells = new HashMap<Integer, DefaultGraphCell>();
+		arrows = new HashSet<DefaultEdge>();
 		model = new DefaultGraphModel();
 		view = new GraphLayoutCache(model, new DefaultCellViewFactory());
 		jgraph = new JGraph( model, view );
-		jgraph.setPreferredSize( DEFAULT_SIZE );
-		
+
 		adjustDisplaySettings( jgraph );
 		getContentPane().add( jgraph );
 		resize( DEFAULT_SIZE );
@@ -58,7 +61,9 @@ public abstract class Drawer extends JApplet {
 	 */
 	public void clear() {
 		model.remove(cells.values().toArray());
+		model.remove(arrows.toArray());
 		cells = new HashMap<Integer, DefaultGraphCell>();
+		arrows = new HashSet<DefaultEdge>();
 	}
 	
 	/**
@@ -74,7 +79,15 @@ public abstract class Drawer extends JApplet {
 	 * @return the graph's preferred size
 	 */
 	public Dimension getPreferredSize() {
-		return DEFAULT_SIZE;
+		return jgraph.getPreferredSize();
+	}
+	
+	/**
+	 * Sets the graph's preferred size.
+	 * @param size the graph's new preferred size
+	 */
+	public void setPreferredSize(Dimension size) {
+		jgraph.setPreferredSize(size);
 	}
 	
 	/**
@@ -131,6 +144,7 @@ public abstract class Drawer extends JApplet {
 	protected void insertEdge( Port source, Port target) {
 		 // Create Edge
 		DefaultEdge edge = new DefaultEdge();
+		arrows.add(edge);
 		// Create ConnectionSet for Insertion
 		ConnectionSet cs = new ConnectionSet(edge, source, target);
 		int arrow = GraphConstants.ARROW_CLASSIC;

@@ -33,6 +33,8 @@ abstract public class DataStructure implements Serializable {
 		operationParams = new HashMap<String, String[]>();
 	}
 	
+	abstract public String getShortName();
+	
 	/* Draw-related methods */
 	/**
 	 * Redraws the data structure on the screen.
@@ -103,7 +105,7 @@ abstract public class DataStructure implements Serializable {
 				int numOfParams = operationParams.get(operation).length;
 				
 				if (params.length != numOfParams)
-					throw new DSIllegalNumberOfArgumentsException(command, this.getClass(), numOfParams, params.length);
+					throw new DSIllegalNumberOfArgumentsException(command, this, numOfParams, params.length);
 				Class<?>[] paramsTypes = new Class<?>[params.length];
 				Arrays.fill(paramsTypes, int.class);
 				

@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class MyList extends DataStructure {
 		
 		support("insert", "key", "position");
 		support("remove", "key");
+	}
+	
+	public String getShortName() {
+		return "List";
 	}
 	
 	/**
@@ -91,6 +96,13 @@ public class MyList extends DataStructure {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Default constructor.
+		 */
+		public MyListDrawer() {
+			setPreferredSize(new Dimension(500, 350));
+		}
+		
 		/**
 		 * Method to draw the structure.
 		 */

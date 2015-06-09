@@ -1,14 +1,15 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
+
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 /**
  * Class stack.
  * @author Ana Caroline
- *
  */
 public class MyStack extends DataStructure{ /*Pilha*/
 	private static final long serialVersionUID = -2034904035673369825L;
@@ -39,6 +40,22 @@ public class MyStack extends DataStructure{ /*Pilha*/
 	}
 	
 	/**
+	 * Removes the node in the top if exists.
+	 * @return true if removed, false otherwise
+	 */
+	public boolean pop(){
+		if(stack.size() > 0){
+			stack.remove(stack.size()-1);
+			return true;
+		}
+		return false;
+	}
+	
+	public String getShortName() {
+		return "Stack";
+	}	
+	
+	/**
      * Returns structure description.
      * @return description
      */
@@ -51,38 +68,17 @@ public class MyStack extends DataStructure{ /*Pilha*/
 	}
 	
 	/**
-	 * Removes the node in the top if exists.
-	 * @return true if removed, false otherwise
-	 */
-	public boolean pop(){
-		if(stack.size() > 0){
-			stack.remove(stack.size()-1);
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Returns the node's position.  
-	 * @param a node to be searched
-	 * @return position 
-	 */
-	public int search(int a){
-		if(stack.contains(a)){
-			a = stack.indexOf(a);
-			return a;
-		}
-		return 0;
-	}
-	
-	/**
 	 * Class to draw the structure.
 	 * @author Ana Caroline
 	 *
 	 */
 	class MyStackDrawer extends Drawer{
 		private static final long serialVersionUID = 5841607402665557330L;
-
+		
+		public MyStackDrawer() {
+			setPreferredSize(new Dimension(500,350));
+		}
+		
 		/**
 		 * Method to draw the structure.
 		 */

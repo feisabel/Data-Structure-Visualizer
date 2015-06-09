@@ -1,13 +1,14 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * Represents a node.
  * @author Fernanda Isabel, João Pedro Holanda
  *
  */
-public abstract class Node {
+public abstract class Node implements Serializable {
 
 	private Node parent;
 	protected Color color;

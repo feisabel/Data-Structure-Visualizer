@@ -6,7 +6,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +27,13 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class GUI {
 
@@ -38,10 +43,6 @@ public class GUI {
 	
 	/**
 	 * Launch the application.
-	 * @throws UnsupportedLookAndFeelException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ClassNotFoundException 
 	 */
 	public static void main(String[] args) {
 		try {
@@ -84,6 +85,13 @@ public class GUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
+		createMenuBar();
+		createContent();
+		
+		frame.pack();
+	}
+	
+	private void createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -108,8 +116,7 @@ public class GUI {
 				
 				int rVal = saver.showSaveDialog(frame);
 				if (rVal == JFileChooser.APPROVE_OPTION) {
-					saveToFile(saver.getCurrentDirectory().toString() +
-							   saver.getSelectedFile().getName());
+					saveToFile(saver.getSelectedFile());
 				}
 			}
 		});
@@ -122,8 +129,7 @@ public class GUI {
 				
 				int rVal = loader.showOpenDialog(frame);
 				if (rVal == JFileChooser.APPROVE_OPTION) {
-					loadFromFile(loader.getCurrentDirectory().toString() +
-							   loader.getSelectedFile().getName());
+					loadFromFile(loader.getSelectedFile());
 				}
 			}
 		});
@@ -133,11 +139,20 @@ public class GUI {
 		menuBar.add(options);
 		
 		JMenuItem optionsAbout = new JMenuItem("About");
+		optionsAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLabel text = new JLabel(getAboutString());
+				text.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+				JOptionPane.showMessageDialog(frame, text, "About", JOptionPane.PLAIN_MESSAGE, null);
+			}
+		});
 		options.add(optionsAbout);
 		
 		JMenuItem optionsHelp = new JMenuItem("Help");
 		options.add(optionsHelp);
-		
+	}
+	
+	private void createContent() {
 		tabs = new JTabbedPane();
 		frame.getContentPane().add(tabs);
 		
@@ -161,7 +176,7 @@ public class GUI {
 		linkedList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.LIST);
-				newTab(ds, "List" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		lists.add(linkedList);
@@ -170,7 +185,7 @@ public class GUI {
 		stack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.STACK);
-				newTab(ds, "Stack" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		lists.add(stack);
@@ -179,7 +194,7 @@ public class GUI {
 		queue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.QUEUE);
-				newTab(ds, "Queue" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		lists.add(queue);
@@ -188,7 +203,7 @@ public class GUI {
 		deque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.DEQUE);
-				newTab(ds, "Deque" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		lists.add(deque);
@@ -202,7 +217,7 @@ public class GUI {
 		binaryTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.BST);
-				newTab(ds, "BST" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(binaryTree);
@@ -211,7 +226,7 @@ public class GUI {
 		heapMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.HEAPMAX);
-				newTab(ds, "HeapMax" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMax);
@@ -220,7 +235,7 @@ public class GUI {
 		heapMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.HEAPMIN);
-				newTab(ds, "HeapMin" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMin);
@@ -229,7 +244,7 @@ public class GUI {
 		aVLTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.AVL);
-				newTab(ds, "AVL" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(aVLTree);
@@ -238,7 +253,7 @@ public class GUI {
 		rBTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.RB);
-				newTab(ds, "RBTree" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(rBTree);
@@ -247,12 +262,10 @@ public class GUI {
 		unionFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.UNIONFIND);
-				newTab(ds, "UnionFind" + tabs.getComponentCount());
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
 			}
 		});
 		trees.add(unionFind);
-		
-		frame.pack();
 	}
 	
 	private void newTab(final DataStructure ds, String title) {
@@ -264,16 +277,21 @@ public class GUI {
 				String[] paramsStr = ds.getParams(command);
 				Integer[] params = new Integer[paramsStr.length];
 				
-				for (int i = 0; i < params.length; i++) {
-					String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
-														"", JOptionPane.PLAIN_MESSAGE);
-					params[i] = Integer.parseInt(input);
-				}
-				
 				try {
-					ds.call(command, params);
+					for (int i = 0; i < params.length; i++) {
+						String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
+															"", JOptionPane.PLAIN_MESSAGE);
+						params[i] = Integer.parseInt(input);
+					}
+					
+					try {
+						ds.call(command, params);
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+					}
+					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Error: Invalid number!", "", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				ds.redraw();
@@ -281,9 +299,8 @@ public class GUI {
 		};
 		
 		final JPanel view = new JPanel();
-		view.setPreferredSize(ds.getPreferredSize());
 		view.setLayout(new BorderLayout(10, 10));
-		view.add(ds.getJGraph(), BorderLayout.CENTER);
+		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
 		JPanel operations = new JPanel();
 		operations.setLayout(new BoxLayout(operations, BoxLayout.PAGE_AXIS));
@@ -317,11 +334,77 @@ public class GUI {
 		frame.pack();
 	}
 	
-	private void saveToFile(String filename) {
-		// TODO
+	private void saveToFile(File file) {
+		String filename = file.getAbsolutePath();
+		String[] format = filename.split(Pattern.quote("."));
+		if (format.length > 0) {
+			String ext = format[format.length-1];
+			if (!ext.equals("dsvisu")) {
+				filename += ".dsvisu";
+			}
+		}
+		
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(filename);
+			DSManager.saveDataStructures(fos);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error: Could not create or open " + filename,
+					                             "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error: Could not save into " + filename,
+					                             "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
-	private void loadFromFile(String filename) {
-		// TODO
+	private void loadFromFile(File file) {
+		tabs.removeAll();
+		DSManager.destroyAll();
+		tabs.addTab("Home", homepage);
+		
+		String filename = file.getAbsolutePath();
+		String[] format = filename.split(Pattern.quote("."));
+		String ext = format[format.length-1];
+		if (!ext.equals("dsvisu")) {
+			JOptionPane.showMessageDialog(frame, "Error: Could not load from " + filename,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			
+			DSManager.loadDataStructures(fis);
+			
+			for (DataStructure ds : DSManager.getDataStructures()) {
+				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error: Could not open " + filename,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error: Could not load from " + filename,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error: Could not load from " + filename + 
+					                           ": File is corrupted", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private String getAboutString() {
+		return "<html><b>Version:</b> 0.1.0<br>" +
+	           "<b>Authors:</b><br>" +
+	           "&nbsp;&nbsp;&nbsp;&nbsp;Ana Caroline Medeiros Brito<br>" +
+			   "&nbsp;&nbsp;&nbsp;&nbsp;Fernanda Menezes Paes Isabel<br>" +
+	           "&nbsp;&nbsp;&nbsp;&nbsp;João Pedro Alencar Rocha de Holanda<br>" +
+			   "&nbsp;&nbsp;&nbsp;&nbsp;Leonardo Bezerra Leibovitz<br>" +
+	           "<b>Institution:</b><br>" +
+			   "&nbsp;&nbsp;&nbsp;&nbsp;Instituto Metrópole Digital/UFRN</html>";
 	}
 }

@@ -3,6 +3,11 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 
 public class AVLNode extends BSTNode {
 	
+	/**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = 44430300841135568L;
+	
 	int balance;
 	
 	/**

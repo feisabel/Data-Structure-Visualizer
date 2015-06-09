@@ -23,6 +23,10 @@ public class HeapMin extends AbstractHeap{
 		}
 	}
 	
+	public String getShortName() {
+		return "HeapMin";
+	}
+	
 	/**
      * Returns structure description.
      * @return description

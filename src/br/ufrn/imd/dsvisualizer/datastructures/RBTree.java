@@ -45,22 +45,6 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-     * Returns structure description.
-     * @return description
-     */
-	static public String getDescription(){
-		return "A Red Black tree é uma árvore binária de busca que possui algumas características específicas." +
-				" Primeiro, ela conta com nós externos, que possuem altura 0." +
-				" Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
-				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
-				" sempre pretos." + " A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
-				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
-				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura." +
-				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
-				" árvore.";
-	}
-	
-	/**
 	 * Helper method to insert a new node.
 	 * @param key new node's key
 	 * @param node current node
@@ -167,6 +151,27 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
+	
+	public String getShortName() {
+		return "RB";
+	}	
+	
+	/**
+     * Returns structure description.
+     * @return description
+     */
+	static public String getDescription(){
+		return "A Red Black tree é uma árvore binária de busca que possui algumas características específicas." +
+				" Primeiro, ela conta com nós externos, que possuem altura 0." +
+				" Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
+				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
+				" sempre pretos." + " A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
+				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
+				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura." +
+				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
+				" árvore.";
+	}
+	
 	/**
 	 * Class to draw the RBTree.
 	 * @author Ana Caroline 
@@ -203,11 +208,18 @@ public class RBTree extends BinarySearchTree {
 		public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
-			preOrderCell(root(), x, y, root().getColor());
+			if (root() != null)
+				preOrderCell(root(), x, y, root().getColor());
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
 			jgraph.getGraphLayoutCache().insert(nullnodes.toArray());
 		}
     	
+		public void clear() {
+			super.clear();
+			jgraph.getGraphLayoutCache().remove(nullnodes.toArray());
+			nullnodes = new LinkedList<DefaultGraphCell>();
+		}
+		
     	/**
     	 * Method to help the draw process. Using pre order access.
     	 * @param c used to mapping the jgraph cells
@@ -227,9 +239,6 @@ public class RBTree extends BinarySearchTree {
 				}else{
 					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
-					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							cells.get(root.getKey()) );
-
 				}
 				if(root.getRight() != null){
 					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
@@ -237,8 +246,6 @@ public class RBTree extends BinarySearchTree {
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));
 				}else{
-					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
-							cells.get(root.getKey()) );
 					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}

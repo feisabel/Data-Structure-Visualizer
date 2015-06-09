@@ -38,6 +38,10 @@ public class UnionFind extends DataStructure {
 		support("find", "num");
 	}
 	
+	public String getShortName() {
+		return "UnionFind";
+	}	
+	
 	/**
      * Returns structure description.
      * @return description
@@ -79,7 +83,7 @@ public class UnionFind extends DataStructure {
 				order[y]++;
 			}
 		}catch(Exception e){
-			System.out.println("Invalid arguments");
+			System.err.println("Invalid arguments");
 		}
 	}
 	/**
@@ -95,7 +99,7 @@ public class UnionFind extends DataStructure {
 			return unionfind[x];
 		}
 		catch(Exception e){
-			System.out.println("Invalid argument");
+			System.err.println("Invalid argument");
 			return -1;
 		}
 	}
@@ -135,14 +139,14 @@ public class UnionFind extends DataStructure {
 			}
 			return res;
 		}catch(Exception e){
-			System.out.println("Invalid argument");
+			System.err.println("Invalid argument");
 			return -1;
 		}
 	}
+	
 	/**
 	 * Class to draw UnionFind.
 	 * @author Ana Caroline
-	 *
 	 */
 	private class UnionFindDrawer extends Drawer{
 		/**
@@ -189,7 +193,6 @@ public class UnionFind extends DataStructure {
 							Y = parentPos.b;
 							parentPos.a += 50;
 						}
-						System.out.println(i + " " + X + " " + Y);
 						createMyVertex(i, X, Y + 50, Color.red );
 						pos.put(i, new Pos(X, Y + 50));
 						if(j == 0){
