@@ -176,6 +176,7 @@ public abstract class AbstractHeap extends DataStructure{
 					lvl++;
 					y+=deltaY;
 				}
+
 				createMyVertex(myVector.get(i), x, y, Color.red);
 				positionX.put(myVector.get(i), x);
 				if(i != 0){
