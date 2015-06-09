@@ -103,7 +103,12 @@ public class RBTree extends BinarySearchTree {
 			return dad;
 		}
 	}
-	
+	/**
+	 * Does adjust colors nodes.
+	 * @param node current node
+	 * @param dad current node's dad
+	 * @param b indicates if needs continue or no
+	 */
 	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
 		RBNode grandad = dad.getParent(), uncle;
 		if (grandad.getLeft() == dad)
@@ -124,6 +129,12 @@ public class RBTree extends BinarySearchTree {
 			root.setColor(Color.BLACK);
 	}
 	
+	/**
+	 * Does the rotate.
+	 * @param node current node
+	 * @param dad current node's dad
+	 * @param grandad current node's grandad
+	 */
 	private void rotate(RBNode node, RBNode dad, RBNode grandad) {
 		if (dad == grandad.getLeft()) {
 			if (node == dad.getLeft()) {
@@ -186,7 +197,9 @@ public class RBTree extends BinarySearchTree {
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad), getDefaultPort(v));
 		}
-
+		/**
+		 * Starts the process to draw the structure.
+		 */
 		public void draw(){
 			int x = DEFAULT_SIZE.width/2;
 			int y = 10;
