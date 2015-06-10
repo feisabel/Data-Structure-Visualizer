@@ -159,7 +159,129 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
-
+	
+	public RBNode delete(int key) {
+        RBNode node = (RBNode)search(key); 
+        if (node != null) { 
+        	if (node.getLeft() != null && node.getRight() != null) {
+        		RBNode left = (RBNode)max(node.getLeft()), leftParent = left.getParent();
+        		replace(node, left);
+        		if (left.getColor() == Color.BLACK) {
+        			if (left != root)
+        				left.setColor(Color.RED);
+        			adjustColorsRemoval(leftParent, true);
+        		}
+        	}
+        	else if (node.getLeft() == null && node.getRight() == null) {
+            	remove(node, null); 
+            	if (node.getColor() == Color.BLACK)
+            		adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
+            }
+        	else if (node.getLeft() != null && node.getRight() == null) {
+        		remove(node, node.getLeft());
+        		node.getLeft().setColor(Color.BLACK);
+        	}
+	        else {
+	        	remove(node, node.getRight()); 
+	        	node.getRight().setColor(Color.BLACK);
+	        }
+        }
+        return node;
+    }
+	
+	private void adjustColorsRemoval(RBNode node, boolean b) {
+		if (node != null) {
+			RBNode son;
+			if (b)
+				son = node.getRight();
+			else
+				son = node.getLeft();
+			if (son.getColor() == Color.RED) {
+				son.setColor(Color.BLACK);
+				node.setColor(Color.RED);
+				if (b)
+					leftRotation(node, son);
+				else
+					rightRotation(node, son);
+				if (node == root)
+					root = son;
+				adjustColorsRemoval(node, node.getLeft() == null);
+			}
+			else {
+				if (son.getRight() == null || son.getLeft() == null) {
+					if (son.getRight() == null) {
+						if (son.getLeft() == null) {
+							son.setColor(Color.RED);
+							if (node.getColor() == Color.RED)
+								node.setColor(Color.BLACK);							else if (node != root)
+									adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
+						}
+						else if (son.getLeft().getColor() == Color.BLACK) {							son.setColor(Color.RED);
+							if (node.getColor() == Color.RED)
+								node.setColor(Color.BLACK);
+							else if (node != root)
+								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
+						}
+						else {
+							son.setColor(Color.RED);
+							son.getLeft().setColor(Color.BLACK);
+							rightRotation(son, son.getLeft());
+							adjustColorsRemoval(node, node.getLeft() == null);
+						}
+					}
+					else {
+						if (son.getRight().getColor() == Color.BLACK) {
+							son.setColor(Color.RED);
+							if (node.getColor() == Color.RED)
+								node.setColor(Color.BLACK);
+							else if (node != root)
+								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
+						}
+						else {
+							if (b) {
+								son.setColor(node.getColor());
+								node.setColor(Color.BLACK);
+								son.getRight().setColor(Color.BLACK);
+								leftRotation(node, son);
+								if (node == root)
+									root = son;
+							}
+							else {
+								node.setColor(Color.BLACK);
+								doubleRightRotation(node, son, son.getRight());
+								if (node == root)
+									root = node.getParent();
+							}
+						}
+					}
+				}
+				else {
+					if (son.getLeft().getColor() == Color.RED && son.getRight().getColor() == Color.BLACK) {
+						son.setColor(Color.RED);
+						son.getLeft().setColor(Color.BLACK);
+						rightRotation(son, son.getLeft());
+						adjustColorsRemoval(node, node.getLeft() == null);
+					}
+					else if (son.getRight().getColor() == Color.RED) {
+						if (b) {
+							son.setColor(node.getColor());
+							node.setColor(Color.BLACK);
+							son.getRight().setColor(Color.BLACK);
+							leftRotation(node, son);
+							if (node == root)
+								root = son;
+						}
+						else {
+							node.setColor(Color.BLACK);
+							doubleRightRotation(node, son, son.getRight());
+							if (node == root)
+								root = node.getParent();
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Returns shor name.
