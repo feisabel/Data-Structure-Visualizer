@@ -120,7 +120,9 @@ public class RBTree extends BinarySearchTree {
 		if (root.getColor() == Color.RED)
 			root.setColor(Color.BLACK);
 	}
+
 	
+		
 	/**
 	 * Does the rotate.
 	 * @param node current node

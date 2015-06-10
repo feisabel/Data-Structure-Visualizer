@@ -39,7 +39,6 @@ public class BinarySearchTree extends Tree
      */
     protected void root(BSTNode node)
     {
-    	System.out.println("chamou da bst");
     	head.setLeft(node);
     }
     
