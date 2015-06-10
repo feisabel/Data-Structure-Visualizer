@@ -6,7 +6,11 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
-
+/**
+ * Abstract heap class.
+ * @author Leonardo
+ *
+ */
 public abstract class AbstractHeap extends DataStructure{
 	/**
 	 * Generated serial ID.

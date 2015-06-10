@@ -1,6 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-
+/**
+ * AVLNode class.
+ * @author Fernanda Isabel
+ *
+ */
 public class AVLNode extends BSTNode {
 	
 	/**

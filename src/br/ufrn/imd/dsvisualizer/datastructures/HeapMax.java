@@ -1,6 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-
+/**
+ * HeapMax class.
+ * @author Leonardo
+ *
+ */
 public class HeapMax extends AbstractHeap{
 	private static final long serialVersionUID = -9077515488358323361L;
 
