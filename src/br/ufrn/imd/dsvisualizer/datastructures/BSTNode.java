@@ -137,8 +137,9 @@ public class BSTNode extends Node
     }
 
     /**
-     * Returns the node's level.
-     * @return level 
+     * Returns the node's level on a given tree.
+     * @param  root  root of the tree
+     * @return node's level
      */
     public int nodeLevel(Node root){
     	int i;
@@ -146,5 +147,4 @@ public class BSTNode extends Node
     	for(i = 1; a != root; a = a.getParent(), i++);	
     	return i;
     }
-
 }

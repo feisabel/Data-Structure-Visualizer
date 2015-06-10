@@ -18,7 +18,7 @@ public class AVLTree extends BinarySearchTree {
 
     /**
      * Access method to the root.
-     * @return the root.
+     * @return the root
      */
     protected AVLNode root() {
     	return root;
@@ -36,38 +36,18 @@ public class AVLTree extends BinarySearchTree {
     
     /**
      * Inserts a new node if does not exists one with the same key.
-     * @param key new node's key.
+     * @param key new node's key
      */
 	public void insert(int key) {
 		privateInsert(key, root(), null, new Ref<Boolean>(true));
 	}
 	
 	/**
-	 * Get the data structure's name.
-	 * @return  data structure's name
-	 */
-	public String getName() {
-		return "AVL Tree";
-	}	
-    
-    /**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
-				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós).\n" + 
-				"Para isso a diferença entre as alturas das subárvores de um nó não pode ser maior do "
-				+ "que módulo de 1.\n" + "Inserção é feita similar a da binária de busca exceto que é necessário"
-				+ " fazer ajustes para se manter balanceada.\n" + "A busca é exatamente a mesma da BST.\n" + 
-				" A cor azul do node representa balanço 0, a cor verde balanço 1 e laranja -1.";
-	}
-	/**
 	 * Inserts a new node if does not exists one with the same key.
-	 * @param key new node's key.
-	 * @param node current node.
-	 * @param dad current's father node.
-	 * @param b indicates if the method will be called again.
+	 * @param key new node's key
+	 * @param node current node
+	 * @param dad current's father node
+	 * @param b indicates if the node is already inserted
 	 */
 	private void privateInsert(int key, AVLNode node, AVLNode dad, Ref<Boolean> b) {
 		if (node == null) {
@@ -95,7 +75,7 @@ public class AVLTree extends BinarySearchTree {
 					else if (node.getBalance() == 0)
 						node.setBalance(-1);
 					else {
-						rightRotations(node);
+						rightRotationsInsertion(node);
 						b.set(false);
 					}
 				}
@@ -110,7 +90,7 @@ public class AVLTree extends BinarySearchTree {
 					else if (node.getBalance() == 0)
 						node.setBalance(1);
 					else {
-						leftRotations(node);
+						leftRotationsInsertion(node);
 						b.set(false);
 					}
 				}
@@ -118,39 +98,45 @@ public class AVLTree extends BinarySearchTree {
 		}
 	}
 	
+
 	/**
 	 * Deletes a node given a key.
 	 * @param key node's key
 	 * @return deleted node
 	 */
 	public AVLNode delete(int key) {
-		AVLNode node = (AVLNode)super.delete(key);
-		if (node.getLeft() != null && node.getRight() != null) {
-			if (node.getLeft() != root) {
-				if (node.getKey() < node.getParent().getKey()) {
-					node.getParent().getLeft().setBalance(node.getBalance());
-					adjustBalance(node.getParent().getLeft(), node.getParent().getLeft().getKey() - 1);
-				}
-				else {
-					node.getParent().getRight().setBalance(node.getBalance());
-					adjustBalance(node.getParent().getRight(), node.getParent().getRight().getKey() - 1);
-				}
-			}
-			else {
-				node.getLeft().setBalance(node.getBalance());
-				adjustBalance(node.getLeft(), node.getLeft().getKey() - 1);
-			}
-		}
-		else {
-			if (node.getLeft() != null)
-				node.getLeft().setBalance(0);
-			else if (node.getRight() != null)
-				node.getRight().setBalance(0);
-			adjustBalance(node.getParent(), node.getKey());
-		}
-		return node;
+		AVLNode node = (AVLNode)search(key);
+        if (node != null) {  
+        	if (node.getLeft() != null && node.getRight() != null) {
+        		AVLNode left = (AVLNode)max(node.getLeft()), leftParent = left.getParent();
+        		replace(node, left);
+        		if (leftParent == node) {
+        			left.setBalance(node.getBalance());
+        			adjustBalance(left, left.getKey() - 1);
+        		}
+        		else {
+        			left.setBalance(node.getBalance());
+        			adjustBalance(leftParent, left.getKey());
+        		}	
+        	}
+        	else {
+	            if (node.getLeft() == null && node.getRight() == null)
+	            	remove(node, null);
+	            else if (node.getLeft() != null && node.getRight() == null) 
+	                remove(node, node.getLeft());  
+	            else
+	                remove(node, node.getRight()); 
+	            adjustBalance(node.getParent(), node.getKey());
+        	}
+        }
+        return node;
 	}
 	
+	/**
+	 * Adjusts the balance.
+	 * @param node current node
+	 * @param key key
+	 */
 	private void adjustBalance(AVLNode node, int key) {
 		if (node != null) {
 			AVLNode parent = node.getParent();
@@ -160,19 +146,19 @@ public class AVLTree extends BinarySearchTree {
 				node.setBalance(node.getBalance() - 1);
 			if (node.getBalance() != 1 && node.getBalance() != -1) {
 				if (node.getBalance() == 2)
-					leftRotations(node);
+					leftRotationsRemoval(node);
 				else if (node.getBalance() == -2) 
-					rightRotations(node);
-				adjustBalance(parent, key);
+					rightRotationsRemoval(node);
+				adjustBalance(parent, node.getKey());
 			}
 		}
 	}
 	
 	/**
 	 * Does the right rotation to correct the tree's balance.
-	 * @param node node will be balanced.
+	 * @param node node will be balanced
 	 */
-	private void rightRotations(AVLNode node) {
+	private void rightRotationsInsertion(AVLNode node) {
 		AVLNode left = node.getLeft(), right;
 		if (left.getBalance() == -1 ) {
 			rightRotation(node, left);
@@ -200,14 +186,86 @@ public class AVLTree extends BinarySearchTree {
 	
 	/**
 	 * Does the right rotation to correct the tree's balance.
-	 * @param node node will be balanced.
+	 * @param node node will be balanced
 	 */
-	private void leftRotations(AVLNode node) {
+	private void leftRotationsInsertion(AVLNode node) {
 		AVLNode right = node.getRight(), left;
 		if (right.getBalance() == 1) {
 			leftRotation(node, right);
 			node.setBalance(0);
 			right.setBalance(0);
+			if (root == node)
+				root = right;
+		}
+		else {
+			left = right.getLeft();
+			doubleLeftRotation(node, right, left);
+			if (left.getBalance() == 1)
+				node.setBalance(-1);
+			else
+				node.setBalance(0);
+			if (left.getBalance() == -1)
+				right.setBalance(1);
+			else
+				right.setBalance(0);
+			left.setBalance(0);
+			if (root == node)
+				root = left;
+		}
+	}
+	
+	/**
+	 * Does the right rotation to correct the tree's balance.
+	 * @param node node will be balanced
+	 */
+	private void rightRotationsRemoval(AVLNode node) {
+		AVLNode left = node.getLeft(), right;
+		if (left.getBalance() == -1 || left.getBalance() == 0) {
+			rightRotation(node, left);
+			if (left.getBalance() == -1) {
+				node.setBalance(0);
+				left.setBalance(0);
+			}
+			else {
+				node.setBalance(-1);
+				left.setBalance(1);
+			}
+			if (root == node)
+				root = left;
+		}
+		else {
+			right = left.getRight();
+			doubleRightRotation(node, left, right);
+			if (right.getBalance() == -1)
+				node.setBalance(1);
+			else
+				node.setBalance(0);
+			if (right.getBalance() == 1)
+				left.setBalance(-1);
+			else
+				left.setBalance(0);
+			right.setBalance(0);
+			if (root == node)
+				root = right;
+		}
+	}
+	
+	/**
+	 * Does the right rotation to correct the tree's balance.
+	 * @param node node will be balanced.
+	 */
+	private void leftRotationsRemoval(AVLNode node) {
+		AVLNode right = node.getRight(), left;
+		if (right.getBalance() == 1 || right.getBalance() == 0) {
+			leftRotation(node, right);
+			if (right.getBalance() == 1) {
+				node.setBalance(0);
+				right.setBalance(0);
+			}
+			else {
+				node.setBalance(1);
+				right.setBalance(-1);
+			}
 			if (root == node)
 				root = right;
 		}

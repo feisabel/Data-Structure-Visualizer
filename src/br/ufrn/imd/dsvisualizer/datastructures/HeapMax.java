@@ -1,6 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-
+/**
+ * HeapMax class.
+ * @author Leonardo
+ *
+ */
 public class HeapMax extends AbstractHeap{
 	private static final long serialVersionUID = -9077515488358323361L;
 
@@ -23,29 +27,7 @@ public class HeapMax extends AbstractHeap{
 			}
 		}
 	}
-	
-	/**
-	 * Get the data structure's name.
-	 * @return the data structure's name
-	 */
-	public String getName() {
-		return "Heap Max";
-	}
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-    public String getDescription(){
-    	return "A principal caracterísica da Heap Max é cada pai ser maior que seus filhos.\n" + 
-    			" Além disso, ela é implementada em um vetor, é necessário que ela seja completa à esquerda.\n"
-    			+ "Apesar da representação como árvore, por ser implementada em vetor, os acessos são feitos "+
-    			" calculando os índices.\n" + "Inserção é feita inserindo um novo valor no final do vetor e subindo" +
-    			" até o lugar adequado na árvore, enquanto ele for maior que o pai.\n" + "Remoção só é feita do topo.\n"
-    			+ "Suas operações são log n.\n" +"Uma conhecida aplicação é na heapsort, possibilitando um algoritmo" +
-    					" de ordenação ótimo.\n";
-    }
-	
+
 	/**
 	 * Assistant method for the inserting method.
 	 * 

@@ -31,26 +31,6 @@ public class MyList extends DataStructure {
 	}
 	
 	/**
-	 * Get the data structure's name.
-	 * @return  data structure's name
-	 */
-	public String getName() {
-		return "List";
-	}
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Lista é uma estrutura em que cada node tem referência para o node anterior e seguinte.\n" +
-				"Dessa forma para inserir a lista é percorrida até o local indicado e então o node é inserido," +
-				" mesma ideia para remoção; assim, as operações são log n.\nA pesquisa também percorre a lista de" +
-				" nodes até encontrar ou até chegar ao final.";
-	}
-	
-	
-	/**
 	 * Inserts new node given a position.
 	 * @param a new node 
 	 * @param position the node position

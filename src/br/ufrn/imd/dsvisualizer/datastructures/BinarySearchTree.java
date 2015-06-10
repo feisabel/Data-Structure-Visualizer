@@ -14,13 +14,13 @@ public class BinarySearchTree extends Tree
 	 */
 	private static final long serialVersionUID = -7455650965315566127L;
 	private BSTNode head;
-	
+	protected BSTNode action;
     /**
      * Constructor for class BinarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
-        head = new BSTNode();
+    	head = new BSTNode();
         drawer = new BSTDrawer();
     }
 
@@ -39,7 +39,6 @@ public class BinarySearchTree extends Tree
      */
     protected void root(BSTNode node)
     {
-    	System.out.println("chamou da bst");
     	head.setLeft(node);
     }
     
@@ -88,7 +87,7 @@ public class BinarySearchTree extends Tree
      * @param  node1  node to be replace
      * @param  node2  node that will replace
      */
-    private void replace(BSTNode node1, BSTNode node2)
+    protected void replace(BSTNode node1, BSTNode node2)
     {
     	if (root() == node1)
     		root(node2);
@@ -120,7 +119,7 @@ public class BinarySearchTree extends Tree
      * Removes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void remove(BSTNode node, BSTNode son)
+    protected void remove(BSTNode node, BSTNode son)
     {
     	if (root() == node)
     		root(son);
@@ -151,7 +150,7 @@ public class BinarySearchTree extends Tree
      * Helper method for search.
      * @param  node  root of the tree to search
      * @param  key  key to search
-     * @param  insert  if creates a new node when not found
+     * @param  insert  if true inserts new node, otherwise the method just to a search
      * @return  node with key 'key'
      */
     private BSTNode privateSearch(BSTNode node, int key, boolean insert)
@@ -184,7 +183,7 @@ public class BinarySearchTree extends Tree
      * @param  r  the root of the subtree
      * @return  the node with the max key in the subtree r
      */
-    private BSTNode max(BSTNode r)
+    protected BSTNode max(BSTNode r)
     {
         if (r != null) {
             if (r.getRight() == null) {
@@ -216,7 +215,7 @@ public class BinarySearchTree extends Tree
 		left.setRight(node);
 		node.setParent(left);
 	}
-	
+		
     /**
      * Does the double right rotation to correct the tree's balance.
      * @param node to be changed position
@@ -290,32 +289,8 @@ public class BinarySearchTree extends Tree
 	}
 	
 	/**
-	 * Get the data structure's name.
-	 * @return the data structure's name
-	 */
-	public String getName() {
-		return "Binary Search Tree";
-	}	
-    
-    /**
-     * Returns structure description.
-     * @return description
-     */
-    public String getDescription(){
-    	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros.\n" +
-    			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
-    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita.\n" +
-    			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
-    			" à direita.\n" + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
-    			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
-    			+ " da árvore.";
-    }
-	
-	/**
 	 * Class BSTDrawer contains the methods to draw the structure.
 	 * @author Ana Caroline
-	 *
 	 */
     protected class BSTDrawer extends Drawer {
 		/**
@@ -335,12 +310,11 @@ public class BinarySearchTree extends Tree
 		}
     	
     	/**
-    	 * Method to help the draw process. Using pre order access.
-    	 * @param c used to mapping the jgraph cells
-    	 * @param root node to be inserted
-    	 * @param x node's position axis x
-    	 * @param y node's position axis y
-    	 * @param col node's color
+    	 * Method to help the draw process. Using pre-order access.
+    	 * @param root  node to be inserted
+    	 * @param x     node's x-axis position
+    	 * @param y     node's y-axis position
+    	 * @param col   node's color
     	 */
 		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
 			if(root != null) {

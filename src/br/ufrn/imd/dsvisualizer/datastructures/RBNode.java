@@ -1,47 +1,50 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
-
+/**
+ * RBNode class.
+ * @author Fernanda Isabel
+ *
+ */
 public class RBNode extends BSTNode {	
-	
+
 	/**
-	 * Default constructor.
+	 * Constructor with no parameters.
 	 */
 	public RBNode () {
 	}
 	
 	/**
-	 * Constructor.
-	 * @param parent this node's parent
-	 * @param left   this node's left child
-	 * @param right  this node's right child
-	 * @param key    this node's key
+	 * Constructor with parameters.
+	 * @param parent parent node
+	 * @param left   left child node
+	 * @param right  right child node
+	 * @param key    key
 	 */
 	public RBNode(RBNode parent, RBNode left, RBNode right, int key) {
 		super(parent, left, right, key);
 	}
 	
 	/**
-	 * Get left child.
+	 * Access method.
 	 * @return  left child
 	 */
 	public RBNode getLeft() {
 		return (RBNode)super.getLeft();
 	}
 	
-
 	/**
-	 * Get right child.
+	 * Access method.
 	 * @return  right child
 	 */
 	public RBNode getRight() {
 		return (RBNode)super.getRight();
 	}
-
+   
 	/**
-	 * Get parent.
-	 * @return  parent
+	 * Access method.
+	 * @return  parent node
 	 */
-   public RBNode getParent() {
-	   return (RBNode)super.getParent();
-   }
+	public RBNode getParent() {
+		return (RBNode)super.getParent();
+	}
 }

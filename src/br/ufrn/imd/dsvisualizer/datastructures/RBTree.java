@@ -28,7 +28,7 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Access method to the root.
+	 * Access method to the root.		
 	 * @return root
 	 */
 	protected RBNode root() {
@@ -160,30 +160,6 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Gets the data structure's name.
-     * @return  the data structure's name
-	 */
-	public String getName() {
-		return "Red-Black Tree";
-	}	
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "A Red-Black Tree é uma árvore binária de busca que possui algumas características específicas.\n" +
-				"Primeiro, ela conta com nós externos, que possuem altura 0.\n" +
-				"Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
-				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
-				" sempre pretos.\n" + "A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
-				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
-				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura.\n" +
-				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
-				" árvore.\n";
-	}
-	
-	/**
 	 * Class to draw the RBTree.
 	 * @author Ana Caroline 
 	 *
@@ -191,7 +167,7 @@ public class RBTree extends BinarySearchTree {
 	class RBTreeDrawer extends Drawer{
 		/**
 		 * Generated serial ID.
-		 */
+		 */	
 		private static final long serialVersionUID = 7900579170125657322L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
 		
