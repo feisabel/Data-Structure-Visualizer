@@ -88,7 +88,7 @@ public class BinarySearchTree extends Tree
      * @param  node1  node to be replace
      * @param  node2  node that will replace
      */
-    private void replace(BSTNode node1, BSTNode node2)
+    protected void replace(BSTNode node1, BSTNode node2)
     {
     	if (root() == node1)
     		root(node2);
@@ -120,7 +120,7 @@ public class BinarySearchTree extends Tree
      * Removes the given node. Must have a parent.
      * @param  node  the node to be removed
      */
-    private void remove(BSTNode node, BSTNode son)
+    protected void remove(BSTNode node, BSTNode son)
     {
     	if (root() == node)
     		root(son);
@@ -184,7 +184,7 @@ public class BinarySearchTree extends Tree
      * @param  r  the root of the subtree
      * @return  the node with the max key in the subtree r
      */
-    private BSTNode max(BSTNode r)
+    protected BSTNode max(BSTNode r)
     {
         if (r != null) {
             if (r.getRight() == null) {
