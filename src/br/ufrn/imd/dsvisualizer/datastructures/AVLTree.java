@@ -148,38 +148,6 @@ public class AVLTree extends BinarySearchTree {
         return node;
 	}
 	
-	
-	
-	/*
-	public AVLNode delete(int key) {
-		AVLNode node = (AVLNode)super.delete(key);
-		if (node.getLeft() != null && node.getRight() != null) {
-			if (node.getLeft() != root) {
-				if (node.getKey() < node.getParent().getKey()) {
-					node.getParent().getLeft().setBalance(node.getBalance());
-					adjustBalance(node.getParent().getLeft(), node.getParent().getLeft().getKey() - 1);
-				}
-				else {
-					node.getParent().getRight().setBalance(node.getBalance());
-					adjustBalance(node.getParent().getRight(), node.getParent().getRight().getKey() - 1);
-				}
-			}
-			else {
-				node.getLeft().setBalance(node.getBalance());
-				adjustBalance(node.getLeft(), node.getLeft().getKey() - 1);
-			}
-		}
-		else {
-			if (node.getLeft() != null)
-				node.getLeft().setBalance(0);
-			else if (node.getRight() != null)
-				node.getRight().setBalance(0);
-			adjustBalance(node.getParent(), node.getKey());
-		}
-		return node;
-	}
-	
-*/
 	/**
 	 * Adjusts the balance.
 	 * @param node current node
