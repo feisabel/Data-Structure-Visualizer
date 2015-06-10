@@ -55,8 +55,11 @@ public class MyQueue extends DataStructure {
 		return false;
 	}
 	
-	
-	public String getShortName() {
+	/**
+	 * Get the data structure's name.
+	 * @return  data structure's name
+	 */
+	public String getName() {
 		return "Queue";
 	}	
 	

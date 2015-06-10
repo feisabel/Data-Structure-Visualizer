@@ -24,8 +24,12 @@ public class HeapMax extends AbstractHeap{
 		}
 	}
 	
-	public String getShortName() {
-		return "HeapMax";
+	/**
+	 * Get the data structure's name.
+	 * @return the data structure's name
+	 */
+	public String getName() {
+		return "Heap Max";
 	}
 	
 	/**

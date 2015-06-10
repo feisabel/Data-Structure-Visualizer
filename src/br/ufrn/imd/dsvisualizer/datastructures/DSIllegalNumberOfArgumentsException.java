@@ -10,13 +10,13 @@ public class DSIllegalNumberOfArgumentsException extends Exception {
 	private static final long serialVersionUID = 5782646695153433654L;
 
 	public DSIllegalNumberOfArgumentsException(String operation, DataStructure ds, int expected, int got) {
-		super("Illegal number of arguments on " + ds.getShortName() + "." + operation + ":" +
+		super("Illegal number of arguments on " + ds.getName() + "." + operation + ":" +
 			  "expected " + expected + ", got " + got);
 		// TODO Auto-generated constructor stub
 	}
 
 	public DSIllegalNumberOfArgumentsException(String operation, DataStructure ds, int expected, int got, Throwable cause) {
-		super("Illegal number of arguments on " + ds.getShortName() + "." + operation + ":" +
+		super("Illegal number of arguments on " + ds.getName() + "." + operation + ":" +
 				  "expected " + expected + ", got " + got, cause);
 		// TODO Auto-generated constructor stub
 	}

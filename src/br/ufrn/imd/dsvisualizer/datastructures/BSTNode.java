@@ -9,7 +9,12 @@ package br.ufrn.imd.dsvisualizer.datastructures;
  */
 public class BSTNode extends Node
 {
-    private BSTNode left;
+    /**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -4505870553104085672L;
+	
+	private BSTNode left;
     private BSTNode right;
     private int key;
     private int x;

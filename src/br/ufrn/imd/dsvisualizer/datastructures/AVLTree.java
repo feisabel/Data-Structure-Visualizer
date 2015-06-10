@@ -42,8 +42,12 @@ public class AVLTree extends BinarySearchTree {
 		privateInsert(key, root(), null, new Ref<Boolean>(true));
 	}
 	
-	public String getShortName() {
-		return "AVL";
+	/**
+	 * Get the data structure's name.
+	 * @return  data structure's name
+	 */
+	public String getName() {
+		return "AVL Tree";
 	}	
     
     /**

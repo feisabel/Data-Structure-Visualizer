@@ -32,7 +32,11 @@ public class MyDeque extends DataStructure{
 		support("removeLast");
 	}
 	
-	public String getShortName() {
+	/**
+	 * Get the data structure's name.
+	 * @return  data structure's name
+	 */
+	public String getName() {
 		return "Deque";
 	}
 	

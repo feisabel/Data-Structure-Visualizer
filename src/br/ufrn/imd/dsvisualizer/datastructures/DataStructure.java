@@ -33,7 +33,12 @@ abstract public class DataStructure implements Serializable {
 		operationParams = new HashMap<String, String[]>();
 	}
 	
-	abstract public String getShortName();
+	/**
+	 * Get the data structure's name.
+	 * @return the data structure's name
+	 */
+	abstract public String getName();
+	
 	
 	/* Draw-related methods */
 	/**

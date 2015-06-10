@@ -11,9 +11,8 @@ import org.jgraph.graph.GraphConstants;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
- * Class Red Black tree.
+ * Class Red-Black Tree.
  * @author Fernanda Isabel
- *
  */
 public class RBTree extends BinarySearchTree {
 	private static final long serialVersionUID = -2112618915954107608L;
@@ -160,8 +159,12 @@ public class RBTree extends BinarySearchTree {
 		}
 	}
 	
-	public String getShortName() {
-		return "RB";
+	/**
+	 * Gets the data structure's name.
+     * @return  the data structure's name
+	 */
+	public String getName() {
+		return "Red-Black Tree";
 	}	
 	
 	/**
@@ -210,6 +213,7 @@ public class RBTree extends BinarySearchTree {
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad), getDefaultPort(v));
 		}
+		
 		/**
 		 * Starts the process to draw the structure.
 		 */
@@ -222,6 +226,9 @@ public class RBTree extends BinarySearchTree {
 			jgraph.getGraphLayoutCache().insert(nullnodes.toArray());
 		}
     	
+		/**
+		 * Clears the graph screen.
+		 */
 		public void clear() {
 			super.clear();
 			jgraph.getGraphLayoutCache().remove(nullnodes.toArray());

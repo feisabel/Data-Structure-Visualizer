@@ -51,7 +51,12 @@ public class MyStack extends DataStructure{ /*Pilha*/
 		return false;
 	}
 	
-	public String getShortName() {
+
+	/**
+	 * Get the data structure's name.
+	 * @return  data structure's name
+	 */
+	public String getName() {
 		return "Stack";
 	}	
 	

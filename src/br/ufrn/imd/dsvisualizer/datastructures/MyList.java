@@ -30,7 +30,11 @@ public class MyList extends DataStructure {
 		support("remove", "key");
 	}
 	
-	public String getShortName() {
+	/**
+	 * Get the data structure's name.
+	 * @return  data structure's name
+	 */
+	public String getName() {
 		return "List";
 	}
 	

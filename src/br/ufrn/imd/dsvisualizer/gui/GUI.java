@@ -207,7 +207,7 @@ public class GUI {
 		linkedList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.LIST);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		lists.add(linkedList);
@@ -216,7 +216,7 @@ public class GUI {
 		stack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.STACK);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		lists.add(stack);
@@ -225,7 +225,7 @@ public class GUI {
 		queue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.QUEUE);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		lists.add(queue);
@@ -234,7 +234,7 @@ public class GUI {
 		deque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.DEQUE);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		lists.add(deque);
@@ -248,7 +248,7 @@ public class GUI {
 		binaryTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.BST);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(binaryTree);
@@ -257,7 +257,7 @@ public class GUI {
 		heapMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.HEAPMAX);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMax);
@@ -266,7 +266,7 @@ public class GUI {
 		heapMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.HEAPMIN);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(heapMin);
@@ -275,7 +275,7 @@ public class GUI {
 		aVLTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.AVL);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(aVLTree);
@@ -284,7 +284,7 @@ public class GUI {
 		rBTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.RB);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(rBTree);
@@ -293,7 +293,7 @@ public class GUI {
 		unionFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataStructure ds = DSManager.create(Factory.UNIONFIND);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		});
 		trees.add(unionFind);
@@ -339,7 +339,7 @@ public class GUI {
 		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
 		JTextPane description = new JTextPane();
-		description.setText(ds.getDescription());
+		description.setText(ds.getName() + "\n" + ds.getDescription());
 		description.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		SimpleAttributeSet sa = new SimpleAttributeSet();
@@ -436,7 +436,7 @@ public class GUI {
 			DSManager.loadDataStructures(fis);
 			
 			for (DataStructure ds : DSManager.getDataStructures()) {
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, ds.getName().replace("[ -]", "") + tabs.getComponentCount());
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

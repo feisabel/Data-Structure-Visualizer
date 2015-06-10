@@ -16,7 +16,7 @@ public class BinarySearchTree extends Tree
 	private BSTNode head;
 	
     /**
-     * Constructor for class BInarySearchTree with no parameters.
+     * Constructor for class BinarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
@@ -289,9 +289,12 @@ public class BinarySearchTree extends Tree
 		node.setParent(left);
 	}
 	
-	
-	public String getShortName() {
-		return "BST";
+	/**
+	 * Get the data structure's name.
+	 * @return the data structure's name
+	 */
+	public String getName() {
+		return "Binary Search Tree";
 	}	
     
     /**

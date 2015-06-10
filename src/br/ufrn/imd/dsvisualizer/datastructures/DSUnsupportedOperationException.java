@@ -14,7 +14,7 @@ public class DSUnsupportedOperationException extends RuntimeException {
 	 * @param ds  data structure on which the operation failed
 	 */
 	public DSUnsupportedOperationException(String operation, DataStructure ds) {
-		super("Unsupported operation " + operation + " on " + ds.getShortName());
+		super("Unsupported operation " + operation + " on " + ds.getName());
 	}
 	
 	/**
@@ -24,6 +24,6 @@ public class DSUnsupportedOperationException extends RuntimeException {
 	 * @param cause  exception 
 	 */
 	public DSUnsupportedOperationException(String operation, DataStructure ds, Throwable cause) {
-		super("Unsupported operation " + operation + " on " + ds.getShortName(), cause);
+		super("Unsupported operation " + operation + " on " + ds.getName(), cause);
 	}
 }

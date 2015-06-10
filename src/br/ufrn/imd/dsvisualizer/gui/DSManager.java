@@ -16,26 +16,50 @@ public final class DSManager {
 	static private List<DataStructure> dataStructures = new LinkedList<DataStructure>();
 	static private Random rand = new Random();
 	
+	/**
+	 * Hidden constructor.
+	 */
 	private DSManager() {}
 	
-	public static DataStructure create(int dataStructure) {
-		DataStructure ds = Factory.create(dataStructure, rand.nextInt(12));
+	/**
+	 * Creates a data structure based on the given parameter
+	 * @param selectedDS  selected data structure
+	 * @return  constructed data structure
+	 */
+	public static DataStructure create(int selectedDS) {
+		DataStructure ds = Factory.create(selectedDS, rand.nextInt(12));
 		dataStructures.add(ds);
 		return ds;
 	}
 	
+	/**
+	 * Get current active data structures.
+	 * @return  a list of the active data structures.
+	 */
 	public static final List<DataStructure> getDataStructures() {
 		return dataStructures;
 	}
 	
+	/**
+	 * Destroy the given data structure.
+	 * @param ds  the data structure to be destroyed
+	 */
 	public static void destroy(DataStructure ds) {
 		dataStructures.remove(ds);
 	}
 	
+	/**
+	 * Destroy all active data structures.
+	 */
 	public static void destroyAll() {
 		dataStructures = new LinkedList<DataStructure>();
 	}
 	
+	/**
+	 * Saves the data structures to a file.
+	 * @param fos  file output stream to save
+	 * @throws IOException
+	 */
 	public static void saveDataStructures(FileOutputStream fos) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		oos.writeInt(dataStructures.size());
@@ -45,6 +69,12 @@ public final class DSManager {
 		oos.close();
 	}
 	
+	/**
+	 * Loads the data structures from a file
+	 * @param fis  file input stream to load
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static void loadDataStructures(FileInputStream fis) throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		int size = ois.readInt();

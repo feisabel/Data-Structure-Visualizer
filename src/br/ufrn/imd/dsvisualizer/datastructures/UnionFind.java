@@ -38,8 +38,11 @@ public class UnionFind extends DataStructure {
 		support("find", "num");
 	}
 	
-	public String getShortName() {
-		return "UnionFind";
+	/**
+	 * Gets the data structure's name.
+	 */
+	public String getName() {
+		return "Union-Find";
 	}	
 	
 	/**
