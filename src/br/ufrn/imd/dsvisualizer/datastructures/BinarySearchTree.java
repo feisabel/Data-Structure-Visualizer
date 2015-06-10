@@ -14,13 +14,13 @@ public class BinarySearchTree extends Tree
 	 */
 	private static final long serialVersionUID = -7455650965315566127L;
 	private BSTNode head;
-	
+	protected BSTNode action;
     /**
      * Constructor for class BInarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
-        head = new BSTNode();
+    	head = new BSTNode();
         drawer = new BSTDrawer();
     }
 
@@ -151,7 +151,7 @@ public class BinarySearchTree extends Tree
      * Helper method for search.
      * @param  node  root of the tree to search
      * @param  key  key to search
-     * @param  insert  if creates a new node when not found
+     * @param  insert  if true inserts new node, otherwise the method just to a search
      * @return  node with key 'key'
      */
     private BSTNode privateSearch(BSTNode node, int key, boolean insert)
@@ -216,7 +216,7 @@ public class BinarySearchTree extends Tree
 		left.setRight(node);
 		node.setParent(left);
 	}
-	
+		
     /**
      * Does the double right rotation to correct the tree's balance.
      * @param node to be changed position

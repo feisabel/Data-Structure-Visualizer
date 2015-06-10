@@ -18,7 +18,7 @@ public class AVLTree extends BinarySearchTree {
 
     /**
      * Access method to the root.
-     * @return the root.
+     * @return the root
      */
     protected AVLNode root() {
     	return root;
@@ -36,7 +36,7 @@ public class AVLTree extends BinarySearchTree {
     
     /**
      * Inserts a new node if does not exists one with the same key.
-     * @param key new node's key.
+     * @param key new node's key
      */
 	public void insert(int key) {
 		privateInsert(key, root(), null, new Ref<Boolean>(true));
@@ -60,10 +60,10 @@ public class AVLTree extends BinarySearchTree {
 	}
 	/**
 	 * Inserts a new node if does not exists one with the same key.
-	 * @param key new node's key.
-	 * @param node current node.
-	 * @param dad current's father node.
-	 * @param b indicates if the method will be called again.
+	 * @param key new node's key
+	 * @param node current node
+	 * @param dad current's father node
+	 * @param b indicates if the node is already inserted
 	 */
 	private void privateInsert(int key, AVLNode node, AVLNode dad, Ref<Boolean> b) {
 		if (node == null) {

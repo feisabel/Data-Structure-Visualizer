@@ -29,7 +29,7 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Access method to the root.
+	 * Access method to the root.		
 	 * @return root
 	 */
 	protected RBNode root() {
@@ -159,11 +159,16 @@ public class RBTree extends BinarySearchTree {
 			grandad.setColor(Color.RED);
 		}
 	}
+
 	
+	/**
+	 * Returns shor name.
+	 * @return RB
+	 */
 	public String getShortName() {
 		return "RB";
 	}	
-	
+				
 	/**
      * Returns structure description.
      * @return description
@@ -188,7 +193,7 @@ public class RBTree extends BinarySearchTree {
 	class RBTreeDrawer extends Drawer{
 		/**
 		 * Generated serial ID.
-		 */
+		 */	
 		private static final long serialVersionUID = 7900579170125657322L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
 		
