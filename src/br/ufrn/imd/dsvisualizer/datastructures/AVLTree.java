@@ -152,16 +152,28 @@ public class AVLTree extends BalancedTree {
 	private void adjustBalance(AVLNode node, int key) {
 		if (node != null) {
 			AVLNode parent = node.getParent();
+			boolean b = parent != null && parent.getLeft() == node;
 			if (key < node.getKey())
 				node.setBalance(node.getBalance() + 1);
 			else
 				node.setBalance(node.getBalance() - 1);
 			if (node.getBalance() != 1 && node.getBalance() != -1) {
-				if (node.getBalance() == 2)
-					leftRotationsRemoval(node);
-				else if (node.getBalance() == -2) 
-					rightRotationsRemoval(node);
-				adjustBalance(parent, node.getKey());
+				if (node.getBalance() == 0)
+					adjustBalance(parent, node.getKey());
+				else {
+					if (node.getBalance() == 2)
+						leftRotationsRemoval(node);
+					else if (node.getBalance() == -2) 
+						rightRotationsRemoval(node);
+					if (b) {
+						if (parent != null && parent.getLeft().getBalance() == 0)
+							adjustBalance(parent, node.getKey());
+					}
+					else {
+						if (parent != null && parent.getRight().getBalance() == 0)
+							adjustBalance(parent, node.getKey());
+					}
+				}
 			}
 		}
 	}
