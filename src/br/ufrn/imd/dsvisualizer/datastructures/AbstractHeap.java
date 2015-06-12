@@ -139,9 +139,32 @@ public abstract class AbstractHeap extends DataStructure{
 		myVector.add(j, aux1);
 	}
 
-
-	abstract public void insert(int key);
-	abstract public void remove();
+	/**
+	 * Insertion method for this variation of priority queue (HeapMax)
+	 * 
+	 * @param key Value wished to be inserted in vector
+	 */
+	public void insert(int key){
+		if(!myVector.contains(key)){
+			myVector.add(myVector.size(), key);
+			if(myVector.size() > 1)
+				goUp(myVector.size()-1);
+		}
+	}
+	
+	/**
+	 * Removing method for this variation of priority queue (HeapMin)
+	 * 
+	 * @param key Value wished to be removed from vector
+	 */
+	public void remove(){
+		swap(0, myVector.size()-1);
+		myVector.remove(myVector.size()-1);
+		goDown(0);
+	}
+	
+	abstract protected void goUp(int key);
+	abstract protected void goDown(int key);
 	
 	/**
 	 * Class to draw the structure heap.
