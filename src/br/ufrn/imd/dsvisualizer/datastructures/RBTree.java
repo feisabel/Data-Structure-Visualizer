@@ -14,10 +14,10 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  * Class Red-Black Tree.
  * @author Fernanda Isabel
  */
-public class RBTree extends BinarySearchTree {
+public class RBTree extends BalancedTree {
 	private static final long serialVersionUID = -2112618915954107608L;
 	
-	private RBNode root;
+	private BSTNode root;
 	
 	/**
 	 * Constructor with no parameters.
@@ -31,7 +31,7 @@ public class RBTree extends BinarySearchTree {
 	 * Access method to the root.		
 	 * @return root
 	 */
-	protected RBNode root() {
+	protected BSTNode root() {
 		return root;
 	}
 	
@@ -40,7 +40,7 @@ public class RBTree extends BinarySearchTree {
 	 * @param the new root
 	 */
 	protected void root(BSTNode root) {
-		this.root = (RBNode)root;
+		this.root = (BSTNode)root;
 	}
 	
 	/**
@@ -59,9 +59,9 @@ public class RBTree extends BinarySearchTree {
 	 * @param b indicates current case 
 	 * @return node used to recursion
 	 */
-	private RBNode privateInsert(int key, RBNode node, RBNode dad, Ref<Integer> b) {
+	private BSTNode privateInsert(int key, BSTNode node, BSTNode dad, Ref<Integer> b) {
 		if (node == null) {
-			node = new RBNode(dad, null, null, key);
+			node = new BSTNode(dad, null, null, key);
 			if (root == null) {
 				root = node;
 				node.setColor(Color.BLACK);
@@ -95,13 +95,13 @@ public class RBTree extends BinarySearchTree {
 		}
 	}
 	/**
-	 * Does adjust colors nodes.
+	 * Adjusts the colors after an insertion.
 	 * @param node current node
 	 * @param dad current node's dad
 	 * @param b indicates if needs continue or no
 	 */
-	private void adjustColorsInsertion(RBNode node, RBNode dad, Ref<Integer> b) {
-		RBNode grandad = dad.getParent(), uncle;
+	private void adjustColorsInsertion(BSTNode node, BSTNode dad, Ref<Integer> b) {
+		BSTNode grandad = dad.getParent(), uncle;
 		if (grandad.getLeft() == dad)
 			uncle = grandad.getRight();
 		else
@@ -121,23 +121,19 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Does the rotate.
+	 * Does the appropriate rotation.
 	 * @param node current node
 	 * @param dad current node's dad
 	 * @param grandad current node's grandad
 	 */
-	private void rotate(RBNode node, RBNode dad, RBNode grandad) {
+	private void rotate(BSTNode node, BSTNode dad, BSTNode grandad) {
 		if (dad == grandad.getLeft()) {
 			if (node == dad.getLeft()) {
 				rightRotation(grandad, dad);
-				if (root == grandad)
-					root = dad;
 				dad.setColor(Color.BLACK);
 			}
 			else {
 				doubleRightRotation(grandad, dad, node);
-				if (root == grandad)
-					root = node;
 				node.setColor(Color.BLACK);
 			}
 			grandad.setColor(Color.RED);
@@ -145,14 +141,10 @@ public class RBTree extends BinarySearchTree {
 		else {
 			if (node == dad.getRight()) {
 				leftRotation(grandad, dad);
-				if (root == grandad)
-					root = dad;
 				dad.setColor(Color.BLACK);
 			}
 			else {
 				doubleLeftRotation(grandad, dad, node);
-				if (root == grandad)
-					root = node;
 				node.setColor(Color.BLACK);
 			}
 			grandad.setColor(Color.RED);
@@ -164,11 +156,11 @@ public class RBTree extends BinarySearchTree {
 	 * @param key node's key
 	 * @return deleted node
 	 */
-	public RBNode delete(int key) {
-        RBNode node = (RBNode)search(key); 
+	public BSTNode delete(int key) {
+        BSTNode node = (BSTNode)search(key); 
         if (node != null) { 
         	if (node.getLeft() != null && node.getRight() != null) {
-        		RBNode left = (RBNode)max(node.getLeft()), leftParent = left.getParent();
+        		BSTNode left = (BSTNode)max(node.getLeft()), leftParent = left.getParent();
         		replace(node, left);
         		if (left.getColor() == Color.BLACK) {
         			if (node.getColor() == Color.RED)
@@ -207,13 +199,13 @@ public class RBTree extends BinarySearchTree {
     }
 	
 	/**
-	 * Adjusts the colors.
+	 * Adjusts the colors after a removal.
 	 * @param node current node
 	 * @param b boolean that indicates if the removed node was the left son of node
 	 */
-	private void adjustColorsRemoval(RBNode node, boolean b) {
+	private void adjustColorsRemoval(BSTNode node, boolean b) {
 		if (node != null) {
-			RBNode son;
+			BSTNode son;
 			if (b)
 				son = node.getRight();
 			else
@@ -225,8 +217,6 @@ public class RBTree extends BinarySearchTree {
 					leftRotation(node, son);
 				else
 					rightRotation(node, son);
-				if (node == root)
-					root = son;
 				adjustColorsRemoval(node, b);
 			}
 			else {
@@ -249,8 +239,6 @@ public class RBTree extends BinarySearchTree {
 						node.setColor(Color.BLACK);
 						son.getRight().setColor(Color.BLACK);
 						leftRotation(node, son);
-						if (node == root)
-							root = son;
 					}
 				}
 				else {
@@ -265,8 +253,6 @@ public class RBTree extends BinarySearchTree {
 						node.setColor(Color.BLACK);
 						son.getLeft().setColor(Color.BLACK);
 						rightRotation(node, son);
-						if (node == root)
-							root = son;
 					}
 				}
 			}
