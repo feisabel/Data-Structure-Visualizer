@@ -30,22 +30,6 @@ public class MyList extends DataStructure {
 		support("remove", "key");
 	}
 	
-	public String getShortName() {
-		return "List";
-	}
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Lista é uma estrutura em que cada node tem referência para o node anterior e seguinte.\n" +
-				"Dessa forma para inserir a lista é percorrida até o local indicado e então o node é inserido," +
-				" mesma ideia para remoção; assim, as operações são log n.\nA pesquisa também percorre a lista de" +
-				" nodes até encontrar ou até chegar ao final.";
-	}
-	
-	
 	/**
 	 * Inserts new node given a position.
 	 * @param a new node 
@@ -111,7 +95,7 @@ public class MyList extends DataStructure {
 			boolean d = true;
 			for(int i = 0; i < list.size(); i++){
 				createMyVertex(list.get(i), x, y, Color.red);
-				if(x + 60 > DEFAULT_SIZE.width && d){
+				if(x + 60 > getPreferredSize().width && d){
 					d = false;
 					y+= 60;
 				}else if(x - 60 < 0 && !d){

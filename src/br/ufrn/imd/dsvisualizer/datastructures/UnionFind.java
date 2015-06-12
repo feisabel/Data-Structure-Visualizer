@@ -38,25 +38,6 @@ public class UnionFind extends DataStructure {
 		support("find", "num");
 	}
 	
-	public String getShortName() {
-		return "UnionFind";
-	}	
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return " Representam a ideia matemática de conjuntos que não possuem elementos em comum," +
-				" cada um aponta para si mesmo, é possível fazer a união entre dois elementos que na" +
-				" verdade consiste na união de toda a árvore onde está esse elemento.\n" + " A operação find"
-				+ " além de retornar o representante (raiz) do conjunto também aproveita e faz a modificação" +
-				" na estrutura diminuindo o caminho do nó mandado até a root.\n A complexidade de find está relacionada a" +
-				" altura da árvore.\n Já unite é O(1), nem chega a percorrer o vetor.\n Uma utilidade comum dessa estrutura" +
-				" é fazer labirintos válidos.\n";
-	}
-	
-	
 	/**
 	 * Unites x with y.
 	 * @param x element to be united 

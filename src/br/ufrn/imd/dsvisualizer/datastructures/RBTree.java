@@ -11,9 +11,8 @@ import org.jgraph.graph.GraphConstants;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
- * Class Red Black tree.
+ * Class Red-Black Tree.
  * @author Fernanda Isabel
- *
  */
 public class RBTree extends BinarySearchTree {
 	private static final long serialVersionUID = -2112618915954107608L;
@@ -265,30 +264,6 @@ public class RBTree extends BinarySearchTree {
 	}
 	
 	/**
-	 * Returns shor name.
-	 * @return RB
-	 */
-	public String getShortName() {
-		return "RB";
-	}	
-				
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "A Red-Black Tree é uma árvore binária de busca que possui algumas características específicas.\n" +
-				"Primeiro, ela conta com nós externos, que possuem altura 0.\n" +
-				"Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
-				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
-				" sempre pretos.\n" + "A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
-				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
-				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura.\n" +
-				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
-				" árvore.\n";
-	}
-	
-	/**
 	 * Class to draw the RBTree.
 	 * @author Ana Caroline 
 	 *
@@ -318,11 +293,12 @@ public class RBTree extends BinarySearchTree {
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad), getDefaultPort(v));
 		}
+		
 		/**
 		 * Starts the process to draw the structure.
 		 */
 		public void draw(){
-			int x = DEFAULT_SIZE.width/2;
+			int x = getPreferredSize().width/2;
 			int y = 10;
 			if (root() != null)
 				preOrderCell(root(), x, y, root().getColor());
@@ -330,6 +306,9 @@ public class RBTree extends BinarySearchTree {
 			jgraph.getGraphLayoutCache().insert(nullnodes.toArray());
 		}
     	
+		/**
+		 * Clears the graph screen.
+		 */
 		public void clear() {
 			super.clear();
 			jgraph.getGraphLayoutCache().remove(nullnodes.toArray());
@@ -348,21 +327,21 @@ public class RBTree extends BinarySearchTree {
 			if(root != null){
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort(cells.get(root.getKey())),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}else{
-					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));
 				}else{
-					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 			}

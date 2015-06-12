@@ -33,8 +33,6 @@ abstract public class DataStructure implements Serializable {
 		operationParams = new HashMap<String, String[]>();
 	}
 	
-	abstract public String getShortName();
-	
 	/* Draw-related methods */
 	/**
 	 * Redraws the data structure on the screen.
@@ -125,6 +123,4 @@ abstract public class DataStructure implements Serializable {
 		if (!success)
 			throw new DSUnsupportedOperationException(command, this);
 	}
-
-	abstract public String getDescription();
 }

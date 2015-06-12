@@ -3,7 +3,6 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 /**
  * Abstract class tree.
  * @author Fernanda Isabel, João Pedro Holanda
- *
  */
 public abstract class Tree extends DataStructure {
 	
@@ -16,8 +15,8 @@ public abstract class Tree extends DataStructure {
 	 * Constructor with no parameters. 
 	 */
 	public Tree() {
-		support("insert", "key");
-		support("delete", "key");
+		support("insert", "key"); // supported operation
+		support("delete", "key"); // supported operation
 	}
 	
 	/**

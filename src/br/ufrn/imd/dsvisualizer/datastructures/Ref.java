@@ -3,11 +3,12 @@ package br.ufrn.imd.dsvisualizer.datastructures;
 /**
  * Class to simulate references.
  * @author João Pedro
- *
- * @param <T>
+ * 
+ * @param <T>  type of the referred object 
  */
 public class Ref<T> {
 	private T internal;
+	
 	/**
 	 * Constructor.
 	 * @param obj
@@ -15,6 +16,7 @@ public class Ref<T> {
 	public Ref(T obj) {
 		internal = obj;
 	}
+	
 	/**
 	 * Access method.
 	 * @return type
@@ -22,6 +24,7 @@ public class Ref<T> {
 	public T get() {
 		return internal;
 	}
+	
 	/**
 	 * Set method. 
 	 * @param obj type

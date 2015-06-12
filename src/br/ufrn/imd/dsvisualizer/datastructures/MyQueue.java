@@ -55,22 +55,6 @@ public class MyQueue extends DataStructure {
 		return false;
 	}
 	
-	
-	public String getShortName() {
-		return "Queue";
-	}	
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Queue é uma estrutura que permite inserção sempre na última posição, e" +
-				" remoção na primeira posição.\n" + "Dessa forma, essas operações são O(1) quando a implementação"
-				+ " guarda referência para primeiro e último lugar.";
-	}
-	
-	
 	/**
 	 * Class to draw the structure.
 	 * @author Ana Caroline
@@ -82,16 +66,22 @@ public class MyQueue extends DataStructure {
 		 */
 		private static final long serialVersionUID = -2802583675001878176L;
 
+		/**
+		 * Default constructor.
+		 */
 		public MyQueueDrawer() {
 			setPreferredSize(new Dimension(500, 350));
 		}
 		
+		/**
+		 * Draws the structure.
+		 */
 		public void draw(){
 			int x = 30, y = 30;
 			boolean d = true;
 			for(int i = 0; i < queue.size(); i++){
 				createMyVertex(queue.get(i), x, y, Color.red);
-				if(x + 60 > DEFAULT_SIZE.width && d){
+				if(x + 60 > getPreferredSize().width && d){
 					d = false;
 					y+= 60;
 				}else if(x - 60 < 0 && !d){

@@ -32,21 +32,6 @@ public class MyDeque extends DataStructure{
 		support("removeLast");
 	}
 	
-	public String getShortName() {
-		return "Deque";
-	}
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Deque é uma estrutura em que cada node contém uma referência para o próximo e para o anterior" +
-				" , sendo permitido apenas inserção no início e no final e remoção só no início e no final.\n " +
-				"Logo a complexidade dessas operações é O(1) caso a implementação guarde refências diretas para o" +
-				" início e para o final.\n";
-	}
-	
 	/**
 	 * Inserts new node in the first position.
 	 * @param a new node 
