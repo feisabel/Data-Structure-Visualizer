@@ -3,7 +3,7 @@ Para abrir o DSVisualizer siga os seguintes passos:
 1. Baixe os arquivos da biblioteca externa:
 https://www.dropbox.com/sh/v5tmmywf1djaxc0/AAAoCshGKlY9Fu880bZIt2kWa?dl=0
 
-2. Para criar um projetodo no Eclipse que use a biblioteca externa:
+2. Para criar um projeto no Eclipse que use a biblioteca externa:
 	File -> New -> Java Project 
 		Insira um nome para o projeto no espaço "Project name"
 		Marque a opção JavaSE-1.7 no campo "Use an execution environment JRE"

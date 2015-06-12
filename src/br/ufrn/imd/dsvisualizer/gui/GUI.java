@@ -36,6 +36,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -158,9 +159,9 @@ public class GUI {
 		JMenuItem optionsHelp = new JMenuItem("Help");
 		optionsHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				File file = new File("");
-				JOptionPane.showMessageDialog(frame, "Open \n" + file.getAbsolutePath() + "/help/usermanual.pdf"
-						                      + "\nto access the user manual.", null, JOptionPane.PLAIN_MESSAGE);
+				JLabel text = new JLabel(getHelpString());
+				text.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+				JOptionPane.showMessageDialog(frame, text, "Help", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		options.add(optionsHelp);
@@ -211,8 +212,14 @@ public class GUI {
 		JButton button = new JButton(DSManager.getName(selectedDS));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(selectedDS);
-				newTab(ds, DSManager.getName(selectedDS).replace(" ", "") + tabs.getComponentCount());
+				String input = (String)JOptionPane.showInputDialog(frame, "Initial size:", "", JOptionPane.PLAIN_MESSAGE);
+				if (input != null) {
+					int size = -1;
+					if (!input.isEmpty())
+						size = Integer.parseInt(input);
+					DataStructure ds = DSManager.create(selectedDS, size);
+					newTab(ds, DSManager.getName(selectedDS).replace(" ", "").replace("-", "") + tabs.getComponentCount());
+				}
 			}
 		});
 		parent.add(button);
@@ -388,5 +395,15 @@ public class GUI {
 			   "&nbsp;&nbsp;&nbsp;&nbsp;Leonardo Bezerra Leibovitz<br>" +
 	           "<b>Institution:</b><br>" +
 			   "&nbsp;&nbsp;&nbsp;&nbsp;Instituto Metrópole Digital/UFRN</html>";
+	}
+	
+	/**
+	 * Gets the 'help' dialog content.
+	 * @return  application help
+	 */
+	private String getHelpString() {
+		File file = new File("");
+		return "<html>Open<br><b>" + file.getAbsolutePath() + "/help/usermanual.pdf</b>"
+                + "<br>to access the user manual.</html>";
 	}
 }

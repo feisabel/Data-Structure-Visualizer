@@ -7,7 +7,7 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
  * @version 27.04.2015
  */
-public class BinarySearchTree extends Tree
+public class BinarySearchTree extends AbstractTree
 {
 	/**
 	 * Generated serial ID.
@@ -302,7 +302,7 @@ public class BinarySearchTree extends Tree
 		 * Method to draw the structure.
 		 */
     	public void draw(){
-			int x = DEFAULT_SIZE.width/2;
+			int x = DEFAULT_BG_SIZE.width/2;
 			int y = 10;
 			if (root() != null)
 				preOrderCell(root(), x, y, root().getColor());
@@ -320,13 +320,13 @@ public class BinarySearchTree extends Tree
 			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));

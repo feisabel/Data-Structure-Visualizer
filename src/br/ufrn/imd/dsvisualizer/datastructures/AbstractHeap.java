@@ -197,7 +197,6 @@ public abstract class AbstractHeap extends DataStructure{
 				else{
 					help = myVector.get(i/2);
 					x = (int) (positionX.get(help) - getPreferredSize().width/Math.scalb(1.0, lvl+1));
-					
 				}
 				if(Math.scalb(1.0, lvl) == i+1){
 					lvl++;

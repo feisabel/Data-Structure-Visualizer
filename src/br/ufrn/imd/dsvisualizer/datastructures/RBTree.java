@@ -1,6 +1,7 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 import java.util.List;
@@ -286,7 +287,7 @@ public class RBTree extends BinarySearchTree {
 		 */	
 		private static final long serialVersionUID = 7900579170125657322L;
 		private List<DefaultGraphCell> nullnodes = new LinkedList<DefaultGraphCell>();
-		
+		private final Dimension DEFAULT_NULL_SIZE = new Dimension(15, 15); 
 		/**
 		 * Special method to draw a null node, according this structure type. 
 		 * @param x position x
@@ -299,8 +300,10 @@ public class RBTree extends BinarySearchTree {
 			DefaultPort port = new DefaultPort();
 			v.add(port);
 			port.setParent(v);
+			int width = DEFAULT_NULL_SIZE.width;
+			int height = DEFAULT_NULL_SIZE.height;
 			GraphConstants.setBounds(v.getAttributes(), new
-					 Rectangle2D.Double(x,y,15,15));
+					 Rectangle2D.Double(x-width/2,y,width,height));
 			GraphConstants.setGradientColor(v.getAttributes(), Color.black);
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad), getDefaultPort(v));
@@ -339,21 +342,21 @@ public class RBTree extends BinarySearchTree {
 			if(root != null){
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort(cells.get(root.getKey())),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}else{
-					createNullVertex((int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x - getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));
 				}else{
-					createNullVertex((int) (x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x + getPreferredSize().width/Math.scalb(1, 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 			}

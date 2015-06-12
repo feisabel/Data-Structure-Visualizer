@@ -26,8 +26,9 @@ import org.jgraph.graph.Port;
 public abstract class Drawer {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_SIZE = new Dimension( 800, 300 );
-	protected static final int deltaY = 40;
+    protected static final Dimension DEFAULT_BG_SIZE = new Dimension( 800, 300 );
+	protected static final Dimension DEFAULT_CELL_SIZE = new Dimension( 30, 15 );
+    protected static final int deltaY = 40;
 	protected GraphModel model;
 	protected JGraph jgraph;
 	protected GraphLayoutCache view;
@@ -99,7 +100,7 @@ public abstract class Drawer {
 	 * @param jg a graph to be adjusted
 	 */
 	protected void adjustDisplaySettings( JGraph jg ) {
-        jg.setPreferredSize( DEFAULT_SIZE );
+        jg.setPreferredSize( DEFAULT_BG_SIZE );
         Color  c        = DEFAULT_BG_COLOR;
         jg.setBackground( c );
     }
@@ -127,7 +128,9 @@ public abstract class Drawer {
 		DefaultPort port = new DefaultPort();
 		v.add(port);
 		port.setParent(v);
-		GraphConstants.setBounds(v.getAttributes(), new Rectangle2D.Double(x,y,30,15));
+		int width = DEFAULT_CELL_SIZE.width;
+		int height = DEFAULT_CELL_SIZE.height;
+		GraphConstants.setBounds(v.getAttributes(), new Rectangle2D.Double(x-width/2,y,width,height));
 		GraphConstants.setGradientColor(v.getAttributes(), c);
 		GraphConstants.setOpaque(v.getAttributes(), true);
 	}

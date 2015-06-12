@@ -165,8 +165,10 @@ public final class DSManager {
 	 * @param selectedDS  selected data structure
 	 * @return  constructed data structure
 	 */
-	public static DataStructure create(int selectedDS) {
-		DataStructure ds = Factory.create(selectedDS, 5+rand.nextInt(5));
+	public static DataStructure create(int selectedDS, int size) {
+		if (size < 0)
+			size = 5 + rand.nextInt(10); 
+		DataStructure ds = Factory.create(selectedDS, size);
 		dataStructures.add(ds);
 		return ds;
 	}
