@@ -5,7 +5,7 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
  * Implements a binary search tree using Node.
  * @author Ana Caroline, Fernanda, João Pedro e Leonardo. 
- * @version 27.04.2015
+ * @version 09.06.2015
  */
 public class BinarySearchTree extends Tree
 {

@@ -230,7 +230,7 @@ public class RBTree extends BinarySearchTree {
 				adjustColorsRemoval(node, b);
 			}
 			else {
-				if ((son.getLeft() != null && son.getRight() != null && son.getLeft().getColor() == Color.BLACK && son.getRight().getColor() == Color.BLACK) || (son.getRight() != null && son.getRight().getColor() == Color.BLACK && son.getLeft() == null) || (son.getLeft() != null && son.getLeft().getColor() == Color.BLACK && son.getRight() == null) || (son.getLeft() == null && son.getRight() == null)) {
+				if((son.getLeft() == null || son.getLeft().getColor() == Color.BLACK) && (son.getRight() == null || son.getRight().getColor() == Color.BLACK)) {
 						son.setColor(Color.RED);
 						if (node.getColor() == Color.RED)
 							node.setColor(Color.BLACK);
