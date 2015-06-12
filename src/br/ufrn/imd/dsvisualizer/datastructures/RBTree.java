@@ -318,7 +318,6 @@ public class RBTree extends BalancedTree {
 		
     	/**
     	 * Method to help the draw process. Using pre order access.
-    	 * @param c used to mapping the jgraph cells
     	 * @param root node to be inserted
     	 * @param x node's position axis x
     	 * @param y node's position axis y

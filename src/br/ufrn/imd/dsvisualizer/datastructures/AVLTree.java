@@ -1,5 +1,13 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+import java.awt.Color;
+import java.awt.geom.Rectangle2D;
+import java.util.HashSet;
+
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.DefaultPort;
+import org.jgraph.graph.GraphConstants;
+
 /**
  * Class AVL Tree.
  * @author Fernanda Isabel
@@ -19,6 +27,7 @@ public class AVLTree extends BalancedTree {
     public AVLTree()
     {
         root = null;
+        drawer = new AVLTreeDrawer();
     }
 
     /**
@@ -270,6 +279,49 @@ public class AVLTree extends BalancedTree {
 			else
 				right.setBalance(0);
 			left.setBalance(0);
+		}
+	}
+	
+	/**
+	 * Class to draw AVL tree.
+	 * @author Ana Caroline, João Pedro Holanda
+	 *
+	 */
+	class AVLTreeDrawer extends BSTDrawer{
+		private HashSet<DefaultGraphCell> subtitle = new HashSet<DefaultGraphCell>();
+		/**
+		 * Calls the super method and draws the subtitles.
+		 */
+		public void draw(){
+			super.draw();
+			createSubtitles(-1, 10, DEFAULT_BG_SIZE.height - 3*DEFAULT_CELL_SIZE.height - 5, Color.orange);
+			createSubtitles(0, 10, DEFAULT_BG_SIZE.height - 2*DEFAULT_CELL_SIZE.height - 5, Color.blue);
+			createSubtitles(1, 10, DEFAULT_BG_SIZE.height - DEFAULT_CELL_SIZE.height - 5, Color.green);
+			jgraph.getGraphLayoutCache().insert(subtitle.toArray());
+		}
+		/**
+		 * Creates a new node type: subtitle.
+		 * @param i number
+		 * @param x position x
+		 * @param y position y
+		 * @param c color 
+		 */
+		private void createSubtitles(int i, int x, int y, Color c){
+			DefaultGraphCell v = new DefaultGraphCell(""+ i);
+			subtitle.add(v);
+			DefaultPort port = new DefaultPort();
+			v.add(port);
+			port.setParent(v);
+			int width = 30;
+			int height = 15;
+			GraphConstants.setBounds(v.getAttributes(), new
+					 Rectangle2D.Double(x,y,width,height));
+			GraphConstants.setGradientColor(v.getAttributes(), c);
+			GraphConstants.setOpaque(v.getAttributes(), true);
+		}
+		public void clear() {
+			super.clear();
+			model.remove(subtitle.toArray());
 		}
 	}
 }
