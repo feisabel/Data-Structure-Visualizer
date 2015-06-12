@@ -18,3 +18,5 @@ No project explorer:
 	Selecione todos os arquivos e aperte em "finish"
 
 4. Dentre os arquivos importados, execute: GUI.java
+
+5. O manual do usuário encontra-se dentro da pasta help.
