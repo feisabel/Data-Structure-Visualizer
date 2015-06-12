@@ -51,7 +51,6 @@ public class UnionFind extends DataStructure {
 	 * Helper method to links two elements.
 	 * @param x element to be united
 	 * @param y element to be united
-	 * @throws DSIllegalArgumentsException  
 	 */
 	private void link(int x, int y){
 		if (x != y) {
