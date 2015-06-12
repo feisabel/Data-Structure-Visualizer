@@ -1,5 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+/**
+ * Class AVL Tree.
+ * @author Fernanda Isabel
+ */
+
 public class AVLTree extends BinarySearchTree {
 	
 	/**

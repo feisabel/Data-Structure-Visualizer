@@ -159,6 +159,11 @@ public class RBTree extends BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * Deletes a node given a key.
+	 * @param key node's key
+	 * @return deleted node
+	 */
 	public RBNode delete(int key) {
         RBNode node = (RBNode)search(key); 
         if (node != null) { 
@@ -201,6 +206,11 @@ public class RBTree extends BinarySearchTree {
         return node;
     }
 	
+	/**
+	 * Adjusts the colors.
+	 * @param node current node
+	 * @param b boolean that indicates if the removed node was the left son of node
+	 */
 	private void adjustColorsRemoval(RBNode node, boolean b) {
 		if (node != null) {
 			RBNode son;
