@@ -9,7 +9,6 @@ import br.ufrn.imd.dsvisualizer.gui.Drawer;
 
 public class AbstractList extends DataStructure {
 	protected List<Integer> list;
-	private Drawer drawer;
 	
 	public AbstractList() {
 		list = new LinkedList<Integer>();

@@ -26,7 +26,7 @@ import org.jgraph.graph.Port;
 public abstract class Drawer {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
-    protected static final Dimension DEFAULT_BG_SIZE = new Dimension( 800, 300 );
+    protected static final Dimension DEFAULT_BG_SIZE = new Dimension( 800, 350 );
 	protected static final Dimension DEFAULT_CELL_SIZE = new Dimension( 30, 15 );
     protected static final int deltaY = 40;
 	protected GraphModel model;
@@ -106,15 +106,6 @@ public abstract class Drawer {
     }
 	
 	/**
-	 * Casts int to string.
-	 * @param a int
-	 * @return string
-	 */
-	public String toString(int a){
-		return "" + a;
-	}
-	
-	/**
 	 * Method that create a new vertex.
 	 * @param g hashmap with the cells
 	 * @param n node's key
@@ -123,7 +114,7 @@ public abstract class Drawer {
 	 * @param c node's color
 	 */
 	protected void createMyVertex(int n, int x, int y, java.awt.Color c){
-		DefaultGraphCell v = new DefaultGraphCell(new String(toString(n)));
+		DefaultGraphCell v = new DefaultGraphCell("" + n);
 		cells.put(n, v);
 		DefaultPort port = new DefaultPort();
 		v.add(port);

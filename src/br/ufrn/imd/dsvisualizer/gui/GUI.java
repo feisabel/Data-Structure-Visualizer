@@ -211,12 +211,24 @@ public class GUI {
 	private void makeDSButton(JComponent parent, final int selectedDS) {
 		JButton button = new JButton(DSManager.getName(selectedDS));
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent ev) {
 				String input = (String)JOptionPane.showInputDialog(frame, "Initial size:", "", JOptionPane.PLAIN_MESSAGE);
 				if (input != null) {
 					int size = -1;
 					if (!input.isEmpty())
-						size = Integer.parseInt(input);
+						try {
+							size = Integer.parseInt(input);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(frame, "Error: Invalid number!",
+				                    "Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					
+					if (size > 25) {
+						size = 25;
+						JOptionPane.showMessageDialog(frame, "Warning: size too big! Trimming...",
+			                    "Warning", JOptionPane.WARNING_MESSAGE);
+					}
 					DataStructure ds = DSManager.create(selectedDS, size);
 					newTab(ds, DSManager.getName(selectedDS).replace(" ", "").replace("-", "") + tabs.getComponentCount());
 				}
@@ -267,7 +279,7 @@ public class GUI {
 		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
 		JTextPane description = new JTextPane();
-		description.setText(DSManager.getName(ds) + "\n" + DSManager.getDescription(ds));
+		description.setText(DSManager.getName(ds) + "\n" + DSManager.getDescription(ds)); 
 		description.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		description.setEditable(false);
 		
@@ -276,7 +288,7 @@ public class GUI {
 		description.getStyledDocument().setParagraphAttributes(0, DSManager.getDescription(ds).length(), sa, false);
 		
 		JScrollPane scroll = new JScrollPane(description);
-		scroll.setPreferredSize(new Dimension(205, 400));
+		scroll.setPreferredSize(new Dimension(205, ds.getPreferredSize().height));
 		view.add(scroll, BorderLayout.EAST);
 		
 		JPanel operations = new JPanel();
