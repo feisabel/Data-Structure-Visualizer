@@ -10,7 +10,6 @@ public class HeapMin extends AbstractHeap{
 	
 	/**
 	 * Assistant method for the removing method.
-	 * 
 	 * @param index Starter index for the goDown method (increases recursively)
 	 */
 	protected void goDown(int index){
@@ -28,10 +27,8 @@ public class HeapMin extends AbstractHeap{
 		}
 	}
 	
-
 	/**
 	 * Assistant method for the inserting method.
-	 * 
 	 * @param index Starter index for the goUp method (decreases recursively)
 	 */
 	protected void goUp(int index){
@@ -43,23 +40,5 @@ public class HeapMin extends AbstractHeap{
 					goUp(aux);
 			}
 		}
-	}
-	
-	public String getShortName() {
-		return "HeapMin";
-	}
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "A principal caracterísica da Heap Min é cada pai ser menor que seus filhos.\n" + 
-    			"Além disso, ela é implementada em um vetor, é necessário que ela seja completa à esquerda.\n"
-    			+ "Apesar da representação como árvore, por ser implementada em vetor, os acessos são feitos "+
-    			" calculando os índices.\n" + "Inserção é feita inserindo um novo valor no final do vetor e subindo" +
-    			" até o lugar adequado na árvore, enquanto ele for menor que o pai.\n" + "Remoção só é feita do topo."
-    			+ "Suas operações são log n.\n" +"Uma conhecida aplicação é na heapsort, possibilitando um algoritmo" +
-    			" de ordenação ótimo.\n";	
 	}
 }

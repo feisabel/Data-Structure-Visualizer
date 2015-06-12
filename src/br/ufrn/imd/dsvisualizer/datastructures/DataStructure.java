@@ -33,8 +33,6 @@ abstract public class DataStructure implements Serializable {
 		operationParams = new HashMap<String, String[]>();
 	}
 	
-	abstract public String getShortName();
-	
 	/* Draw-related methods */
 	/**
 	 * Redraws the data structure on the screen.
@@ -93,9 +91,10 @@ abstract public class DataStructure implements Serializable {
 	 * @param params   parameters to be passed to the command
 	 * @throws DSIllegalNumberOfArgumentsException
 	 * @throws DSUnsupportedOperationException
+	 * @throws DSIllegalArgumentsException 
 	 */
 	public void call(String command, Integer... params)
-			throws DSIllegalNumberOfArgumentsException, DSUnsupportedOperationException
+			throws DSIllegalNumberOfArgumentsException, DSUnsupportedOperationException, DSIllegalArgumentsException
 	{
 		Set<String> operations = operationParams.keySet();
 		boolean success = false;
@@ -112,10 +111,16 @@ abstract public class DataStructure implements Serializable {
 				Method method = null;
 				try {
 					method = this.getClass().getMethod(command, paramsTypes);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new DSUnsupportedOperationException(this, command);
+				}
+				
+				try {
 					method.invoke(this, (Object[])params);
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new DSUnsupportedOperationException(command, this);
+					throw new DSIllegalArgumentsException(this, command, params);
 				}
 				
 				success = true;
@@ -123,8 +128,6 @@ abstract public class DataStructure implements Serializable {
 		}
 		
 		if (!success)
-			throw new DSUnsupportedOperationException(command, this);
+			throw new DSUnsupportedOperationException(this, command);
 	}
-
-	abstract public String getDescription();
 }

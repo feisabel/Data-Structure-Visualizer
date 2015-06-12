@@ -1,5 +1,10 @@
 package br.ufrn.imd.dsvisualizer.datastructures;
 
+/**
+ * Class AVL Tree.
+ * @author Fernanda Isabel
+ */
+
 public class AVLTree extends BinarySearchTree {
 	
 	/**
@@ -29,8 +34,6 @@ public class AVLTree extends BinarySearchTree {
      * @param new root.
      */
     protected void root(BSTNode root) {
-    	System.out.println("chamou da avl");
-
     	this.root = (AVLNode)root;
     }
     
@@ -42,22 +45,6 @@ public class AVLTree extends BinarySearchTree {
 		privateInsert(key, root(), null, new Ref<Boolean>(true));
 	}
 	
-	public String getShortName() {
-		return "AVL";
-	}	
-    
-    /**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "Toda AVL é também uma árvore binária de busca, exceto que visando sempre ter a maior"
-				+ " otimização, a árvore é mantida com altura log n (n sendo o número de nós).\n" + 
-				"Para isso a diferença entre as alturas das subárvores de um nó não pode ser maior do "
-				+ "que módulo de 1.\n" + "Inserção é feita similar a da binária de busca exceto que é necessário"
-				+ " fazer ajustes para se manter balanceada.\n" + "A busca é exatamente a mesma da BST.\n" + 
-				" A cor azul do node representa balanço 0, a cor verde balanço 1 e laranja -1.";
-	}
 	/**
 	 * Inserts a new node if does not exists one with the same key.
 	 * @param key new node's key

@@ -6,7 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,27 +17,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeSelectionModel;
-
 import br.ufrn.imd.dsvisualizer.datastructures.DataStructure;
 import br.ufrn.imd.dsvisualizer.datastructures.Factory;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -47,11 +36,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import javax.swing.tree.DefaultTreeModel;
 
 public class GUI {
 
@@ -173,8 +159,8 @@ public class GUI {
 		optionsHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				File file = new File("");
-				JOptionPane.showMessageDialog(frame, "Open " + file.getAbsolutePath() + "/help/usermanual.pdf"
-						                      + " to access the user manual.", null, JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "Open \n" + file.getAbsolutePath() + "/help/usermanual.pdf"
+						                      + "\nto access the user manual.", null, JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		options.add(optionsHelp);
@@ -202,101 +188,34 @@ public class GUI {
 		lists.setLayout(new FlowLayout(FlowLayout.CENTER));
 		lists.setBorder(BorderFactory.createTitledBorder("Lists"));
 		homepage.add(lists);
-		
-		JButton linkedList = new JButton("Linked List");
-		linkedList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.LIST);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		lists.add(linkedList);
-		
-		JButton stack = new JButton("Stack");
-		stack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.STACK);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		lists.add(stack);
-		
-		JButton queue = new JButton("Queue");
-		queue.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.QUEUE);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		lists.add(queue);
-		
-		JButton deque = new JButton("Deque");
-		deque.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.DEQUE);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		lists.add(deque);
+				
+		makeDSButton(lists, Factory.LIST);
+		makeDSButton(lists, Factory.STACK);
+		makeDSButton(lists, Factory.QUEUE);
+		makeDSButton(lists, Factory.DEQUE);
 		
 		JPanel trees = new JPanel();
 		trees.setLayout(new FlowLayout(FlowLayout.CENTER));
 		trees.setBorder(BorderFactory.createTitledBorder("Trees"));
 		homepage.add(trees);
 		
-		JButton binaryTree = new JButton("Binary Search Tree");
-		binaryTree.addActionListener(new ActionListener() {
+		makeDSButton(trees, Factory.HEAPMAX);
+		makeDSButton(trees, Factory.HEAPMIN);
+		makeDSButton(trees, Factory.BST);
+		makeDSButton(trees, Factory.AVL);
+		makeDSButton(trees, Factory.RB);
+		makeDSButton(trees, Factory.UNIONFIND);
+	}
+	
+	private void makeDSButton(JComponent parent, final int selectedDS) {
+		JButton button = new JButton(DSManager.getName(selectedDS));
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.BST);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				DataStructure ds = DSManager.create(selectedDS);
+				newTab(ds, DSManager.getName(selectedDS).replace(" ", "") + tabs.getComponentCount());
 			}
 		});
-		trees.add(binaryTree);
-		
-		JButton heapMax = new JButton("HeapMax");
-		heapMax.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.HEAPMAX);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		trees.add(heapMax);
-		
-		JButton heapMin = new JButton("HeapMin");
-		heapMin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.HEAPMIN);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		trees.add(heapMin);
-		
-		JButton aVLTree = new JButton("AVL Tree");
-		aVLTree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.AVL);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		trees.add(aVLTree);
-		
-		JButton rBTree = new JButton("Red-Black Tree");
-		rBTree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.RB);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		trees.add(rBTree);
-		
-		JButton unionFind = new JButton("Union-Find");
-		unionFind.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DataStructure ds = DSManager.create(Factory.UNIONFIND);
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
-			}
-		});
-		trees.add(unionFind);
+		parent.add(button);
 	}
 	
 	/**
@@ -317,7 +236,10 @@ public class GUI {
 					for (int i = 0; i < params.length; i++) {
 						String input = (String)JOptionPane.showInputDialog(frame, paramsStr[i],
 															"", JOptionPane.PLAIN_MESSAGE);
-						params[i] = Integer.parseInt(input);
+						if (input != null)
+							params[i] = Integer.parseInt(input);
+						else
+							return; // user cancelled action
 					}
 					
 					try {
@@ -325,8 +247,7 @@ public class GUI {
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(frame, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 					}
-					
-				} catch (Exception e) {
+				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(frame, "Error: Invalid number!", "", JOptionPane.ERROR_MESSAGE);
 				}
 				
@@ -339,12 +260,13 @@ public class GUI {
 		view.add(new JScrollPane(ds.getJGraph()), BorderLayout.CENTER);
 		
 		JTextPane description = new JTextPane();
-		description.setText(ds.getDescription());
+		description.setText(DSManager.getName(ds) + "\n" + DSManager.getDescription(ds));
 		description.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		description.setEditable(false);
 		
 		SimpleAttributeSet sa = new SimpleAttributeSet();
 		StyleConstants.setAlignment(sa, StyleConstants.ALIGN_JUSTIFIED);
-		description.getStyledDocument().setParagraphAttributes(0, ds.getDescription().length(), sa, false);
+		description.getStyledDocument().setParagraphAttributes(0, DSManager.getDescription(ds).length(), sa, false);
 		
 		JScrollPane scroll = new JScrollPane(description);
 		scroll.setPreferredSize(new Dimension(205, 400));
@@ -436,7 +358,7 @@ public class GUI {
 			DSManager.loadDataStructures(fis);
 			
 			for (DataStructure ds : DSManager.getDataStructures()) {
-				newTab(ds, ds.getShortName() + tabs.getComponentCount());
+				newTab(ds, DSManager.getName(ds) + tabs.getComponentCount());
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -11,9 +11,8 @@ import org.jgraph.graph.GraphConstants;
 
 import br.ufrn.imd.dsvisualizer.gui.Drawer;
 /**
- * Class Red Black tree.
+ * Class Red-Black Tree.
  * @author Fernanda Isabel
- *
  */
 public class RBTree extends BinarySearchTree {
 	private static final long serialVersionUID = -2112618915954107608L;
@@ -40,8 +39,8 @@ public class RBTree extends BinarySearchTree {
 	 * Modifier method to the root.
 	 * @param the new root
 	 */
-	protected void root(RBNode root) {
-		this.root = root;
+	protected void root(BSTNode root) {
+		this.root = (RBNode)root;
 	}
 	
 	/**
@@ -86,7 +85,7 @@ public class RBTree extends BinarySearchTree {
 				if (dad.getColor() == Color.BLACK)
 					b.set(2);
 				else if (b.get() == 1)
-					adjustColors(node, dad, b);
+					adjustColorsInsertion(node, dad, b);
 				else if (b.get() == 0)
 					b.set(1);
 			}
@@ -101,7 +100,7 @@ public class RBTree extends BinarySearchTree {
 	 * @param dad current node's dad
 	 * @param b indicates if needs continue or no
 	 */
-	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
+	private void adjustColorsInsertion(RBNode node, RBNode dad, Ref<Integer> b) {
 		RBNode grandad = dad.getParent(), uncle;
 		if (grandad.getLeft() == dad)
 			uncle = grandad.getRight();
@@ -162,6 +161,11 @@ public class RBTree extends BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * Deletes a node given a key.
+	 * @param key node's key
+	 * @return deleted node
+	 */
 	public RBNode delete(int key) {
         RBNode node = (RBNode)search(key); 
         if (node != null) { 
@@ -169,14 +173,27 @@ public class RBTree extends BinarySearchTree {
         		RBNode left = (RBNode)max(node.getLeft()), leftParent = left.getParent();
         		replace(node, left);
         		if (left.getColor() == Color.BLACK) {
-        			if (left != root)
+        			if (node.getColor() == Color.RED)
         				left.setColor(Color.RED);
-        			adjustColorsRemoval(leftParent, true);
+        			if (leftParent != node) {
+        				if (leftParent.getRight() != null)
+        					leftParent.getRight().setColor(Color.BLACK);
+        				else
+        					adjustColorsRemoval(leftParent, false);
+        			}
+        			else {
+        				if (left.getLeft() != null)
+        					left.getLeft().setColor(Color.BLACK);
+        				else
+        					adjustColorsRemoval(left, true);
+        			}
         		}
+        		else if (node.getColor() == Color.BLACK)
+        			left.setColor(Color.BLACK);
         	}
         	else if (node.getLeft() == null && node.getRight() == null) {
             	remove(node, null); 
-            	if (node.getColor() == Color.BLACK)
+            	if (root != null && node.getColor() == Color.BLACK)
             		adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
             }
         	else if (node.getLeft() != null && node.getRight() == null) {
@@ -191,6 +208,11 @@ public class RBTree extends BinarySearchTree {
         return node;
     }
 	
+	/**
+	 * Adjusts the colors.
+	 * @param node current node
+	 * @param b boolean that indicates if the removed node was the left son of node
+	 */
 	private void adjustColorsRemoval(RBNode node, boolean b) {
 		if (node != null) {
 			RBNode son;
@@ -207,106 +229,50 @@ public class RBTree extends BinarySearchTree {
 					rightRotation(node, son);
 				if (node == root)
 					root = son;
-				adjustColorsRemoval(node, node.getLeft() == null);
+				adjustColorsRemoval(node, b);
 			}
 			else {
-				if (son.getRight() == null || son.getLeft() == null) {
-					if (son.getRight() == null) {
-						if (son.getLeft() == null) {
-							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);							else if (node != root)
-									adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else if (son.getLeft().getColor() == Color.BLACK) {							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);
-							else if (node != root)
-								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else {
-							son.setColor(Color.RED);
-							son.getLeft().setColor(Color.BLACK);
-							rightRotation(son, son.getLeft());
-							adjustColorsRemoval(node, node.getLeft() == null);
-						}
-					}
-					else {
-						if (son.getRight().getColor() == Color.BLACK) {
-							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);
-							else if (node != root)
-								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else {
-							if (b) {
-								son.setColor(node.getColor());
-								node.setColor(Color.BLACK);
-								son.getRight().setColor(Color.BLACK);
-								leftRotation(node, son);
-								if (node == root)
-									root = son;
-							}
-							else {
-								node.setColor(Color.BLACK);
-								doubleRightRotation(node, son, son.getRight());
-								if (node == root)
-									root = node.getParent();
-							}
-						}
-					}
+				if ((son.getLeft() != null && son.getRight() != null && son.getLeft().getColor() == Color.BLACK && son.getRight().getColor() == Color.BLACK) || (son.getRight() != null && son.getRight().getColor() == Color.BLACK && son.getLeft() == null) || (son.getLeft() != null && son.getLeft().getColor() == Color.BLACK && son.getRight() == null) || (son.getLeft() == null && son.getRight() == null)) {
+						son.setColor(Color.RED);
+						if (node.getColor() == Color.RED)
+							node.setColor(Color.BLACK);
+						else if (node != root)
+							adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
 				}
-				else {
-					if (son.getLeft().getColor() == Color.RED && son.getRight().getColor() == Color.BLACK) {
+				else if (b) {
+					if (son.getRight() == null || son.getRight().getColor() == Color.BLACK) {
 						son.setColor(Color.RED);
 						son.getLeft().setColor(Color.BLACK);
 						rightRotation(son, son.getLeft());
-						adjustColorsRemoval(node, node.getLeft() == null);
+						adjustColorsRemoval(node, true);
 					}
 					else if (son.getRight().getColor() == Color.RED) {
-						if (b) {
-							son.setColor(node.getColor());
-							node.setColor(Color.BLACK);
-							son.getRight().setColor(Color.BLACK);
-							leftRotation(node, son);
-							if (node == root)
-								root = son;
-						}
-						else {
-							node.setColor(Color.BLACK);
-							doubleRightRotation(node, son, son.getRight());
-							if (node == root)
-								root = node.getParent();
-						}
+						son.setColor(node.getColor());
+						node.setColor(Color.BLACK);
+						son.getRight().setColor(Color.BLACK);
+						leftRotation(node, son);
+						if (node == root)
+							root = son;
+					}
+				}
+				else {
+					if (son.getLeft() == null || son.getLeft().getColor() == Color.BLACK) {
+						son.setColor(Color.RED);
+						son.getRight().setColor(Color.BLACK);
+						leftRotation(son, son.getRight());
+						adjustColorsRemoval(node, false);
+					}
+					else if (son.getLeft().getColor() == Color.RED) {
+						son.setColor(node.getColor());
+						node.setColor(Color.BLACK);
+						son.getLeft().setColor(Color.BLACK);
+						rightRotation(node, son);
+						if (node == root)
+							root = son;
 					}
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Returns shor name.
-	 * @return RB
-	 */
-	public String getShortName() {
-		return "RB";
-	}	
-				
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return "A Red-Black Tree é uma árvore binária de busca que possui algumas características específicas.\n" +
-				"Primeiro, ela conta com nós externos, que possuem altura 0.\n" +
-				"Além disso, há um esquema de coloração dos nós. Em todos caminhos para um nó externo tem que " +
-				"haver a mesma quantidade de nós negros, não pode haver nós rubros seguidos e os nós externos são" +
-				" sempre pretos.\n" + "A pesquisa é feita da mesma maneira que a BST e as remoções e inserções exigem" +
-				" a manutenção da quantidade de nodes negros, após uma dessas alterações na estrutura é necessário" +
-				" conferir o caminho percorrido e fazer as rotações necessárias para manutenção da estrutura.\n" +
-				" A complexidade está relacionada a quantidade de rotações que foram necessárias fazer e a altura da" +
-				" árvore.\n";
 	}
 	
 	/**
@@ -339,11 +305,12 @@ public class RBTree extends BinarySearchTree {
 			GraphConstants.setOpaque(v.getAttributes(), true);
 			insertEdge(getDefaultPort(dad), getDefaultPort(v));
 		}
+		
 		/**
 		 * Starts the process to draw the structure.
 		 */
 		public void draw(){
-			int x = DEFAULT_SIZE.width/2;
+			int x = getPreferredSize().width/2;
 			int y = 10;
 			if (root() != null)
 				preOrderCell(root(), x, y, root().getColor());
@@ -351,6 +318,9 @@ public class RBTree extends BinarySearchTree {
 			jgraph.getGraphLayoutCache().insert(nullnodes.toArray());
 		}
     	
+		/**
+		 * Clears the graph screen.
+		 */
 		public void clear() {
 			super.clear();
 			jgraph.getGraphLayoutCache().remove(nullnodes.toArray());
@@ -369,21 +339,21 @@ public class RBTree extends BinarySearchTree {
 			if(root != null){
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort(cells.get(root.getKey())),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}else{
-					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));
 				}else{
-					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 			}

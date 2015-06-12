@@ -38,43 +38,23 @@ public class UnionFind extends DataStructure {
 		support("find", "num");
 	}
 	
-	public String getShortName() {
-		return "UnionFind";
-	}	
-	
-	/**
-     * Returns structure description.
-     * @return description
-     */
-	public String getDescription(){
-		return " Representam a ideia matemática de conjuntos que não possuem elementos em comum," +
-				" cada um aponta para si mesmo, é possível fazer a união entre dois elementos que na" +
-				" verdade consiste na união de toda a árvore onde está esse elemento.\n" + " A operação find"
-				+ " além de retornar o representante (raiz) do conjunto também aproveita e faz a modificação" +
-				" na estrutura diminuindo o caminho do nó mandado até a root.\n A complexidade de find está relacionada a" +
-				" altura da árvore.\n Já unite é O(1), nem chega a percorrer o vetor.\n Uma utilidade comum dessa estrutura" +
-				" é fazer labirintos válidos.\n";
-	}
-	
-	
 	/**
 	 * Unites x with y.
 	 * @param x element to be united 
 	 * @param y element to be united
 	 */
 	public void unite(int x, int y){
-		if(x >= len || y >= len)
-			return;
-		link(unionfind[x], unionfind[y]);
+		link(find(x), find(y));
 	}
 	
 	/**
 	 * Helper method to links two elements.
 	 * @param x element to be united
 	 * @param y element to be united
+	 * @throws DSIllegalArgumentsException  
 	 */
 	private void link(int x, int y){
-		try{
+		if (x != y) {
 			if(order[x] > order[y]){
 				unionfind[y] = x;
 			}
@@ -82,8 +62,6 @@ public class UnionFind extends DataStructure {
 				unionfind[x] = y;
 				order[y]++;
 			}
-		}catch(Exception e){
-			System.err.println("Invalid arguments");
 		}
 	}
 	/**
@@ -92,16 +70,10 @@ public class UnionFind extends DataStructure {
 	 * @return root
 	 */
 	public int find(int x){
-		try{
-			if(x != unionfind[x]){
-				unionfind[x] = find(unionfind[x]);	
-			}
-			return unionfind[x];
+		if(x != unionfind[x]){
+			unionfind[x] = find(unionfind[x]);	
 		}
-		catch(Exception e){
-			System.err.println("Invalid argument");
-			return -1;
-		}
+		return unionfind[x];
 	}
 	
 	/**
@@ -124,24 +96,19 @@ public class UnionFind extends DataStructure {
 	 * @param i node
 	 * @return level
 	 */
-	private int level(int i){
-		try{
-			int res = 0;
-			boolean t = false;
-			while(!t){
-				if(unionfind[i] == i)
-					t = true;
-				else{
-					int k = unionfind[i];
-					i = k;
-					res++;
-				}
+	private int level(int i) {
+		int res = 0;
+		boolean t = false;
+		while(!t){
+			if(unionfind[i] == i)
+				t = true;
+			else{
+				int k = unionfind[i];
+				i = k;
+				res++;
 			}
-			return res;
-		}catch(Exception e){
-			System.err.println("Invalid argument");
-			return -1;
 		}
+		return res;
 	}
 	
 	/**
@@ -178,11 +145,16 @@ public class UnionFind extends DataStructure {
 			HashMap<Integer, Pos> pos = new HashMap<Integer, Pos>();
 			
 			int x = 50, y = 0;
-			
-			for(int j = 0; j <= maxOrder(); j++){
+			int max = maxOrder();
+			for(int j = 0; j <= max; j++){
 				for(int i = 0; i < len; i++){
 					if(level(i) == j){
 						int X, Y;
+						
+						if(x >= getPreferredSize().width - 50){
+							x = 50;
+							y += 150;
+						}
 						if(j == 0){
 							X = x;
 							Y = y;
@@ -200,17 +172,11 @@ public class UnionFind extends DataStructure {
 						}else{
 							insertEdge(getDefaultPort(cells.get(i)), getDefaultPort(cells.get(unionfind[i])));
 						}
-						if(X > DEFAULT_SIZE.width - 50){
-							x = 50;
-							y+= 150;
-						}
 					}
 				}//pegar todos os irmãos de um i que estão na ordem j
 				//tem que saber quando "irmãos há nessa ordem"
 			}			
 			jgraph.getGraphLayoutCache().insert(cells.values().toArray());
-	
-		}
-		
+		}		
 	}
 }

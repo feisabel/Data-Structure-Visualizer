@@ -6,8 +6,6 @@ import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import javax.swing.JApplet;
-
 import org.jgraph.JGraph;
 import org.jgraph.graph.ConnectionSet;
 import org.jgraph.graph.DefaultCellViewFactory;
@@ -25,7 +23,7 @@ import org.jgraph.graph.Port;
  * @author Ana Caroline, João Pedro Holanda
  *
  */
-public abstract class Drawer extends JApplet {
+public abstract class Drawer {
 	private static final long serialVersionUID = 1L;
 	private static final Color     DEFAULT_BG_COLOR = Color.decode( "#FFFFFF" );
     protected static final Dimension DEFAULT_SIZE = new Dimension( 800, 300 );
@@ -47,8 +45,6 @@ public abstract class Drawer extends JApplet {
 		jgraph = new JGraph( model, view );
 
 		adjustDisplaySettings( jgraph );
-		getContentPane().add( jgraph );
-		resize( DEFAULT_SIZE );
 	}
 	
 	/**

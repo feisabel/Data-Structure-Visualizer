@@ -16,7 +16,7 @@ public class BinarySearchTree extends Tree
 	private BSTNode head;
 	protected BSTNode action;
     /**
-     * Constructor for class BInarySearchTree with no parameters.
+     * Constructor for class BinarySearchTree with no parameters.
      */
     public BinarySearchTree()
     {
@@ -288,30 +288,9 @@ public class BinarySearchTree extends Tree
 		node.setParent(left);
 	}
 	
-	
-	public String getShortName() {
-		return "BST";
-	}	
-    
-    /**
-     * Returns structure description.
-     * @return description
-     */
-    public String getDescription(){
-    	return "BinarySearchTree possui como característica principal o fato de cada nó ter até dois filhos, " +
-    			"os valores armazenados são organizados conforme a ordenação natural dos inteiros.\n" +
-    			"A busca é feita comparando o valor buscado com o valor de cada nó, caso seja maior " +
-    			"que o valor do nó, chama-se o filho da direita, caso contrário o da direita.\n" +
-    			"A remoção é feita substituindo o nó removido pelo nó mais a direita da subárvore " +
-    			" à direita.\n" + "A complexidade das operações estão baseadas na altura da árvore, uma vez"
-    			+ " que no máximo será acessado um caminho da raiz até o nó mais distante, ou seja, altura"
-    			+ " da árvore.";
-    }
-	
 	/**
 	 * Class BSTDrawer contains the methods to draw the structure.
 	 * @author Ana Caroline
-	 *
 	 */
     protected class BSTDrawer extends Drawer {
 		/**
@@ -331,24 +310,23 @@ public class BinarySearchTree extends Tree
 		}
     	
     	/**
-    	 * Method to help the draw process. Using pre order access.
-    	 * @param c used to mapping the jgraph cells
-    	 * @param root node to be inserted
-    	 * @param x node's position axis x
-    	 * @param y node's position axis y
-    	 * @param col node's color
+    	 * Method to help the draw process. Using pre-order access.
+    	 * @param root  node to be inserted
+    	 * @param x     node's x-axis position
+    	 * @param y     node's y-axis position
+    	 * @param col   node's color
     	 */
 		void preOrderCell(BSTNode root, int x, int y, java.awt.Color col){
 			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));

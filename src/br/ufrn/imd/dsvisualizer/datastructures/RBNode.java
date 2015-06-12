@@ -6,18 +6,19 @@ package br.ufrn.imd.dsvisualizer.datastructures;
  *
  */
 public class RBNode extends BSTNode {	
+
 	/**
 	 * Constructor with no parameters.
 	 */
 	public RBNode () {
-		
 	}
+	
 	/**
 	 * Constructor with parameters.
 	 * @param parent parent node
-	 * @param left left 
-	 * @param right right
-	 * @param key key
+	 * @param left   left child node
+	 * @param right  right child node
+	 * @param key    key
 	 */
 	public RBNode(RBNode parent, RBNode left, RBNode right, int key) {
 		super(parent, left, right, key);
@@ -25,15 +26,15 @@ public class RBNode extends BSTNode {
 	
 	/**
 	 * Access method.
-	 * @return RBNode left kid
+	 * @return  left child
 	 */
 	public RBNode getLeft() {
 		return (RBNode)super.getLeft();
 	}
 	
 	/**
-	 * Accesse method.
-	 * @return RBNode right kid
+	 * Access method.
+	 * @return  right child
 	 */
 	public RBNode getRight() {
 		return (RBNode)super.getRight();
@@ -41,10 +42,9 @@ public class RBNode extends BSTNode {
    
 	/**
 	 * Access method.
-	 * @return parent node
+	 * @return  parent node
 	 */
 	public RBNode getParent() {
 		return (RBNode)super.getParent();
 	}
-
 }

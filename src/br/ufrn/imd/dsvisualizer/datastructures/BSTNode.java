@@ -9,7 +9,12 @@ package br.ufrn.imd.dsvisualizer.datastructures;
  */
 public class BSTNode extends Node
 {
-    private BSTNode left;
+    /**
+	 * Generated serial ID.
+	 */
+	private static final long serialVersionUID = -4505870553104085672L;
+	
+	private BSTNode left;
     private BSTNode right;
     private int key;
     private int x;
@@ -132,8 +137,9 @@ public class BSTNode extends Node
     }
 
     /**
-     * Returns the node's level.
-     * @return level 
+     * Returns the node's level on a given tree.
+     * @param  root  root of the tree
+     * @return node's level
      */
     public int nodeLevel(Node root){
     	int i;
@@ -141,5 +147,4 @@ public class BSTNode extends Node
     	for(i = 1; a != root; a = a.getParent(), i++);	
     	return i;
     }
-
 }
