@@ -320,13 +320,13 @@ public class BinarySearchTree extends Tree
 			if(root != null) {
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1.1, 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));

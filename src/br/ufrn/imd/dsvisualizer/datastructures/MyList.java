@@ -95,7 +95,7 @@ public class MyList extends DataStructure {
 			boolean d = true;
 			for(int i = 0; i < list.size(); i++){
 				createMyVertex(list.get(i), x, y, Color.red);
-				if(x + 60 > DEFAULT_SIZE.width && d){
+				if(x + 60 > getPreferredSize().width && d){
 					d = false;
 					y+= 60;
 				}else if(x - 60 < 0 && !d){

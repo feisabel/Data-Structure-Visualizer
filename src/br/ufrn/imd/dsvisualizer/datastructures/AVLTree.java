@@ -29,8 +29,6 @@ public class AVLTree extends BinarySearchTree {
      * @param new root.
      */
     protected void root(BSTNode root) {
-    	System.out.println("chamou da avl");
-
     	this.root = (AVLNode)root;
     }
     

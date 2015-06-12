@@ -317,7 +317,7 @@ public class RBTree extends BinarySearchTree {
 		 * Starts the process to draw the structure.
 		 */
 		public void draw(){
-			int x = DEFAULT_SIZE.width/2;
+			int x = getPreferredSize().width/2;
 			int y = 10;
 			if (root() != null)
 				preOrderCell(root(), x, y, root().getColor());
@@ -346,21 +346,21 @@ public class RBTree extends BinarySearchTree {
 			if(root != null){
 				createMyVertex(root.getKey(), x, y, col);
 				if(root.getLeft() != null){
-					preOrderCell(root.getLeft(), (int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))),
+					preOrderCell(root.getLeft(), (int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))),
 							y + deltaY, root.getLeft().getColor());
 					insertEdge(getDefaultPort(cells.get(root.getKey())),
 							getDefaultPort(cells.get(root.getLeft().getKey())));	
 				}else{
-					createNullVertex((int) (x - DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x - getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 				if(root.getRight() != null){
-					preOrderCell(root.getRight(), (int)(x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
+					preOrderCell(root.getRight(), (int)(x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), 
 							y + deltaY, root.getRight().getColor());
 					insertEdge(getDefaultPort((cells.get(root.getKey()))),
 							getDefaultPort(cells.get(root.getRight().getKey())));
 				}else{
-					createNullVertex((int) (x + DEFAULT_SIZE.width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
+					createNullVertex((int) (x + getPreferredSize().width/Math.scalb(1., 1 + root.nodeLevel(root()))), y + deltaY, 
 							cells.get(root.getKey()) );
 				}
 			}

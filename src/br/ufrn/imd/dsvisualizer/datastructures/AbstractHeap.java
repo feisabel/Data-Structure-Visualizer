@@ -167,13 +167,13 @@ public abstract class AbstractHeap extends DataStructure{
 				if(i%2 == 0){
 					if(i != 0){
 						help = myVector.get(i/2 - 1);
-						x = (int) (positionX.get(help) + DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
+						x = (int) (positionX.get(help) + getPreferredSize().width/Math.scalb(1.0, lvl));
 					}else
-						x = (int) (DEFAULT_SIZE.width/Math.scalb(1.0, lvl));
+						x = (int) (getPreferredSize().width/Math.scalb(1.0, lvl));
 				}
 				else{
 					help = myVector.get(i/2);
-					x = (int) (positionX.get(help) - DEFAULT_SIZE.width/Math.scalb(1.0, lvl+1));
+					x = (int) (positionX.get(help) - getPreferredSize().width/Math.scalb(1.0, lvl+1));
 					
 				}
 				if(Math.scalb(1.0, lvl) == i+1){
