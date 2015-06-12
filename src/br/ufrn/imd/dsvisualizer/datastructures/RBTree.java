@@ -40,8 +40,8 @@ public class RBTree extends BinarySearchTree {
 	 * Modifier method to the root.
 	 * @param the new root
 	 */
-	protected void root(RBNode root) {
-		this.root = root;
+	protected void root(BSTNode root) {
+		this.root = (RBNode)root;
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class RBTree extends BinarySearchTree {
 				if (dad.getColor() == Color.BLACK)
 					b.set(2);
 				else if (b.get() == 1)
-					adjustColors(node, dad, b);
+					adjustColorsInsertion(node, dad, b);
 				else if (b.get() == 0)
 					b.set(1);
 			}
@@ -101,7 +101,7 @@ public class RBTree extends BinarySearchTree {
 	 * @param dad current node's dad
 	 * @param b indicates if needs continue or no
 	 */
-	private void adjustColors(RBNode node, RBNode dad, Ref<Integer> b) {
+	private void adjustColorsInsertion(RBNode node, RBNode dad, Ref<Integer> b) {
 		RBNode grandad = dad.getParent(), uncle;
 		if (grandad.getLeft() == dad)
 			uncle = grandad.getRight();
@@ -167,14 +167,27 @@ public class RBTree extends BinarySearchTree {
         		RBNode left = (RBNode)max(node.getLeft()), leftParent = left.getParent();
         		replace(node, left);
         		if (left.getColor() == Color.BLACK) {
-        			if (left != root)
+        			if (node.getColor() == Color.RED)
         				left.setColor(Color.RED);
-        			adjustColorsRemoval(leftParent, true);
+        			if (leftParent != node) {
+        				if (leftParent.getRight() != null)
+        					leftParent.getRight().setColor(Color.BLACK);
+        				else
+        					adjustColorsRemoval(leftParent, false);
+        			}
+        			else {
+        				if (left.getLeft() != null)
+        					left.getLeft().setColor(Color.BLACK);
+        				else
+        					adjustColorsRemoval(left, true);
+        			}
         		}
+        		else if (node.getColor() == Color.BLACK)
+        			left.setColor(Color.BLACK);
         	}
         	else if (node.getLeft() == null && node.getRight() == null) {
             	remove(node, null); 
-            	if (node.getColor() == Color.BLACK)
+            	if (root != null && node.getColor() == Color.BLACK)
             		adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
             }
         	else if (node.getLeft() != null && node.getRight() == null) {
@@ -205,78 +218,46 @@ public class RBTree extends BinarySearchTree {
 					rightRotation(node, son);
 				if (node == root)
 					root = son;
-				adjustColorsRemoval(node, node.getLeft() == null);
+				adjustColorsRemoval(node, b);
 			}
 			else {
-				if (son.getRight() == null || son.getLeft() == null) {
-					if (son.getRight() == null) {
-						if (son.getLeft() == null) {
-							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);							else if (node != root)
-									adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else if (son.getLeft().getColor() == Color.BLACK) {							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);
-							else if (node != root)
-								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else {
-							son.setColor(Color.RED);
-							son.getLeft().setColor(Color.BLACK);
-							rightRotation(son, son.getLeft());
-							adjustColorsRemoval(node, node.getLeft() == null);
-						}
-					}
-					else {
-						if (son.getRight().getColor() == Color.BLACK) {
-							son.setColor(Color.RED);
-							if (node.getColor() == Color.RED)
-								node.setColor(Color.BLACK);
-							else if (node != root)
-								adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
-						}
-						else {
-							if (b) {
-								son.setColor(node.getColor());
-								node.setColor(Color.BLACK);
-								son.getRight().setColor(Color.BLACK);
-								leftRotation(node, son);
-								if (node == root)
-									root = son;
-							}
-							else {
-								node.setColor(Color.BLACK);
-								doubleRightRotation(node, son, son.getRight());
-								if (node == root)
-									root = node.getParent();
-							}
-						}
-					}
+				if ((son.getLeft() != null && son.getRight() != null && son.getLeft().getColor() == Color.BLACK && son.getRight().getColor() == Color.BLACK) || (son.getRight() != null && son.getRight().getColor() == Color.BLACK && son.getLeft() == null) || (son.getLeft() != null && son.getLeft().getColor() == Color.BLACK && son.getRight() == null) || (son.getLeft() == null && son.getRight() == null)) {
+						son.setColor(Color.RED);
+						if (node.getColor() == Color.RED)
+							node.setColor(Color.BLACK);
+						else if (node != root)
+							adjustColorsRemoval(node.getParent(), node.getKey() < node.getParent().getKey());
 				}
-				else {
-					if (son.getLeft().getColor() == Color.RED && son.getRight().getColor() == Color.BLACK) {
+				else if (b) {
+					if (son.getRight() == null || son.getRight().getColor() == Color.BLACK) {
 						son.setColor(Color.RED);
 						son.getLeft().setColor(Color.BLACK);
 						rightRotation(son, son.getLeft());
-						adjustColorsRemoval(node, node.getLeft() == null);
+						adjustColorsRemoval(node, true);
 					}
 					else if (son.getRight().getColor() == Color.RED) {
-						if (b) {
-							son.setColor(node.getColor());
-							node.setColor(Color.BLACK);
-							son.getRight().setColor(Color.BLACK);
-							leftRotation(node, son);
-							if (node == root)
-								root = son;
-						}
-						else {
-							node.setColor(Color.BLACK);
-							doubleRightRotation(node, son, son.getRight());
-							if (node == root)
-								root = node.getParent();
-						}
+						son.setColor(node.getColor());
+						node.setColor(Color.BLACK);
+						son.getRight().setColor(Color.BLACK);
+						leftRotation(node, son);
+						if (node == root)
+							root = son;
+					}
+				}
+				else {
+					if (son.getLeft() == null || son.getLeft().getColor() == Color.BLACK) {
+						son.setColor(Color.RED);
+						son.getRight().setColor(Color.BLACK);
+						leftRotation(son, son.getRight());
+						adjustColorsRemoval(node, false);
+					}
+					else if (son.getLeft().getColor() == Color.RED) {
+						son.setColor(node.getColor());
+						node.setColor(Color.BLACK);
+						son.getLeft().setColor(Color.BLACK);
+						rightRotation(node, son);
+						if (node == root)
+							root = son;
 					}
 				}
 			}
